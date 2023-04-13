@@ -1,12 +1,42 @@
 {% extends "base.html" %}
-{% block title %} Entrar {% endblock %}
+
+{% block title %} Login {% endblock %}
 
 {% block content %}
 
-<h1 align="center">Login</h1>
+{% macro render_field(field) %}
+       <div class="form-outline">
+       {{ field(**kwargs)|safe }}
+       
+          {{ field.label(class="form-label") }} 
+          {% if field.errors %}
+            {% for error in field.errors %}
+             <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+          {% endif %}
+       </div>
+{% endmacro %}
 
-<form>
-  {{ form.usuario.label }}
+
+<div class="container mt-5">
+
+
+<form method="POST" class="needs-validation" novalidate>
+
+  <h3 align="center">ENTRAR</h3>
+        {{ render_field(form.email, class='form-control is-valid')}} 
+        <br>
+        {{ render_field(form.senha, class='form-control is-valid')}}
+
+
+    <br>
+    <br>    
+    <div class="col-12">
+    {{ form.enviar(style='width: 150px', class='btn btn-primary') }}
+    </div>
+
 </form>
+
+</div>
 
 {% endblock %}
