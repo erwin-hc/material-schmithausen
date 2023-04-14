@@ -1,19 +1,17 @@
-from wtforms import Form, StringField, EmailField, SubmitField
 from flask_wtf import FlaskForm
-from wtforms.validators import  ValidationError, Email, InputRequired, Length
+from wtforms import StringField, EmailField
+from wtforms.validators import DataRequired, Length, Email
 
-class FormLogin(Form):
+class FormLogin(FlaskForm):
 	email = EmailField(
 		'Email',
 		validators = [
-		InputRequired(message=('Preencher este campo!')),
+		DataRequired(message=('Este campo é obrigatório!')),
 		Email(message=('Digite um email válido!')),
 		])
 	senha = StringField(
 		'Senha',
 		validators = [
-		InputRequired(message=('Preencher este campo!')),
-		Length(min=6,max=20, message=('Mínimo 6 caracteres!'))
+		DataRequired(message=('Este campo é obrigatório!')),
+		Length(min=6, message=('Este campo deve ter pelo menos 6 caracteres!'))
 		])
-
-	enviar = SubmitField('Entrar')
