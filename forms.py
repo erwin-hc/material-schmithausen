@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField
-from wtforms.validators import DataRequired, Length, Email
+from wtforms import StringField, EmailField, SubmitField
+from wtforms.validators import ValidationError, DataRequired, Length, Email
 
 class FormLogin(FlaskForm):
 	email = EmailField(
@@ -15,3 +15,4 @@ class FormLogin(FlaskForm):
 		DataRequired(message=('Este campo é obrigatório!')),
 		Length(min=6, message=('Este campo deve ter pelo menos 6 caracteres!'))
 		])
+	enviar = SubmitField('Entrar')

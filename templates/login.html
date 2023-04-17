@@ -3,11 +3,13 @@
 
 {% block content %}
 <div class="container py-5 h-100">
-<form method="POST" action="/" novalidate class="form-outline form-white mb-4">
+<form id='formEntrar' method="POST" class="form-outline form-white mb-4" action="" novalidate>
+    {{ form.hidden_tag() }}
 
     <h2 align="center" class="fw-bold mb-1 text-uppercase text-white mb-5">Entrar</h2>
 <!-- -------------------------------------------------- -->
 <div class="form-outline mb-5">    
+
     {{ form.email(class='form-control', autofocus=true) }}
     {{ form.email.label(class="form-label") }}
 
@@ -32,7 +34,6 @@
     {% endfor %}
     {% endif %}
 </div>
-
     <button class="btn btn-outline-light" type="submit">Entrar</button>
 </form>
 </div>

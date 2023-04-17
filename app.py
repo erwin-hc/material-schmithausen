@@ -7,13 +7,12 @@ app.config['SECRET_KEY'] = 'ÇALDKFJAÇALDKJFALFJ'
 
 @app.route('/', methods=['GET','POST'])
 def login():
-    form = FormLogin(request.form)
-    if request.method == ['POST']:
-        return 'FORMULARIO SUBMETIDO COM SUCESSO'
-    else:
-        return 'ERROR'
+    form = FormLogin()
+    if form.validate_on_submit():  
+        return redirect(url_for('comandas'))
     
-    return render_template('login.html', form=form)
+    return render_template('/login.html', form=form)    
+    
 
 @app.route('/comandas.html', methods=['GET','POST'])
 def comandas():
