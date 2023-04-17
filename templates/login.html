@@ -3,6 +3,7 @@
 
 {% block content %}
 <div class="container py-5 h-100">
+
 <form id='formEntrar' method="POST" class="form-outline form-white mb-4" action="" novalidate>
     {{ form.hidden_tag() }}
 
@@ -10,7 +11,7 @@
 <!-- -------------------------------------------------- -->
 <div class="form-outline mb-5">    
 
-    {{ form.email(class='form-control', autofocus=true) }}
+    {{ form.email(class='form-control border-0', autofocus=true) }}
     {{ form.email.label(class="form-label") }}
 
     {% if form.email.errors %}
@@ -23,7 +24,7 @@
 </div>
 <!-- -------------------------------------------------- -->    
 <div class="form-outline mb-5">    
-    {{ form.senha(class='form-control', autofocus=true) }}
+    {{ form.senha(class='form-control border-0', autofocus=true) }}
     {{ form.senha.label(class="form-label") }}
 
     {% if form.senha.errors %}
@@ -36,5 +37,29 @@
 </div>
     <button class="btn btn-outline-light" type="submit">Entrar</button>
 </form>
+
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+
+    {% for message in messages %}
+
+      <p class="text-center note alert-danger alert-dismissible">{{ message }}</p>
+    {% endfor %}
+
+  {% endif %}
+{% endwith %}
+
 </div>
+
+<script type="text/javascript">
+var alerts = document.querySelectorAll('.alert-dismissible');
+
+    alerts.forEach(function (alert) {
+    setTimeout(function() {
+        alert.classList.add('hide-me')
+    }, 3000)
+    })
+
+</script>
 {% endblock %}

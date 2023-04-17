@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, flash
 import sqlalchemy
 from forms import *
 
@@ -9,7 +9,11 @@ app.config['SECRET_KEY'] = 'ÇALDKFJAÇALDKJFALFJ'
 def login():
     form = FormLogin()
     if form.validate_on_submit():  
-        return redirect(url_for('comandas'))
+        if form.email.data == 'erwin.stein@gmail.com' and form.senha.data == 'erwinstein':
+            return redirect(url_for('comandas'))
+        else: 
+            flash('Email e senha não conferem!')
+            return redirect(url_for('login'))
     
     return render_template('/login.html', form=form)    
     

@@ -2,3 +2,6 @@
   border: 1px solid orange!important;
 }
 
+.hide-me {
+  display: none;
+}

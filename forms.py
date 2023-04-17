@@ -13,6 +13,6 @@ class FormLogin(FlaskForm):
 		'Senha',
 		validators = [
 		DataRequired(message=('Este campo é obrigatório!')),
-		Length(min=6, message=('Este campo deve ter pelo menos 6 caracteres!'))
+		Length(min=6, message=('Pelo menos 6 caracteres!'))
 		])
 	enviar = SubmitField('Entrar')
