@@ -1,26 +1,18 @@
-from flask import Flask, render_template, url_for, redirect, request, flash
-import sqlalchemy
-from forms import *
+from flask import Flask 
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
+from login.login import login
+from comandas.comandas import blu_comandas
+from login.login import blu_login
+
 
 app = Flask(__name__)
+app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///schmithausen.sqlite3'
 app.config['SECRET_KEY'] = 'ÇALDKFJAÇALDKJFALFJ'
+db = SQLAlchemy(app)
 
-@app.route('/', methods=['GET','POST'])
-def login():
-    form = FormLogin()
-    if form.validate_on_submit():  
-        if form.email.data == 'erwin.stein@gmail.com' and form.senha.data == 'erwinstein':
-            return redirect(url_for('comandas'))
-        else: 
-            flash('Email e senha não conferem!')
-            return redirect(url_for('login'))
-    
-    return render_template('/login.html', form=form)    
-    
-
-@app.route('/comandas.html', methods=['GET','POST'])
-def comandas():
-    return render_template('comandas.html')
+app.register_blueprint(blu_login)
+app.register_blueprint(blu_comandas)
 
 
 if __name__ == '__main__':
