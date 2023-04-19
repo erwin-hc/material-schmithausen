@@ -19,9 +19,9 @@ class FormCadastroClientes(FlaskForm):
 		])
 	enviar = SubmitField('Entrar')
 # ***********************************************************************************************
-blu_clientes = Blueprint('blu_clientes', __name__, template_folder='pages')
+clientes = Blueprint('clientes', __name__, template_folder='pages')
 # ***********************************************************************************************
-@blu_clientes.route('/clientes.html', methods=['GET','POST'])
-def clientes():
+@clientes.route('/', methods=['GET','POST'])
+def listar_clientes():
     form = FormCadastroClientes()
     return render_template('/clientes.html', form=form)    

@@ -19,9 +19,9 @@ class FormCadastroProdutos(FlaskForm):
 		])
 	enviar = SubmitField('Entrar')
 # ***********************************************************************************************
-blu_produtos = Blueprint('blu_produtos', __name__, template_folder='pages')
+produtos = Blueprint('produtos', __name__, template_folder='pages')
 # ***********************************************************************************************
-@blu_produtos.route('/produtos.html', methods=['GET','POST'])
-def produtos():
+@produtos.route('/', methods=['GET','POST'])
+def listar_produtos():
     form = FormCadastroProdutos()
     return render_template('/produtos.html', form=form)    

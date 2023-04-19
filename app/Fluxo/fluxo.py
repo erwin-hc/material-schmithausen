@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 # ***********************************************************************************************
 
 # ***********************************************************************************************
-blu_fluxo = Blueprint('blu_fluxo', __name__, template_folder='pages')
+fluxo = Blueprint('fluxo', __name__, template_folder='pages')
 # ***********************************************************************************************
-@blu_fluxo.route('/fluxo.html', methods=['GET','POST'])
-def fluxo():
+@fluxo.route('/', methods=['GET','POST'])
+def listar_fluxo():
     return render_template('/fluxo.html')    

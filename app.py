@@ -1,24 +1,24 @@
 from flask import Flask 
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-from app.Comandas.comandas import blu_comandas
-from app.Login.login import blu_login
-from app.Usuarios.usuarios import blu_usuarios
-from app.Clientes.clientes import blu_clientes
-from app.Produtos.produtos import blu_produtos
-from app.Fluxo.fluxo import blu_fluxo
+from app.Comandas.comandas import comandas
+from app.Login.login import login
+from app.Usuarios.usuarios import usuarios
+from app.Clientes.clientes import clientes
+from app.Produtos.produtos import produtos
+from app.Fluxo.fluxo import fluxo
 
 app = Flask(__name__)
 app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///schmithausen.sqlite3'
 app.config['SECRET_KEY'] = 'ÇALDKFJAÇALDKJFALFJ'
 db = SQLAlchemy(app)
 
-app.register_blueprint(blu_login)
-app.register_blueprint(blu_comandas)
-app.register_blueprint(blu_usuarios)
-app.register_blueprint(blu_clientes)
-app.register_blueprint(blu_produtos)
-app.register_blueprint(blu_fluxo)
+app.register_blueprint(login, url_prefix='/')
+app.register_blueprint(comandas, url_prefix='/comandas')
+app.register_blueprint(usuarios, url_prefix='/usuarios')
+app.register_blueprint(clientes, url_prefix='/clientes')
+app.register_blueprint(produtos, url_prefix='/produtos')
+app.register_blueprint(fluxo, url_prefix='/fluxo')
 
 
 if __name__ == '__main__':

@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
 <title>{% block title %} Entrar {% endblock %}</title>
-<link rel="icon" href="static/img/schmithausen.svg" type="image/svg+xml" />
+<link rel="icon" href="{{ url_for('static', filename='img/schmithausen.svg') }}" type="image/svg+xml" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
-<link rel="stylesheet" href="static/css/mdb.min.css" />
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/mdb.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
 </head>
 
@@ -20,7 +21,7 @@
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a class="navbar-brand" style="color: orange;" href="{{ url_for('blu_login.login') }}"><i class="fa-solid fa-dragon"></i>&nbsp;&nbsp;Schmithausen</a>
+    <a class="navbar-brand" style="color: orange;" href="{{ url_for('login.listar_login') }}"><i class="fa-solid fa-dragon"></i>&nbsp;&nbsp;Schmithausen</a>
     <!-- Toggle button -->
     <button class="navbar-toggler"
      type="button" 
@@ -36,13 +37,13 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- Link -->
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('blu_login.login') }}">Entrar</a>
+          <a class="nav-link" href="{{ url_for('login.listar_login') }}">Entrar</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('blu_comandas.comandas') }}">Comandas</a>
+          <a class="nav-link" href="{{ url_for('comandas.listar_comandas') }}">Comandas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('blu_fluxo.fluxo') }}">Fluxo de Caixa</a>
+          <a class="nav-link" href="{{ url_for('fluxo.listar_fluxo') }}">Fluxo de Caixa</a>
         </li>
         <!-- Dropdown relatorios -->
         <li class="nav-item dropdown">
@@ -70,13 +71,13 @@
           <!-- Dropdown Cadastros -->
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
-              <a class="dropdown-item" href="{{ url_for('blu_produtos.produtos') }}">Produtos</a>
+              <a class="dropdown-item" href="{{ url_for('produtos.listar_produtos') }}">Produtos</a>
             </li>
             <li>
-              <a class="dropdown-item" href="{{ url_for('blu_clientes.clientes') }}">Clientes</a>
+              <a class="dropdown-item" href="{{ url_for('clientes.listar_clientes') }}">Clientes</a>
             </li>
             <li>
-              <a class="dropdown-item" href="{{ url_for('blu_usuarios.usuarios') }}">Usuários</a>
+              <a class="dropdown-item" href="{{ url_for('usuarios.listar_usuarios') }}">Usuários</a>
             </li>
           </ul>
         </li>
@@ -101,7 +102,7 @@
 </footer>
 </div>
 <!-- End your project here-->
-<script type="text/javascript" src="static/js/mdb.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
 <!-- Custom -->
 <script type="text/javascript">
  // ************************************************************************************************** 

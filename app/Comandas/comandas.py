@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 
-blu_comandas = Blueprint('blu_comandas', __name__, template_folder='pages')
+comandas = Blueprint('comandas', __name__, template_folder='pages')
 
-@blu_comandas.route('/comandas.html')
-def comandas():
+@comandas.route('/')
+def listar_comandas():
 	return render_template('/comandas.html')
