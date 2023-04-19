@@ -22,5 +22,5 @@ app.register_blueprint(blu_fluxo)
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.216',debug=True)
-    # app.run(host='10.0.0.53',debug=True)
+    # app.run(host='192.168.0.216',debug=True)
+    app.run(host='10.0.0.53',debug=True)

@@ -2,7 +2,7 @@
 {% block title %} ENTRAR {% endblock %}
 
 {% block content %}
-<div class="container py-5 h-100">
+<div class="container-fluid py-5">
 
 <form id='formEntrar' method="POST" class="form-outline form-white mb-4" action="" novalidate>
     {{ form.hidden_tag() }}
@@ -11,8 +11,7 @@
 <!-- -------------------------------------------------- -->
 <div class="form-outline mb-5">    
 
-    {{ form.email(class='form-control border-0', autofocus=true) }}
-    {{ form.email.label(class="form-label") }}
+    {{ form.email(class='myInputs', placeholder= form.email.label.text) }}
 
     {% if form.email.errors %}
     {% for e in form.email.errors %}
@@ -24,8 +23,7 @@
 </div>
 <!-- -------------------------------------------------- -->    
 <div class="form-outline mb-5">    
-    {{ form.senha(class='form-control border-0', autofocus=true) }}
-    {{ form.senha.label(class="form-label") }}
+    {{ form.senha(class='myInputs', placeholder= form.senha.label.text) }}
 
     {% if form.senha.errors %}
     {% for e in form.senha.errors %}
@@ -51,15 +49,4 @@
 {% endwith %}
 
 </div>
-
-<script type="text/javascript">
-var alerts = document.querySelectorAll('.alert-dismissible');
-
-    alerts.forEach(function (alert) {
-    setTimeout(function() {
-        alert.classList.add('hide-me')
-    }, 3000)
-    })
-
-</script>
 {% endblock %}
