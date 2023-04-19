@@ -16,11 +16,11 @@
 <body class="bg-dark">
 <div class="container pt-5" >
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg fixed-top bg-dark navbar-dark ">
+<nav class="navbar navbar-expand-lg bg-dark fixed-top navbar-dark ">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a class="navbar-brand" style="color: orange;" href="#"><i class="fa-solid fa-dragon"></i>&nbsp;&nbsp;Schmithausen</a>
+    <a class="navbar-brand" style="color: orange;" href="{{ url_for('blu_login.login') }}"><i class="fa-solid fa-dragon"></i>&nbsp;&nbsp;Schmithausen</a>
     <!-- Toggle button -->
     <button class="navbar-toggler"
      type="button" 
@@ -42,7 +42,7 @@
           <a class="nav-link" href="{{ url_for('blu_comandas.comandas') }}">Comandas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Fluxo de Caixa</a>
+          <a class="nav-link" href="{{ url_for('blu_fluxo.fluxo') }}">Fluxo de Caixa</a>
         </li>
         <!-- Dropdown relatorios -->
         <li class="nav-item dropdown">
@@ -70,13 +70,13 @@
           <!-- Dropdown Cadastros -->
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
-              <a class="dropdown-item" href="#">Produtos</a>
+              <a class="dropdown-item" href="{{ url_for('blu_produtos.produtos') }}">Produtos</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Clientes</a>
+              <a class="dropdown-item" href="{{ url_for('blu_clientes.clientes') }}">Clientes</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Usuários</a>
+              <a class="dropdown-item" href="{{ url_for('blu_usuarios.usuarios') }}">Usuários</a>
             </li>
           </ul>
         </li>
