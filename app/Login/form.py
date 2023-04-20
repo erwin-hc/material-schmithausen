@@ -1,10 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, EmailField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Length, Email
-
 # ***********************************************************************************************
-class FormCadastroClientes(FlaskForm):
+class FormLogin(FlaskForm):
 	email = EmailField(
 		'Email',
 		validators = [
@@ -19,9 +17,3 @@ class FormCadastroClientes(FlaskForm):
 		])
 	enviar = SubmitField('Entrar')
 # ***********************************************************************************************
-clientes = Blueprint('clientes', __name__, template_folder='pages')
-# ***********************************************************************************************
-@clientes.route('/', methods=['GET','POST'])
-def listar_clientes():
-    form = FormCadastroClientes()
-    return render_template('/clientes.html', form=form)    
