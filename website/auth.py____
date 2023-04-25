@@ -1,0 +1,15 @@
+from flask import Blueprint, render_template
+
+auth_bp = Blueprint('auth', __name__)
+
+@auth_bp.route('/entrar')
+def entrar():
+	return render_template('entrar.html')
+
+@auth_bp.route('/sair')
+def sair():
+	return render_template('sair.html')	
+
+@auth_bp.route('/cadastrar')
+def cadastrar():
+	return '<h1> CADASTRAR </h1>'	
