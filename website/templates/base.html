@@ -15,7 +15,7 @@
 </head>
 
 
-<body class="bg-dark">
+<body class="dark-ligth">
 <div class="container pt-5" >
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-dark fixed-top navbar-dark ">
@@ -24,6 +24,7 @@
     <!-- Navbar brand -->
     <a class="navbar-brand" style="color: orange;pointer-events: none;"><i class="fa-solid fa-dragon"></i>&nbsp;&nbsp;Schmithausen</a>
     <!-- Toggle button -->
+    {% if user.is_authenticated %}
     <button class="navbar-toggler"
      type="button" 
      data-mdb-toggle="collapse" 
@@ -37,7 +38,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- Link -->
-        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="/comandas">Comandas</a>
         </li>
@@ -91,12 +91,15 @@
 </nav>
 <!-- Navbar -->
 
-<div class="container pt-3">  
+<!-- ------------------------------------------ -->
+<!-- COMECO DOS BLOCOS -->
+<!-- ------------------------------------------ -->
   {% block content %} 
 
   {% endblock %}
-</div>
-
+<!-- ------------------------------------------ -->
+<!-- FIM DOS BLOCOS -->
+<!-- ------------------------------------------ -->
 
 <!-- Footer -->
 <footer class="bg-dark text-center text-white fixed-bottom">
@@ -115,11 +118,11 @@ var inputs = document.querySelectorAll('.myInputs')
 var messages = document.querySelectorAll('.form-helper')
 var forms = document.querySelectorAll('.form-outline')
 // ESCONDE ALERTAS
-      // alerts.forEach(function (alert) {
-      //   setTimeout(function() {
-      //       alert.classList.add('hide-me')
-      //   }, 3000)
-      // })
+alerts.forEach(function (alert) {
+  setTimeout(function() {
+      alert.classList.add('hide-me')
+  }, 2000)
+})
 // ESCONDE MENSAGENS
 messages.forEach(function (item) {
   setTimeout(function() {

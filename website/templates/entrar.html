@@ -2,15 +2,16 @@
 {% block title %} ENTRAR {% endblock %}
 <!-- *********************************************************** -->
 {% block content %}
+<div class="container pt-5">
 <!-- *********************************************************** -->
 <!-- FORM ENTRAR -->
 <!-- *********************************************************** -->
 <form id='formEntrar' 
 method="POST"
-class="form-outline form-white mb-4 mt-4 m-auto card bg-dark p-5"
+class="form-outline form-white mb-4 mt-4 m-auto card bg-dark p-5 larg-max"
 action="/" 
 novalidate
-style="max-width: 540px;">
+>
 {{ form.hidden_tag() }}
 {{ form.csrf_token }}
 
@@ -56,12 +57,13 @@ style="max-width: 540px;">
   {% if messages %}
     {% for message in messages %}
       <p 
-      class="text-center note alert-danger alert-dismissible p-2 m-auto p-3"
-      style="max-width: 540px;">
+      class="text-center note alert-danger alert-dismissible p-2 m-auto p-3 larg-max"
+      >
       {{ message }}
       </p>
     {% endfor %}
   {% endif %}
 {% endwith %}
-{% endblock %}
 <!-- *********************************************************** -->
+</div>
+{% endblock %}

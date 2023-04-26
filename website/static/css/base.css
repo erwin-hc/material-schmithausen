@@ -8,6 +8,7 @@
   --color-info: #54B4D3;
   --color-ligth:#FBFBFB;
   --color-dark:#332D2D;
+  --color-dark-ligth: #2d2828;
 }
 
 .btn-outline-light {
@@ -47,4 +48,12 @@
 
 .btn-close:hover {
   background-color: var(--color-danger)!important;
+}
+
+.larg-max {
+  max-width: 720px!important;
+}
+
+.dark-ligth {
+  background-color: var(--color-dark-ligth);
 }
