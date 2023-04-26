@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %} ENTRAR {% endblock %}
+<!-- *********************************************************** -->
+{% block content %}
+<!-- *********************************************************** -->
+<!-- FORM ENTRAR -->
+<!-- *********************************************************** -->
+<form id='formEntrar' 
+method="POST"
+class="form-outline form-white mb-4 mt-4 m-auto card bg-dark p-5"
+action="/" 
+novalidate
+style="max-width: 540px;">
+{{ form.hidden_tag() }}
+{{ form.csrf_token }}
+
+<h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3">Entrar</h2>
+
+<!-- *********************************************************** -->
+<!-- INPUT EMAIL -->
+<!-- *********************************************************** -->
+<div class="form-outline mb-5">
+{{ form.email(class='myInputs', placeholder= form.email.label.text, style='text-transform:lowercase') }}
+<!-- ERROS -->
+{% if form.email.errors %}
+{% for e in form.email.errors %}
+<div class="form-helper ms-3 mt-1 text-danger">
+{{ e }}
+</div> 
+{% endfor %}
+{% endif %}
+</div>
+<!-- *********************************************************** -->
+<!-- INPUT SENHA -->
+<!-- *********************************************************** -->
+<div class="form-outline mb-5">    
+{{ form.senha(class='myInputs', placeholder= form.senha.label.text) }}
+<!-- ERROS -->
+{% if form.senha.errors %}
+{% for e in form.senha.errors %}
+<div class="form-helper ms-3 mt-1 text-danger">
+{{ e }}
+</div> 
+{% endfor %}
+{% endif %}
+</div>
+<!-- *********************************************************** -->
+<!-- BOTAO ENTRAR -->
+<!-- *********************************************************** -->
+<button class="btn btn-outline-light " type="submit">Entrar</button>
+</form>
+<!-- *********************************************************** -->
+<!-- FLASH MESSAGES -->
+<!-- *********************************************************** -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p 
+      class="text-center note alert-danger alert-dismissible p-2 m-auto p-3"
+      style="max-width: 540px;">
+      {{ message }}
+      </p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+{% endblock %}
+<!-- *********************************************************** -->

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
-<title>{% block title %} Entrar {% endblock %}</title>
-<link rel="icon" href="{{ url_for('static', filename='img/schmithausen.svg') }}" type="image/svg+xml" />
+<title>{% block title %} ENTRAR {% endblock %}</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
 
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/mdb.min.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
+<link rel="icon"       type="image/svg+xml"  href="{{ url_for('static', filename='img/schmithausen.svg') }}">
+<link rel="stylesheet" type="text/css"       href="{{ url_for('static', filename='css/mdb.min.css')      }}">
+<link rel="stylesheet" type="text/css"       href="{{ url_for('static', filename='css/base.css')         }}">
 </head>
 
 
@@ -21,7 +22,7 @@
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a class="navbar-brand" style="color: orange;" href="/"><i class="fa-solid fa-dragon"></i>&nbsp;&nbsp;Schmithausen</a>
+    <a class="navbar-brand" style="color: orange;pointer-events: none;"><i class="fa-solid fa-dragon"></i>&nbsp;&nbsp;Schmithausen</a>
     <!-- Toggle button -->
     <button class="navbar-toggler"
      type="button" 
@@ -36,9 +37,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- Link -->
-        <li class="nav-item">
-          <a class="nav-link" href="/">Entrar</a>
-        </li>
+        {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="/comandas">Comandas</a>
         </li>
@@ -71,15 +70,19 @@
           <!-- Dropdown Cadastros -->
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>
-              <a class="dropdown-item" href="/produtos">Produtos</a>
+              <a class="dropdown-item" href="#">Produtos</a>
             </li>
             <li>
-              <a class="dropdown-item" href="/clientes">Clientes</a>
+              <a class="dropdown-item" href="#">Clientes</a>
             </li>
             <li>
-              <a class="dropdown-item" href="{{url_for('usuarios.cadastrar')}}">Usuários</a>
+              <a class="dropdown-item" href="#">Usuários</a>
             </li>
           </ul>
+            <li class="nav-item">
+            <a class="nav-link text-danger" href="/logout">Sair</a>
+            </li>
+        {% endif %}
         </li>
       </ul>
     </div>
@@ -88,7 +91,7 @@
 </nav>
 <!-- Navbar -->
 
-<div class="container">  
+<div class="container pt-3">  
   {% block content %} 
 
   {% endblock %}
@@ -112,16 +115,16 @@ var inputs = document.querySelectorAll('.myInputs')
 var messages = document.querySelectorAll('.form-helper')
 var forms = document.querySelectorAll('.form-outline')
 // ESCONDE ALERTAS
-alerts.forEach(function (alert) {
-  setTimeout(function() {
-      alert.classList.add('hide-me')
-  }, 3000)
-})
+      // alerts.forEach(function (alert) {
+      //   setTimeout(function() {
+      //       alert.classList.add('hide-me')
+      //   }, 3000)
+      // })
 // ESCONDE MENSAGENS
 messages.forEach(function (item) {
   setTimeout(function() {
       item.classList.add('hide-me')
-  }, 1000)
+  }, 2000)
 })
 // INPUT INVALIDO
 inputs.forEach(function (item) {

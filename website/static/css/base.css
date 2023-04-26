@@ -45,19 +45,6 @@
   border: 1px solid var(--color-danger);
 }
 
-.centered {
-    margin: 0 auto !important;
-    float: none !important;
-}
-
-.modal-header {
-border: none !important;
-}
-
-.modal-footer {
-border: none !important;
-}
-
 .btn-close:hover {
   background-color: var(--color-danger)!important;
 }
