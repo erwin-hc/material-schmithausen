@@ -1,8 +1,15 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
 from .models import Note
+from .models import User
 from . import db
 import json
+import datetime
+# ***********************************************************************************************
+# DATA ATUAL
+# ***********************************************************************************************
+data = x = datetime.datetime.now().date()
+# ***********************************************************************************************
 
 views = Blueprint('views', __name__)
 # ***********************************************************************************************
@@ -11,17 +18,7 @@ views = Blueprint('views', __name__)
 @views.route('/comandas', methods=['GET', 'POST'])
 @login_required
 def comandas():
-    return render_template("comandas.html", user=current_user)
-    # if request.method == 'POST': 
-    #     note = request.form.get('note')#Gets the note from the HTML 
-
-    #     if len(note) < 1:
-    #         flash('Note is too short!', category='error') 
-    #     else:
-    #         new_note = Note(data=note, user_id=current_user.id)  #providing the schema for the note 
-    #         db.session.add(new_note) #adding the note to the database 
-    #         db.session.commit()
-    #         flash('Note added!', category='success')
+    return render_template("comandas.html", user=current_user, data=data)
 # ***********************************************************************************************
 # DELETE NOTE
 # ***********************************************************************************************
@@ -37,3 +34,14 @@ def delete_note():
 
     return jsonify({})
 # ***********************************************************************************************
+#  USUARIOS
+# ***********************************************************************************************
+@views.route('/usuarios', methods=['GET','POST'])
+@login_required
+def usuarios():
+    users = []
+    rows = User.query.all()
+    for r in rows:
+        users.append(r)
+        
+    return render_template("usuarios.html", user=current_user, data=data, users=users)

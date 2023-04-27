@@ -57,3 +57,20 @@
 .dark-ligth {
   background-color: var(--color-dark-ligth);
 }
+
+.my-dropdown-menu {
+  background-color: var(--color-dark);
+  border: 1px solid var(--color-orange);
+}
+.my-dropdown-menu a {
+  color: var(--color-secondary);  
+}
+
+.my-dropdown-menu li :hover {
+  background-color: rgba(255,165,0,0.1);
+  color: var(--color-orange)
+}
+
+.my-navbar li :hover {
+  color: var(--color-orange)
+}

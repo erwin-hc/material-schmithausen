@@ -1,0 +1,15 @@
+{% extends "base.html" %} 
+{% block title %} USUÁRIOS {% endblock %} 
+{% block content %}
+
+<h1 class="pt-5"> USUÁRIOS </h1>
+
+<div>
+	{% for us in users %}
+	{{ us.id }} - {{ us.first_name | upper }} - {{ us.email }}  <br>
+	{% endfor %}
+</div>
+
+{% endblock %}
+
+{% block titlefooter %} {{ user.first_name | upper }} - {{ data.strftime('%d/%m/%Y') }}  {% endblock %}

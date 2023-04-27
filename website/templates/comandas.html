@@ -21,4 +21,12 @@
     <button type="submit" class="btn btn-primary">Add Note</button>
   </div>
 </form>
+
+{% endblock %}
+{% block titlefooter %}
+<i class="fa-regular fa-user fa-sm"></i>
+&nbsp;{{ user.first_name | upper }}
+&nbsp;&nbsp;&nbsp;
+<i class="fa-regular fa-calendar fa-sm"> </i>
+&nbsp;{{ data.strftime('%d/%m/%Y') }}
 {% endblock %}
