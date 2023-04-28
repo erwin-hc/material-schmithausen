@@ -23,10 +23,14 @@
 </form>
 
 {% endblock %}
+
 {% block titlefooter %}
+<span style="color:#9FA6B2">
 <i class="fa-regular fa-user fa-sm"></i>
 &nbsp;{{ user.first_name | upper }}
 &nbsp;&nbsp;&nbsp;
+<span style="color:#9FA6B2">
 <i class="fa-regular fa-calendar fa-sm"> </i>
 &nbsp;{{ data.strftime('%d/%m/%Y') }}
+</span>
 {% endblock %}
