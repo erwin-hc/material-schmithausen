@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, request, flash, jsonify
-from flask_login import login_required, current_user
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user, login_required, logout_user, current_user
 from . import db
 from .models import *
 from .forms import *
@@ -56,8 +57,35 @@ def cadastroUsuarios():
     if form.validate_on_submit():
         if request.method == 'POST':
             email = request.form.get('email')
+            first_name = request.form.get('nome')
+            password1 = request.form.get('senha')
+            password2 = request.form.get('confirmar')
+
             user = User.query.filter_by(email=email).first()
+
             if user:
                 flash('EMAIL JÁ CADASTRADO !!!', category='error')
+            else:
+                new_user = User(email=email, first_name=first_name, password=generate_password_hash(
+                password1, method='sha256'))
+                db.session.add(new_user)
+                db.session.commit()
+                login_user(new_user, remember=True)
+
+            return redirect(url_for('views.usuarios'))
 
     return render_template("cadastro_usuarios.html", user=current_user, data=data, form=form)
+# ***********************************************************************************************
+# DELETAR USUARIO
+# ***********************************************************************************************
+@views.route('/deletar-usuario', methods=['POST'])
+def deletarUsuario():  
+    user = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
+    UserID = user['UserID']
+    id = User.query.get(id)
+    if id:
+        db.session.delete(id)
+        db.session.commit()
+        flash('CADASTRO DELETADO COM SUCESSO !!!', category='error')
+
+    return jsonify({})

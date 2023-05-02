@@ -74,3 +74,14 @@
 .my-navbar li :hover {
   color: var(--color-orange)
 }
+
+.alert-dismissible {
+  z-index: 99999!important;
+  width: 100%!important;
+  bottom: 35px;
+  border-radius: 0!important;
+}
+
+.form-outline {
+  margin-bottom: 35px!important;
+}

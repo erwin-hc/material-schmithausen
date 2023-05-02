@@ -121,37 +121,7 @@
 <!-- End your project here-->
 <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
 <!-- Custom -->
-<script type="text/javascript">
- // ************************************************************************************************** 
-var alerts = document.querySelectorAll('.alert-dismissible');
-var inputs = document.querySelectorAll('.myInputs')
-var messages = document.querySelectorAll('.form-helper')
-var forms = document.querySelectorAll('.form-outline')
-// ESCONDE ALERTAS
-alerts.forEach(function (alert) {
-  setTimeout(function() {
-      alert.classList.add('hide-me')
-  }, 2000)
-})
-// ESCONDE MENSAGENS
-messages.forEach(function (item) {
-  setTimeout(function() {
-      item.classList.add('hide-me')
-  }, 2000)
-})
-// INPUT INVALIDO
-inputs.forEach(function (item) {
-  item.addEventListener('change', (e)=>{
-    target = e.target;
-    if (!target.checkValidity()) {
-      target.classList.add('myInputs-invalid')
-    } else {
-       target.classList.remove('myInputs-invalid')
-    }
-});
-});
-// **************************************************************************************************
-</script>
+<script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
 
 </body>
 </html>

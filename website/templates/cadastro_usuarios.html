@@ -18,30 +18,18 @@ novalidate
 {{ form.hidden_tag() }}
 {{ form.csrf_token }}
 
-<h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3">CADASTRAR USUÁRIOS</h2>
+<h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
+<i class="fa-solid fa-user-plus"></i>
+CADASTRAR USUÁRIOS</h2>
 <!-- *********************************************************** -->
 <!-- INPUT NOME -->
 <!-- *********************************************************** -->
-<div class="form-outline mb-5">
-
-	{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
-      <p 
-      class="text-center note alert-danger alert-dismissible p-2 m-auto p-3 larg-max"
-      >
-      {{ message }}
-      </p>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-
-	
-{{ form.nome(class='myInputs', placeholder= form.nome.label.text) }}
+<div class="form-outline">	
+{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase') }}
 <!-- ERROS -->
 {% if form.nome.errors %}
 {% for e in form.nome.errors %}
-<div class="form-helper ms-3 mt-1 text-danger">
+<div class="form-helper ms-3 text-danger">
 {{ e }}
 </div> 
 {% endfor %}
@@ -52,8 +40,8 @@ novalidate
 <!-- *********************************************************** -->
 <!-- INPUT EMAIL -->
 <!-- *********************************************************** -->
-<div class="form-outline mb-5">
-{{ form.email(class='myInputs', placeholder= form.email.label.text) }}
+<div class="form-outline">
+{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text) }}
 <!-- ERROS -->
 {% if form.email.errors %}
 {% for e in form.email.errors %}
@@ -66,8 +54,8 @@ novalidate
 <!-- *********************************************************** -->
 <!-- INPUT SENHA -->
 <!-- *********************************************************** -->
-<div class="form-outline mb-5">    
-{{ form.senha(class='myInputs', placeholder= form.senha.label.text) }}
+<div class="form-outline">    
+{{ form.senha(class='myInputs form-control-sm', placeholder= form.senha.label.text) }}
 <!-- ERROS -->
 {% if form.senha.errors %}
 {% for e in form.senha.errors %}
@@ -80,8 +68,8 @@ novalidate
 <!-- *********************************************************** -->
 <!-- INPUT CONFIRMAR SENHA -->
 <!-- *********************************************************** -->
-<div class="form-outline mb-5">    
-{{ form.confirmar(class='myInputs', placeholder= form.confirmar.label.text) }}
+<div class="form-outline">    
+{{ form.confirmar(class='myInputs form-control-sm', placeholder= form.confirmar.label.text) }}
 <!-- ERROS -->
 {% if form.confirmar.errors %}
 {% for e in form.confirmar.errors %}
@@ -94,25 +82,25 @@ novalidate
 <!-- *********************************************************** -->
 <!-- BOTAO ENTRAR -->
 <!-- *********************************************************** -->
-<button class="btn btn-lg btn-outline-light " type="submit">CADASTRAR</button>
+<button class="btn btn btn-outline-light " type="submit">CADASTRAR</button>
 </form>
+</div>
 <!-- *********************************************************** -->
 <!-- FLASH MESSAGES -->
 <!-- *********************************************************** -->
-<!-- {% with messages = get_flashed_messages() %}
+{% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
       <p 
-      class="text-center note alert-danger alert-dismissible p-2 m-auto p-3 larg-max"
+      class="h6 z-index-master fixed-bottom text-center alert alert-danger alert-dismissible p-2 m-auto"
+      role="alert"
       >
       {{ message }}
       </p>
     {% endfor %}
   {% endif %}
-{% endwith %} -->
+{% endwith %}
 <!-- *********************************************************** -->
-</div>
-
 
 {% endblock %}
 
@@ -126,3 +114,4 @@ novalidate
 &nbsp;{{ data.strftime('%d/%m/%Y') }}
 </span>
 {% endblock %}
+

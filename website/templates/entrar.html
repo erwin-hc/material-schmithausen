@@ -15,13 +15,15 @@ novalidate
 {{ form.hidden_tag() }}
 {{ form.csrf_token }}
 
-<h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3">Entrar</h2>
+<h2 align="center" class="h5 mb-1 text-uppercase text-secondary mb-3">
+<i class="fa-solid fa-right-to-bracket"></i>
+Entrar</h2>
 
 <!-- *********************************************************** -->
 <!-- INPUT EMAIL -->
 <!-- *********************************************************** -->
 <div class="form-outline mb-5">
-{{ form.email(class='myInputs', placeholder= form.email.label.text) }}
+{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text) }}
 <!-- ERROS -->
 {% if form.email.errors %}
 {% for e in form.email.errors %}
@@ -35,7 +37,7 @@ novalidate
 <!-- INPUT SENHA -->
 <!-- *********************************************************** -->
 <div class="form-outline mb-5">    
-{{ form.senha(class='myInputs', placeholder= form.senha.label.text) }}
+{{ form.senha(class='myInputs form-control-sm', placeholder= form.senha.label.text) }}
 <!-- ERROS -->
 {% if form.senha.errors %}
 {% for e in form.senha.errors %}
@@ -48,8 +50,10 @@ novalidate
 <!-- *********************************************************** -->
 <!-- BOTAO ENTRAR -->
 <!-- *********************************************************** -->
-<button class="btn btn-lg btn-outline-light " type="submit">Entrar</button>
+<button class="btn btn btn-outline-light " type="submit">Entrar</button>
 </form>
+
+</div>
 <!-- *********************************************************** -->
 <!-- FLASH MESSAGES -->
 <!-- *********************************************************** -->
@@ -57,7 +61,8 @@ novalidate
   {% if messages %}
     {% for message in messages %}
       <p 
-      class="text-center note alert-danger alert-dismissible p-2 m-auto p-3 larg-max"
+      class="h6 z-index-master fixed-bottom text-center alert alert-danger alert-dismissible p-2 m-auto"
+      role="alert"
       >
       {{ message }}
       </p>
@@ -65,5 +70,4 @@ novalidate
   {% endif %}
 {% endwith %}
 <!-- *********************************************************** -->
-</div>
 {% endblock %}
