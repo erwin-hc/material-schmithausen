@@ -1,10 +1,11 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Note
-from .models import User
 from . import db
-import json
+from .models import *
+from .forms import *
 import datetime
+import json
+
 # ***********************************************************************************************
 # DATA ATUAL
 # ***********************************************************************************************
@@ -45,3 +46,18 @@ def usuarios():
         users.append(r)
         
     return render_template("usuarios.html", user=current_user, data=data, users=users)
+# ***********************************************************************************************
+#  CADASTRO USUARIOS
+# ***********************************************************************************************
+@views.route('/cadastro_usuarios', methods=['GET','POST'])
+@login_required
+def cadastroUsuarios():
+    form = CadastroUsuario()
+    if form.validate_on_submit():
+        if request.method == 'POST':
+            email = request.form.get('email')
+            user = User.query.filter_by(email=email).first()
+            if user:
+                flash('EMAIL JÁ CADASTRADO !!!', category='error')
+
+    return render_template("cadastro_usuarios.html", user=current_user, data=data, form=form)
