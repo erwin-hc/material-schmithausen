@@ -3,19 +3,25 @@ var alerts = document.querySelectorAll('.alert-dismissible');
 var inputs = document.querySelectorAll('.myInputs')
 var messages = document.querySelectorAll('.form-helper')
 var forms = document.querySelectorAll('.form-outline')
-// ESCONDE ALERTAS
+// ---------------------------------------------------------------
+// ESCONDER ALERTAS
+// ---------------------------------------------------------------
 alerts.forEach(function (alert) {
   setTimeout(function() {
       alert.classList.add('hide-me')
-  }, 2000)
+  }, 3000)
 })
-// ESCONDE MENSAGENS
+// ---------------------------------------------------------------
+// ESCONDER MENSAGENS DE ERRO IMPUTS
+// ---------------------------------------------------------------
 messages.forEach(function (item) {
   setTimeout(function() {
       item.classList.add('hide-me')
-  }, 2000)
+  }, 3000)
 })
-// INPUT INVALIDO
+// ---------------------------------------------------------------
+// IMPUT INVALIDO
+// ---------------------------------------------------------------
 inputs.forEach(function (item) {
   item.addEventListener('change', (e)=>{
     target = e.target;
@@ -26,9 +32,9 @@ inputs.forEach(function (item) {
     }
 });
 });
-
-
-// **************************************************************************************************
+// ---------------------------------------------------------------
+// DELETAR NOTES
+// ---------------------------------------------------------------
 function deleteNote(noteId) {
   fetch("/delete-note", {
     method: "POST",
@@ -48,4 +54,10 @@ function deleteNote(noteId) {
       window.location.href = "/usuarios";
     });
 }
-
+// ---------------------------------------------------------------
+// MASK FONE
+// ---------------------------------------------------------------
+var phoneMask = IMask(
+  document.querySelector('.phone-mask'), {
+    mask: '(47) 0-0000-0000'
+  });

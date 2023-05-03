@@ -23,6 +23,7 @@ Entrar</h2>
 <!-- INPUT EMAIL -->
 <!-- *********************************************************** -->
 <div class="form-outline mb-5">
+<i class="fa-solid fa-at trailing"></i>
 {{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text) }}
 <!-- ERROS -->
 {% if form.email.errors %}
@@ -36,7 +37,8 @@ Entrar</h2>
 <!-- *********************************************************** -->
 <!-- INPUT SENHA -->
 <!-- *********************************************************** -->
-<div class="form-outline mb-5">    
+<div class="form-outline mb-5">   
+<i class="fa-solid fa-key trailing"></i> 
 {{ form.senha(class='myInputs form-control-sm', placeholder= form.senha.label.text) }}
 <!-- ERROS -->
 {% if form.senha.errors %}
@@ -54,20 +56,5 @@ Entrar</h2>
 </form>
 
 </div>
-<!-- *********************************************************** -->
-<!-- FLASH MESSAGES -->
-<!-- *********************************************************** -->
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
-      <p 
-      class="h6 z-index-master fixed-bottom text-center alert alert-danger alert-dismissible p-2 m-auto"
-      role="alert"
-      >
-      {{ message }}
-      </p>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-<!-- *********************************************************** -->
+
 {% endblock %}

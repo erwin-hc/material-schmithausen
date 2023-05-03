@@ -36,7 +36,7 @@ def delete_note():
 
     return jsonify({})
 # ***********************************************************************************************
-#  USUARIOS
+#  LISTAR USUARIOS
 # ***********************************************************************************************
 @views.route('/usuarios', methods=['GET','POST'])
 @login_required
@@ -44,8 +44,7 @@ def usuarios():
     users = []
     rows = User.query.all()
     for r in rows:
-        users.append(r)
-        
+        users.append(r)        
     return render_template("usuarios.html", user=current_user, data=data, users=users)
 # ***********************************************************************************************
 #  CADASTRO USUARIOS
@@ -81,11 +80,38 @@ def cadastroUsuarios():
 @views.route('/deletar-usuario', methods=['POST'])
 def deletarUsuario():  
     user = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
-    UserID = user['UserID']
-    id = User.query.get(id)
-    if id:
-        db.session.delete(id)
-        db.session.commit()
-        flash('CADASTRO DELETADO COM SUCESSO !!!', category='error')
+    _id = user['UserID']
+    if _id != 1:
+        get_user = User.query.get(_id)
+        if get_user:
+            db.session.delete(get_user)
+            db.session.commit()
+    else:
+        flash('ESSE USUÁRIO NÃO PODE SER EXCLUÍDO !!!',category='error')
 
     return jsonify({})
+
+# ***********************************************************************************************
+#  LISTAR CLIENTES
+# ***********************************************************************************************
+@views.route('/clientes', methods=['GET','POST'])
+@login_required
+def clientes():
+    # users = []
+    # rows = User.query.all()
+    # for r in rows:
+    #     users.append(r)        
+    return render_template("clientes.html", user=current_user, data=data)
+# ***********************************************************************************************
+#  CADASTRO CLIENTES
+# ***********************************************************************************************
+@views.route('/cadastro_clientes', methods=['GET','POST'])
+@login_required
+def cadastroClientes():
+    form = CadastroCliente()
+    if form.validate_on_submit():
+        if request.method == 'POST':
+            email = request.form.get('email')
+            fone = request.form.get('fone')
+
+    return render_template("cadastro_clientes.html", user=current_user, data=data, form=form)

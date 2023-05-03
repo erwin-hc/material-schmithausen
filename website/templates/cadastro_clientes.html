@@ -12,15 +12,15 @@
 <form id='cadatroUsuarios' 
 method="POST"
 class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max"
-action="{{ url_for('views.cadastroUsuarios') }}" 
+action="{{ url_for('views.cadastroClientes') }}" 
 novalidate
 >
 {{ form.hidden_tag() }}
 {{ form.csrf_token }}
 
 <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
-<i class="fa-solid fa-user"></i>
-CADASTRAR USUÁRIOS</h2>
+<i class="fa-solid fa-user-group"></i>
+CADASTRAR CLIENTES</h2>
 <!-- *********************************************************** -->
 <!-- INPUT NOME -->
 <!-- *********************************************************** -->
@@ -37,46 +37,17 @@ CADASTRAR USUÁRIOS</h2>
 {% endif %}
 </div>
 <!-- *********************************************************** -->
+<!-- INPUT CELUAR -->
+<!-- *********************************************************** -->
+<!-- <script src="https://unpkg.com/imask"></script> -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/imask.js') }}"></script>
 
-<!-- *********************************************************** -->
-<!-- INPUT EMAIL -->
-<!-- *********************************************************** -->
 <div class="form-outline">
-<i class="fa-solid fa-at trailing"></i>
-{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text) }}
+<i class="fa-solid fa-phone trailing"></i>
+{{ form.fone(class='myInputs form-control-sm phone-mask', placeholder='(XX) X-XXXX-XXXX') }}
 <!-- ERROS -->
-{% if form.email.errors %}
-{% for e in form.email.errors %}
-<div class="form-helper ms-3 mt-1 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
-</div>
-<!-- *********************************************************** -->
-<!-- INPUT SENHA -->
-<!-- *********************************************************** -->
-<div class="form-outline">    
-<i class="fa-solid fa-key trailing"></i>
-{{ form.senha(class='myInputs form-control-sm', placeholder= form.senha.label.text) }}
-<!-- ERROS -->
-{% if form.senha.errors %}
-{% for e in form.senha.errors %}
-<div class="form-helper ms-3 mt-1 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
-</div>
-<!-- *********************************************************** -->
-<!-- INPUT CONFIRMAR SENHA -->
-<!-- *********************************************************** -->
-<div class="form-outline">    
-<i class="fa-solid fa-key trailing"></i>
-{{ form.confirmar(class='myInputs form-control-sm', placeholder= form.confirmar.label.text) }}
-<!-- ERROS -->
-{% if form.confirmar.errors %}
-{% for e in form.confirmar.errors %}
+{% if form.fone.errors %}
+{% for e in form.fone.errors %}
 <div class="form-helper ms-3 mt-1 text-danger">
 {{ e }}
 </div> 

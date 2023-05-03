@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, EmailField, SubmitField, PasswordField
 from wtforms.validators import ValidationError, DataRequired, Length, Email, EqualTo
 # ***********************************************************************************************
+# FORMULARIO LOGIN
+# ***********************************************************************************************
 class FormLogin(FlaskForm):
 	email = EmailField(
 		'Email',
@@ -16,6 +18,8 @@ class FormLogin(FlaskForm):
 		Length(min=6, message=('Pelo menos 6 caracteres!'))
 		])
 
+# ***********************************************************************************************
+# FORMULARIO CADASTRO USUARIOS
 # ***********************************************************************************************
 class CadastroUsuario(FlaskForm):
 	nome = StringField(
@@ -45,3 +49,18 @@ class CadastroUsuario(FlaskForm):
 		])
 
 # ***********************************************************************************************
+# FORMULARIO CADASTRO CLIENTES
+# ***********************************************************************************************
+class CadastroCliente(FlaskForm):
+	nome = StringField(
+	'Nome',
+	validators= [
+	DataRequired(message=("Este campo é obrigatório!")),
+	Length(min=4, message=("Pelo menos 4 caracteres!"))
+	])
+	fone = StringField(
+	'Celuar',
+	validators= [
+	DataRequired(message=("Este campo é obrigatório!"))
+	])
+

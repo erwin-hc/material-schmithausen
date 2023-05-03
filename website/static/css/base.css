@@ -78,8 +78,7 @@
 .alert-dismissible {
   z-index: 99999!important;
   width: 100%!important;
-  bottom: 35px;
-  border-radius: 0!important;
+  top: 60px;
 }
 
 .form-outline {

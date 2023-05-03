@@ -1,6 +1,13 @@
 from website import create_app
+from flask import session
+from datetime import timedelta
 
 app = create_app()
+
+@app.before_request
+def before_request():
+    session.permanent = True
+    app.permanent_session_lifetime = timedelta(minutes=5)
 
 if __name__ == '__main__':
     app.run(host='10.0.0.53',debug=True)

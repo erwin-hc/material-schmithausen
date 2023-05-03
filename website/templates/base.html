@@ -12,10 +12,27 @@
 <link rel="icon"       type="image/svg+xml"  href="{{ url_for('static', filename='img/schmithausen.svg') }}">
 <link rel="stylesheet" type="text/css"       href="{{ url_for('static', filename='css/mdb.min.css')      }}">
 <link rel="stylesheet" type="text/css"       href="{{ url_for('static', filename='css/base.css')         }}">
+
 </head>
 
 
 <body class="dark-ligth">
+
+  <!-- *********************************************************** -->
+<!-- FLASH MESSAGES -->
+<!-- *********************************************************** -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="text-center alert alert-danger mb-0 alert-dismissible alert-absolute fade show" id="alertExample" role="alert" data-mdb-color="secondary">
+<i class="fas fa-biohazard fa-2xl"></i>
+{{ message }}
+</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<!-- *********************************************************** -->
+
 <div class="container pt-5" >
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-dark fixed-top navbar-dark ">
@@ -73,7 +90,7 @@
               <a class="dropdown-item" href="#">Produtos</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Clientes</a>
+              <a class="dropdown-item" href="/clientes">Clientes</a>
             </li>
             <li>
               <a class="dropdown-item" href="/usuarios">Usuários</a>
@@ -119,9 +136,9 @@
 </footer>
 </div>
 <!-- End your project here-->
+
 <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
-<!-- Custom -->
-<script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
 
 </body>
 </html>
