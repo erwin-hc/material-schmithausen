@@ -61,6 +61,7 @@ class CadastroCliente(FlaskForm):
 	fone = StringField(
 	'Celuar',
 	validators= [
-	DataRequired(message=("Este campo é obrigatório!"))
+	DataRequired(message=("Este campo é obrigatório!")),
+	Length(min=16, message=("Número celuar inválido!"))
 	])
 

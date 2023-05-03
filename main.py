@@ -4,6 +4,7 @@ from datetime import timedelta
 
 app = create_app()
 
+
 @app.before_request
 def before_request():
     session.permanent = True

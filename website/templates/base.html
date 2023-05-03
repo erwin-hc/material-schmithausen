@@ -24,9 +24,15 @@
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message in messages %}
-<div class="text-center alert alert-danger mb-0 alert-dismissible alert-absolute fade show" id="alertExample" role="alert" data-mdb-color="secondary">
-<i class="fas fa-biohazard fa-2xl"></i>
-{{ message }}
+<div 
+class="note alert-danger alert-dismissible alert-absolute fade show" 
+id="alertExample" 
+role="alert" 
+data-mdb-color="secondary">
+<p class="d-flex align-items-center justify-content-center m-0">
+<i class="fas fa-biohazard fa-xl"></i>
+&nbsp;
+{{ message }}</p>
 </div>
     {% endfor %}
   {% endif %}

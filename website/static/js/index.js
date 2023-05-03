@@ -1,4 +1,4 @@
- // ************************************************************************************************** 
+// ---------------------------------------------------------------
 var alerts = document.querySelectorAll('.alert-dismissible');
 var inputs = document.querySelectorAll('.myInputs')
 var messages = document.querySelectorAll('.form-helper')
@@ -55,9 +55,25 @@ function deleteNote(noteId) {
     });
 }
 // ---------------------------------------------------------------
+// DELETAR CLIENTE
+// ---------------------------------------------------------------
+  function deletarCliente(CliID) {
+    fetch("/deletar-cliente", {
+      method: "POST",
+      body: JSON.stringify({ CliID: CliID }),
+    }).then((_res) => {
+      window.location.href = "/clientes";
+    });
+}
+
+
+
+
+
+// ---------------------------------------------------------------
 // MASK FONE
 // ---------------------------------------------------------------
 var phoneMask = IMask(
   document.querySelector('.phone-mask'), {
-    mask: '(47) 0-0000-0000'
+    mask: '(00)-0-0000-0000'
   });

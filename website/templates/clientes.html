@@ -7,7 +7,7 @@
   <table class="table table-striped table-hover table-borderless table-sm table-dark ">
     <thead>
     	<tr>
-    		<th colspan="5" class="h5 text-secondary">
+    		<th colspan="6" class="h5 text-secondary">
         <i class="fa-solid fa-list"></i>
         <i class="fa-solid fa-user-group"></i>
         &nbsp;&nbsp;&nbsp;
@@ -18,16 +18,18 @@
         <th scope="col">#</th>
         <th scope="col">Cliente</th>
         <th scope="col">Celular</th>
+        <th scope="col">Desde</th>
         <th></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
-
+      {% for i in clientes %}
       <tr>
-        <td scope="row"> Cli ID </td>
-        <td> Cli Nome </td>
-        <td> Cli Celular </td>
+        <td scope="row"> {{ i.id }} </td>
+        <td> {{ i.nome }} </td>
+        <td> {{ i.fone }} </td>
+        <td> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
    		
 				<td class="text-end" style="width: 50px"> 
 					<a href="#!" role="button" class="text-white">
@@ -38,16 +40,17 @@
 					<a class="text-danger" 
           href="#!" 
           role="button"
+          onclick="deletarCliente( {{ i.id }} )" 
           >
 						<i class="fa-regular fa-trash-can"></i>
 					</a>
 				</td>
 
       </tr>     
-
+      {% endfor %}
     </tbody>
     <tfoot>
-    	<th colspan="5">
+    	<th colspan="6">
 
             <a href="/cadastro_clientes" class="btn btn-sm btn-outline-light">
                 NOVO

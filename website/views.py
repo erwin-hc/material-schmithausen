@@ -63,7 +63,7 @@ def cadastroUsuarios():
             user = User.query.filter_by(email=email).first()
 
             if user:
-                flash('EMAIL JÁ CADASTRADO !!!', category='error')
+                flash('EMAIL JÁ CADASTRADO!', category='error')
             else:
                 new_user = User(email=email, first_name=first_name, password=generate_password_hash(
                 password1, method='sha256'))
@@ -87,7 +87,7 @@ def deletarUsuario():
             db.session.delete(get_user)
             db.session.commit()
     else:
-        flash('ESSE USUÁRIO NÃO PODE SER EXCLUÍDO !!!',category='error')
+        flash('NÃO PODE SER EXCLUÍDO!',category='error')
 
     return jsonify({})
 
@@ -97,11 +97,11 @@ def deletarUsuario():
 @views.route('/clientes', methods=['GET','POST'])
 @login_required
 def clientes():
-    # users = []
-    # rows = User.query.all()
-    # for r in rows:
-    #     users.append(r)        
-    return render_template("clientes.html", user=current_user, data=data)
+    clientes = []
+    rows = Cliente.query.all()
+    for r in rows:
+        clientes.append(r)        
+    return render_template("clientes.html", user=current_user, data=data, clientes=clientes)
 # ***********************************************************************************************
 #  CADASTRO CLIENTES
 # ***********************************************************************************************
@@ -111,7 +111,32 @@ def cadastroClientes():
     form = CadastroCliente()
     if form.validate_on_submit():
         if request.method == 'POST':
-            email = request.form.get('email')
+            nome = request.form.get('nome').upper()
             fone = request.form.get('fone')
 
+            existis_fone = Cliente.query.filter_by(fone=fone).first()
+            if existis_fone:
+                flash('CELULAR JÁ CADASTRADO !!!', category='error')
+            else:
+                novo_cliente = Cliente(nome=nome, fone=fone)
+                db.session.add(novo_cliente)
+                db.session.commit()    
+
+                return redirect(url_for('views.clientes'))
+
     return render_template("cadastro_clientes.html", user=current_user, data=data, form=form)
+# ***********************************************************************************************
+# DELETAR CLIENTES
+# ***********************************************************************************************
+@views.route('/deletar-cliente', methods=['POST'])
+def deletarCliente():  
+    cliente = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
+    _id = cliente['CliID']
+    if _id != 1:
+        get_cli = User.query.get(_id)
+        if get_cli:
+            db.session.delete(get_cli)
+            db.session.commit()
+    else:
+        flash('NÃO PODE SER EXCLUÍDO!',category='error')
+    return jsonify({})
