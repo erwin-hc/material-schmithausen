@@ -29,18 +29,23 @@
         <td>{{ us.first_name | upper }}</td>
         <td>{{ us.email }}</td>
    		
-				<td class="text-end" style="width: 50px"> 
-					<a href="#!" role="button" class="text-white">
-						<i class="fa-regular fa-pen-to-square"></i>
-					</a>					
+				<td 
+          class="text-end"
+          style="width: 50px"> 
+  				<a class="text-white"
+          role="button"
+          onclick="atualizarUsuario( '{{ us.id }}' , '{{ us.first_name }}' , '{{ us.email }}' )">
+  				<i class="fa-regular fa-pen-to-square"></i></a>					
 				</td>
-				<td class="text-start" style="width: 50px"> 
-					<a class="text-danger" 
+				<td 
+          class="text-start" 
+          style="width: 50px"> 
+					<a 
+          class="text-danger" 
           href="#!" 
           role="button"
-          onclick="deletarUsuario({{ us.id }})"
-          >
-						<i class="fa-regular fa-trash-can"></i>
+          onclick="deletarUsuario({{ us.id }})">
+					<i class="fa-regular fa-trash-can"></i>
 					</a>
 				</td>
 

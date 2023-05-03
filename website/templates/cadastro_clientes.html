@@ -56,7 +56,7 @@ CADASTRAR CLIENTES</h2>
 <!-- *********************************************************** -->
 <!-- BOTAO ENTRAR -->
 <!-- *********************************************************** -->
-<button class="btn btn btn-outline-light " type="submit">CADASTRAR</button>
+<button class="btn btn btn-outline-light " type="submit">SALVAR</button>
 </form>
 </div>
 
@@ -73,3 +73,12 @@ CADASTRAR CLIENTES</h2>
 </span>
 {% endblock %}
 
+<script type="text/javascript">
+// ---------------------------------------------------------------
+// MASK FONE
+// ---------------------------------------------------------------
+var phoneMask = IMask(
+document.querySelector('.phone-mask'), {
+mask: '(00)-0-0000-0000'
+});
+</script>

@@ -55,6 +55,17 @@ function deleteNote(noteId) {
     });
 }
 // ---------------------------------------------------------------
+// ATUALIZAR USUARIO
+// ---------------------------------------------------------------
+  function atualizarUsuario(id, nome, email) {
+    fetch("/atualizar-usuario", {
+      method: "POST",
+      body: JSON.stringify({ id: id, nome: nome, email: email }),
+    }).then((_res) => {
+      window.location.href = "/cadastro_usuarios";
+    });
+}
+// ---------------------------------------------------------------
 // DELETAR CLIENTE
 // ---------------------------------------------------------------
   function deletarCliente(CliID) {
@@ -70,10 +81,3 @@ function deleteNote(noteId) {
 
 
 
-// ---------------------------------------------------------------
-// MASK FONE
-// ---------------------------------------------------------------
-var phoneMask = IMask(
-  document.querySelector('.phone-mask'), {
-    mask: '(00)-0-0000-0000'
-  });
