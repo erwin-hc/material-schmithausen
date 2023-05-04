@@ -68,16 +68,23 @@ function deleteNote(noteId) {
 // ---------------------------------------------------------------
 // DELETAR CLIENTE
 // ---------------------------------------------------------------
-  function deletarCliente(CliID) {
-    fetch("/deletar-cliente", {
+  function deletarCliente(id) {
+    fetch("/clientes_deletar", {
       method: "POST",
-      body: JSON.stringify({ CliID: CliID }),
+      body: JSON.stringify({ id: id }),
     }).then((_res) => {
       window.location.href = "/clientes";
     });
 }
-
-
-
-
+// ---------------------------------------------------------------
+// ATUALIZAR CLIENTE
+// ---------------------------------------------------------------
+  function atualizarCliente(id) { 
+    fetch("/clientes_atualizar", {
+      method: "POST",
+      body: JSON.stringify({ id: id })
+    }).then((_res) => {
+      window.location.href = "/clientes_atualizar";
+    });
+}
 

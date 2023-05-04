@@ -45,7 +45,7 @@ def usuarios():
     rows = User.query.all()
     for r in rows:
         users.append(r)        
-    return render_template("usuarios.html", user=current_user, data=data, users=users)
+    return render_template("usuarios_listar.html", user=current_user, data=data, users=users)
 # ***********************************************************************************************
 #  CADASTRO USUARIOS
 # ***********************************************************************************************
@@ -73,7 +73,7 @@ def cadastroUsuarios():
 
             return redirect(url_for('views.usuarios'))
 
-    return render_template("cadastro_usuarios.html", user=current_user, data=data, form=form)
+    return render_template("usuarios_cadastrar.html", user=current_user, data=data, form=form)
 # ***********************************************************************************************
 # DELETAR USUARIO
 # ***********************************************************************************************
@@ -101,11 +101,11 @@ def clientes():
     rows = Cliente.query.all()
     for r in rows:
         clientes.append(r)        
-    return render_template("clientes.html", user=current_user, data=data, clientes=clientes)
+    return render_template("clientes_listar.html", user=current_user, data=data, clientes=clientes)
 # ***********************************************************************************************
 #  CADASTRO CLIENTES
 # ***********************************************************************************************
-@views.route('/cadastro_clientes', methods=['GET','POST'])
+@views.route('/clientes_cadastrar', methods=['GET','POST'])
 @login_required
 def cadastroClientes():
     form = CadastroCliente()
@@ -124,19 +124,53 @@ def cadastroClientes():
 
                 return redirect(url_for('views.clientes'))
 
-    return render_template("cadastro_clientes.html", user=current_user, data=data, form=form)
+    return render_template("clientes_cadastrar.html", user=current_user, data=data, form=form)
 # ***********************************************************************************************
 # DELETAR CLIENTES
 # ***********************************************************************************************
-@views.route('/deletar-cliente', methods=['POST'])
+@views.route('/clientes_deletar', methods=['POST'])
+@login_required
 def deletarCliente():  
     cliente = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
-    _id = cliente['CliID']
-    if _id != 1:
-        get_cli = User.query.get(_id)
+    id = cliente['id']
+    if id != 1:
+        get_cli = User.query.get(id)
         if get_cli:
             db.session.delete(get_cli)
             db.session.commit()
     else:
         flash('NÃO PODE SER EXCLUÍDO!',category='error')
     return jsonify({})
+# ***********************************************************************************************
+# ATUALIZAR CLIENTES
+# ***********************************************************************************************
+@views.route('/clientes_atualizar/<int:id>', methods=['GET','POST'])
+@login_required
+def atualizarClientes(id): 
+    form = CadastroCliente()
+    get_cli = Cliente.query.get(id)
+
+    if request.method == 'GET': 
+        return render_template('clientes_atualizar.html', 
+            user=current_user, 
+            data=data, 
+            form=form,
+            c=get_cli
+            )
+
+    if form.validate_on_submit():
+        if request.method == 'POST':
+            if id != 1:
+                nome = request.form.get('nome').upper()
+                fone = request.form.get('fone')
+                get_cli.nome = nome
+                get_cli.fone = fone
+                db.session.commit()
+            else:
+                flash('NÃO PODE SER ATUALIZADO!',category='error')
+                return render_template('clientes_atualizar.html')
+
+    return redirect(url_for('views.clientes'))
+
+    
+

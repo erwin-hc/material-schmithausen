@@ -32,8 +32,11 @@
         <td> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
    		
 				<td class="text-end" style="width: 50px"> 
-					<a href="#!" role="button" class="text-white">
-						<i class="fa-regular fa-pen-to-square"></i>
+					<a 
+          role="button"
+          class="text-white"
+          href="/clientes_atualizar/{{ i.id }}">
+						      <i class="fa-regular fa-pen-to-square"></i>
 					</a>					
 				</td>
 				<td class="text-start" style="width: 50px"> 
@@ -52,7 +55,7 @@
     <tfoot>
     	<th colspan="6">
 
-            <a href="/cadastro_clientes" class="btn btn-sm btn-outline-light">
+            <a href="/clientes_cadastrar" class="btn btn-sm btn-outline-light">
                 NOVO
             </a>
 
