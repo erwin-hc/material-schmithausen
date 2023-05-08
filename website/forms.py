@@ -62,6 +62,6 @@ class CadastroCliente(FlaskForm):
 	'Celuar',
 	validators= [
 	DataRequired(message=("Este campo é obrigatório!")),
-	Length(min=16, message=("Número celuar inválido!"))
+	Length(min=16,max=16, message=("Número celuar inválido!"))
 	])
 

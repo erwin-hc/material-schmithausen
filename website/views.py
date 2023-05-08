@@ -150,27 +150,42 @@ def atualizarClientes(id):
     form = CadastroCliente()
     get_cli = Cliente.query.get(id)
 
-    if request.method == 'GET': 
-        return render_template('clientes_atualizar.html', 
-            user=current_user, 
-            data=data, 
-            form=form,
-            c=get_cli
-            )
+    if id != 1:
+        if request.method == 'GET': 
+            return render_template('clientes_atualizar.html', 
+                user=current_user, 
+                data=data, 
+                form=form,
+                c=get_cli
+                )
 
-    if form.validate_on_submit():
         if request.method == 'POST':
-            if id != 1:
+            if form.validate_on_submit():
                 nome = request.form.get('nome').upper()
                 fone = request.form.get('fone')
-                get_cli.nome = nome
-                get_cli.fone = fone
-                db.session.commit()
+                existis_fone = Cliente.query.filter_by(fone=fone).first()
+                if existis_fone:
+                    flash('CELULAR JÁ CADASTRADO !!!', category='error')
+                    return render_template('clientes_atualizar.html', 
+                        user=current_user, 
+                        data=data, 
+                        form=form,
+                        c=get_cli
+                        )
+                else:
+                    get_cli.nome = nome
+                    get_cli.fone = fone
+                    db.session.commit()
+                    return redirect(url_for('views.clientes'))
             else:
-                flash('NÃO PODE SER ATUALIZADO!',category='error')
-                return render_template('clientes_atualizar.html')
+                return render_template('clientes_atualizar.html', 
+                    user=current_user, 
+                    data=data, 
+                    form=form,
+                    c=get_cli
+                    )
 
-    return redirect(url_for('views.clientes'))
-
-    
-
+        return redirect(url_for('views.clientes'))
+    else:
+        flash('NÃO PODE SER EDITADO!')
+        return redirect(url_for('views.clientes'))

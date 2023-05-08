@@ -42,8 +42,6 @@ ATUALIZAR CLIENTE</h2>
 <!-- *********************************************************** -->
 <!-- INPUT CELUAR -->
 <!-- *********************************************************** -->
-<script type="text/javascript" src="{{ url_for('static', filename='js/imask.js') }}"></script>
-
 <div class="form-outline">
 <i class="fa-solid fa-phone trailing"></i>
 {{ form.fone(class='myInputs form-control-sm phone-mask', placeholder='(XX) X-XXXX-XXXX', value=fone) }}
@@ -76,12 +74,3 @@ ATUALIZAR CLIENTE</h2>
 </span>
 {% endblock %}
 
-<script type="text/javascript">
-// ---------------------------------------------------------------
-// MASK FONE
-// ---------------------------------------------------------------
-var phoneMask = IMask(
-document.querySelector('.phone-mask'), {
-mask: '(00)-0-0000-0000'
-});
-</script>
