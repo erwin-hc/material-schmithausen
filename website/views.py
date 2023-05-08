@@ -165,19 +165,25 @@ def atualizarClientes(id):
                 fone = request.form.get('fone')
                 existis_fone = Cliente.query.filter_by(fone=fone).first()
 
-                if existis_fone.id != id:
-                    flash('CELULAR JÁ CADASTRADO !!!', category='error')
-                    return render_template('clientes_atualizar.html', 
-                        user=current_user, 
-                        data=data, 
-                        form=form,
-                        c=get_cli
-                        )
-                else:
+                if existis_fone == None:
                     get_cli.nome = nome
                     get_cli.fone = fone
                     db.session.commit()
                     return redirect(url_for('views.clientes'))
+                else:
+                    if existis_fone.id == id:
+                        get_cli.nome = nome
+                        get_cli.fone = fone
+                        db.session.commit()
+                        return redirect(url_for('views.clientes'))
+                    else:    
+                        flash('CELULAR JÁ CADASTRADO !!!', category='error')
+                        return render_template('clientes_atualizar.html', 
+                            user=current_user, 
+                            data=data, 
+                            form=form,
+                            c=get_cli
+                            )
             else:
                 return render_template('clientes_atualizar.html', 
                     user=current_user, 
