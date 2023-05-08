@@ -164,7 +164,8 @@ def atualizarClientes(id):
                 nome = request.form.get('nome').upper()
                 fone = request.form.get('fone')
                 existis_fone = Cliente.query.filter_by(fone=fone).first()
-                if existis_fone:
+
+                if existis_fone.id != id:
                     flash('CELULAR JÁ CADASTRADO !!!', category='error')
                     return render_template('clientes_atualizar.html', 
                         user=current_user, 
