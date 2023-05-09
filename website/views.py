@@ -49,7 +49,7 @@ def usuarios():
 # ***********************************************************************************************
 #  CADASTRO USUARIOS
 # ***********************************************************************************************
-@views.route('/cadastro_usuarios', methods=['GET','POST'])
+@views.route('/usuarios_cadastrar', methods=['GET','POST'])
 @login_required
 def cadastroUsuarios():
     form = CadastroUsuario()
@@ -77,25 +77,78 @@ def cadastroUsuarios():
 # ***********************************************************************************************
 # DELETAR USUARIO
 # ***********************************************************************************************
-@views.route('/deletar-usuario', methods=['POST'])
-def deletarUsuario():  
-    user = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
-    _id = user['UserID']
-    if _id != 1:
-        get_user = User.query.get(_id)
-        if get_user:
-            db.session.delete(get_user)
-            db.session.commit()
-    else:
+@views.route('/usuarios_deletar/<int:id>', methods=['POST','GET'])
+def deletarUsuario(id):  
+    get_users = User.query.get(id)
+    if id == 1:
         flash('NÃO PODE SER EXCLUÍDO!',category='error')
+    else:
+        if get_users:
+            db.session.delete(get_users)
+            db.session.commit()
+            return redirect(url_for('views.usuarios'))
 
-    return jsonify({})
+    return redirect(url_for('views.usuarios'))
+# ***********************************************************************************************
+# ATUALIZAR USUARIOS
+# ***********************************************************************************************
+@views.route('/usuarios_atualizar/<int:id>', methods=['GET','POST'])
+@login_required
+def atualizarUsuarios(id): 
+    form = CadastroUsuario()
+    get_users = User.query.get(id)
+
+    if id != 1:
+        if request.method == 'GET': 
+            return render_template('usuarios_atualizar.html', 
+                user=current_user, 
+                data=data, 
+                form=form,
+                u=get_users
+                )
+
+        if request.method == 'POST':
+            if form.validate_on_submit():
+                nome = request.form.get('nome').upper()
+                email = request.form.get('email')
+                existis_email = Cliente.query.filter_by(email=email).first()
+
+                if existis_email == None:
+                    get_users.nome = nome
+                    get_users.email = email
+                    db.session.commit()
+                    return redirect(url_for('views.usuarios'))
+                else:
+                    if existis_email.id == id:
+                        get_users.nome = nome
+                        get_users.fone = fone
+                        db.session.commit()
+                        return redirect(url_for('views.usuarios'))
+                    else:    
+                        flash('EMAIL JÁ CADASTRADO !!!', category='error')
+                        return render_template('usuarios_atualizar.html', 
+                            user=current_user, 
+                            data=data, 
+                            form=form,
+                            u=get_users
+                            )
+            else:
+                return render_template('usuarios_atualizar.html', 
+                    user=current_user, 
+                    data=data, 
+                    form=form,
+                    u=get_users
+                    )
+
+        return redirect(url_for('views.usuarios'))
+    else:
+        flash('NÃO PODE SER EDITADO!')
+        return redirect(url_for('views.usuarios'))
 
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
-
 # ***********************************************************************************************
 #  LISTAR CLIENTES
 # ***********************************************************************************************

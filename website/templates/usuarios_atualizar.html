@@ -3,16 +3,16 @@
 
 {% block content %}
 
+{% set nome = u.first_name %}
+{% set email = u.email %}
 
+<!-- action="/usuarios_atualizar/{{ u.id }} -->
 <div class="container pt-5">
 
-<!-- *********************************************************** -->
-<!-- FORM ENTRAR -->
-<!-- *********************************************************** -->
-<form id='cadatroUsuarios' 
+<form 
 method="POST"
-class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max"
-action="{{ url_for('views.cadastroUsuarios') }}" 
+class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max" 
+action="/usuarios" 
 novalidate
 >
 {{ form.hidden_tag() }}
@@ -20,13 +20,13 @@ novalidate
 
 <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
 <i class="fa-solid fa-user"></i>
-CADASTRO DE USUÁRIO</h2>
+ATUALIZAR USUÁRIO</h2>
 <!-- *********************************************************** -->
 <!-- INPUT NOME -->
 <!-- *********************************************************** -->
 <div class="form-outline">	
 <i class="fa-solid fa-user trailing"></i>
-{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase') }}
+{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase',value=nome, autofocus='true') }}
 <!-- ERROS -->
 {% if form.nome.errors %}
 {% for e in form.nome.errors %}
@@ -37,13 +37,11 @@ CADASTRO DE USUÁRIO</h2>
 {% endif %}
 </div>
 <!-- *********************************************************** -->
-
-<!-- *********************************************************** -->
 <!-- INPUT EMAIL -->
 <!-- *********************************************************** -->
 <div class="form-outline">
 <i class="fa-solid fa-at trailing"></i>
-{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text) }}
+{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text, value=email) }}
 <!-- ERROS -->
 {% if form.email.errors %}
 {% for e in form.email.errors %}
@@ -54,40 +52,10 @@ CADASTRO DE USUÁRIO</h2>
 {% endif %}
 </div>
 <!-- *********************************************************** -->
-<!-- INPUT SENHA -->
-<!-- *********************************************************** -->
-<div class="form-outline">    
-<i class="fa-solid fa-key trailing"></i>
-{{ form.senha(class='myInputs form-control-sm', placeholder= form.senha.label.text) }}
-<!-- ERROS -->
-{% if form.senha.errors %}
-{% for e in form.senha.errors %}
-<div class="form-helper ms-3 mt-1 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
-</div>
-<!-- *********************************************************** -->
-<!-- INPUT CONFIRMAR SENHA -->
-<!-- *********************************************************** -->
-<div class="form-outline">    
-<i class="fa-solid fa-key trailing"></i>
-{{ form.confirmar(class='myInputs form-control-sm', placeholder= form.confirmar.label.text) }}
-<!-- ERROS -->
-{% if form.confirmar.errors %}
-{% for e in form.confirmar.errors %}
-<div class="form-helper ms-3 mt-1 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
-</div>
-<!-- *********************************************************** -->
 <!-- BOTOES -->
 <!-- *********************************************************** -->
 <div class="text-center">
-      <input style="width:125px" type="submit" value="CADASTRAR" class="btn btn-outline-light m-1" />
+      <input style="width:125px" type="submit" value="ATUALIZAR" class="btn btn-outline-light m-1" />
       <a     style="width:125px" href="/usuarios" class="btn btn-outline-danger m-1">CANCELAR</a>
 </div>
 
@@ -99,7 +67,7 @@ CADASTRO DE USUÁRIO</h2>
 {% block titlefooter %}
 <span style="color:#9FA6B2">
 <i class="fa-regular fa-user fa-sm"></i>
-&nbsp;{{ user.first_name | upper }}
+&nbsp;{{ user.first_name.split()[0] | upper }}
 &nbsp;&nbsp;&nbsp;
 <span style="color:#9FA6B2">
 <i class="fa-regular fa-calendar fa-sm"> </i>

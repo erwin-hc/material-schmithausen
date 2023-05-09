@@ -26,7 +26,7 @@ CADASTRO DE USUÁRIO</h2>
 <!-- *********************************************************** -->
 <div class="form-outline">	
 <i class="fa-solid fa-user trailing"></i>
-{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase') }}
+{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase', autofocus='true') }}
 <!-- ERROS -->
 {% if form.nome.errors %}
 {% for e in form.nome.errors %}
@@ -99,7 +99,7 @@ CADASTRO DE USUÁRIO</h2>
 {% block titlefooter %}
 <span style="color:#9FA6B2">
 <i class="fa-regular fa-user fa-sm"></i>
-&nbsp;{{ user.first_name | upper }}
+&nbsp;{{ user.first_name.split()[0] | upper }}
 &nbsp;&nbsp;&nbsp;
 <span style="color:#9FA6B2">
 <i class="fa-regular fa-calendar fa-sm"> </i>

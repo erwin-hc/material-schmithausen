@@ -8,44 +8,44 @@
   <table class="table table-striped table-hover table-borderless table-sm table-dark ">
     <thead>
     	<tr>
-    		<th colspan="5" class="h5 text-secondary">
-        <i class="fa-solid fa-user"></i>
-        <i class="fa-solid fa-list"></i>
-        &nbsp;&nbsp;&nbsp;
-        USUÁRIOS
+    		<th colspan="5" class="text-nowrap" scope="col">
+            <a href="/usuarios_cadastrar" class="p-2 btn btn-sm btn-outline-light">
+                <i class="fa-solid fa-user-plus"></i>
+                &nbsp;&nbsp;NOVO USUÁRIO
+            </a>        
     	</tr>
       <tr>
-        <th scope="col">#</th>
+        <th class="text-nowrap" scope="col">#</th>
         <th class="text-nowrap" scope="col">Usuário</th>
-        <th scope="col">Email</th>
-        <th></th>
-        <th></th>
+        <th class="text-nowrap" scope="col">Email</th>
+        <th class="text-nowrap" scope="col"></th>
+        <th class="text-nowrap" scope="col"></th>
       </tr>
     </thead>
     <tbody>
 	{% for us in users %}
       <tr>
-        <td scope="row">{{ us.id }}</td>
-        <td class="text-nowrap">{{ us.first_name | upper }}</td>
-        <td>{{ us.email }}</td>
+        <td scope="row" class="text-nowrap">{{ us.id }}</td>
+        <td scope="row" class="text-nowrap">{{ us.first_name | upper }}</td>
+        <td scope="row" class="text-nowrap">{{ us.email }}</td>
    		
 				<td 
-          class="text-center"
+          scope="row" 
+          class="text-center text-nowrap"
           style="width: 50px"> 
-  				<a class="text-white ms-3 me-3"
+  				<a class="text-white"
           role="button"
-          onclick="atualizarUsuario( '{{ us.id }}' , '{{ us.first_name }}' , '{{ us.email }}' )">
-  				<i class="fa-regular fa-pen-to-square fa-xl"></i></a>					
+          href="/usuarios_atualizar/{{ us.id }}">
+  				<i class="fa-regular fa-pen-to-square ms-2 me-2"></i></a>					
 				</td>
 				<td 
-          class="text-center" 
+          scope="row" 
+          class="text-center text-nowrap" 
           style="width: 50px"> 
-					<a 
-          class="text-danger ms-3 me-3" 
-          href="#!" 
+					<a class="text-danger" 
           role="button"
-          onclick="deletarUsuario({{ us.id }})">
-					<i class="fa-regular fa-trash-can fa-xl"></i>
+          href="/usuarios_deletar/{{ us.id }}" >
+          <i class="fa-regular fa-trash-can ms-2 me-2"></i>
 					</a>
 				</td>
 
@@ -54,10 +54,6 @@
     </tbody>
     <tfoot>
     	<th colspan="5">
-
-            <a href="/cadastro_usuarios" class="btn btn-sm btn-outline-light">
-                NOVO
-            </a>
 
         </th>
           
@@ -73,7 +69,7 @@
 {% block titlefooter %}
 <span style="color:#9FA6B2">
 <i class="fa-regular fa-user fa-sm"></i>
-&nbsp;{{ user.first_name | upper }}
+&nbsp;{{ user.first_name.split()[0] | upper }}
 &nbsp;&nbsp;&nbsp;
 <span style="color:#9FA6B2">
 <i class="fa-regular fa-calendar fa-sm"> </i>
