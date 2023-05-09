@@ -29,7 +29,7 @@ ATUALIZAR CLIENTE</h2>
 <!-- *********************************************************** -->
 <div class="form-outline">	
 <i class="fa-solid fa-user trailing"></i>
-{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase', value=nome) }}
+{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase', value=nome, autofocus='true') }}
 <!-- ERROS -->
 {% if form.nome.errors %}
 {% for e in form.nome.errors %}

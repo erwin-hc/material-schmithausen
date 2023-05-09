@@ -91,6 +91,11 @@ def deletarUsuario():
 
     return jsonify({})
 
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+
 # ***********************************************************************************************
 #  LISTAR CLIENTES
 # ***********************************************************************************************
@@ -128,19 +133,21 @@ def cadastroClientes():
 # ***********************************************************************************************
 # DELETAR CLIENTES
 # ***********************************************************************************************
-@views.route('/clientes_deletar', methods=['POST'])
+@views.route('/clientes_deletar/<int:id>', methods=['POST', 'GET'])
 @login_required
-def deletarCliente():  
-    cliente = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
-    id = cliente['id']
-    if id != 1:
-        get_cli = User.query.get(id)
+def deletarCliente(id):
+    get_cli = Cliente.query.get(id)
+    if id == 1:
+        flash('NÃO PODE SER EXCLUÍDO!',category='error')
+    else:
+        print(get_cli)
         if get_cli:
             db.session.delete(get_cli)
             db.session.commit()
-    else:
-        flash('NÃO PODE SER EXCLUÍDO!',category='error')
-    return jsonify({})
+            return redirect(url_for('views.clientes'))
+
+    return redirect(url_for('views.clientes'))
+
 # ***********************************************************************************************
 # ATUALIZAR CLIENTES
 # ***********************************************************************************************

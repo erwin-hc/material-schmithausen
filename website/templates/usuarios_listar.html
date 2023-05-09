@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<div class="table-responsive larg-max m-auto pt-5">
+<div class="table-responsive larg-max m-auto pt-5 mb-5">
 
   <table class="table table-striped table-hover table-borderless table-sm table-dark ">
     <thead>
@@ -16,7 +16,7 @@
     	</tr>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Usuário</th>
+        <th class="text-nowrap" scope="col">Usuário</th>
         <th scope="col">Email</th>
         <th></th>
         <th></th>
@@ -26,26 +26,26 @@
 	{% for us in users %}
       <tr>
         <td scope="row">{{ us.id }}</td>
-        <td>{{ us.first_name | upper }}</td>
+        <td class="text-nowrap">{{ us.first_name | upper }}</td>
         <td>{{ us.email }}</td>
    		
 				<td 
-          class="text-end"
+          class="text-center"
           style="width: 50px"> 
-  				<a class="text-white"
+  				<a class="text-white ms-3 me-3"
           role="button"
           onclick="atualizarUsuario( '{{ us.id }}' , '{{ us.first_name }}' , '{{ us.email }}' )">
-  				<i class="fa-regular fa-pen-to-square"></i></a>					
+  				<i class="fa-regular fa-pen-to-square fa-xl"></i></a>					
 				</td>
 				<td 
-          class="text-start" 
+          class="text-center" 
           style="width: 50px"> 
 					<a 
-          class="text-danger" 
+          class="text-danger ms-3 me-3" 
           href="#!" 
           role="button"
           onclick="deletarUsuario({{ us.id }})">
-					<i class="fa-regular fa-trash-can"></i>
+					<i class="fa-regular fa-trash-can fa-xl"></i>
 					</a>
 				</td>
 
