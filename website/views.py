@@ -26,15 +26,14 @@ def comandas():
 # ***********************************************************************************************
 @views.route('/delete-note', methods=['POST'])
 def delete_note():  
-    note = json.loads(request.data) # this function expects a JSON from the INDEX.js file 
-    noteId = note['noteId']
-    note = Note.query.get(noteId)
-    if note:
-        if note.user_id == current_user.id:
-            db.session.delete(note)
-            db.session.commit()
+    pass
 
-    return jsonify({})
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
+# USUARIOS   
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  
+
 # ***********************************************************************************************
 #  LISTAR USUARIOS
 # ***********************************************************************************************
@@ -98,57 +97,31 @@ def atualizarUsuarios(id):
     form = CadastroUsuario()
     get_users = User.query.get(id)
 
-    if id != 1:
-        if request.method == 'GET': 
+    if request.method == 'GET':        
+        if id != 1:
             return render_template('usuarios_atualizar.html', 
                 user=current_user, 
                 data=data, 
                 form=form,
                 u=get_users
                 )
+        else:
+            flash('NÃO PODE SER EDITADO!')
+            return redirect(url_for('views.usuarios'))
 
-        if request.method == 'POST':
-            if form.validate_on_submit():
-                nome = request.form.get('nome').upper()
-                email = request.form.get('email')
-                existis_email = Cliente.query.filter_by(email=email).first()
+    if request.method == 'POST':
+        print(request.form.get('nome'))
+        print(request.form.get('email'))
+        
+        
 
-                if existis_email == None:
-                    get_users.nome = nome
-                    get_users.email = email
-                    db.session.commit()
-                    return redirect(url_for('views.usuarios'))
-                else:
-                    if existis_email.id == id:
-                        get_users.nome = nome
-                        get_users.fone = fone
-                        db.session.commit()
-                        return redirect(url_for('views.usuarios'))
-                    else:    
-                        flash('EMAIL JÁ CADASTRADO !!!', category='error')
-                        return render_template('usuarios_atualizar.html', 
-                            user=current_user, 
-                            data=data, 
-                            form=form,
-                            u=get_users
-                            )
-            else:
-                return render_template('usuarios_atualizar.html', 
-                    user=current_user, 
-                    data=data, 
-                    form=form,
-                    u=get_users
-                    )
-
-        return redirect(url_for('views.usuarios'))
-    else:
-        flash('NÃO PODE SER EDITADO!')
-        return redirect(url_for('views.usuarios'))
-
+    return redirect(url_for('views.usuarios'))
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
+# CLIENTES   
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+
 # ***********************************************************************************************
 #  LISTAR CLIENTES
 # ***********************************************************************************************

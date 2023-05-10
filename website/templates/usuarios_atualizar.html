@@ -6,60 +6,59 @@
 {% set nome = u.first_name %}
 {% set email = u.email %}
 
-<!-- action="/usuarios_atualizar/{{ u.id }} -->
 <div class="container pt-5">
 
-<form 
-method="POST"
-class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max" 
-action="/usuarios" 
-novalidate
->
-{{ form.hidden_tag() }}
-{{ form.csrf_token }}
+            <form 
+            method="POST"
+            class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max" 
+            action="/usuarios_atualizar/{{ u.id }}" 
+            novalidate
+            >
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
 
-<h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
-<i class="fa-solid fa-user"></i>
-ATUALIZAR USUÁRIO</h2>
-<!-- *********************************************************** -->
-<!-- INPUT NOME -->
-<!-- *********************************************************** -->
-<div class="form-outline">	
-<i class="fa-solid fa-user trailing"></i>
-{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase',value=nome, autofocus='true') }}
-<!-- ERROS -->
-{% if form.nome.errors %}
-{% for e in form.nome.errors %}
-<div class="form-helper ms-3 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
-</div>
-<!-- *********************************************************** -->
-<!-- INPUT EMAIL -->
-<!-- *********************************************************** -->
-<div class="form-outline">
-<i class="fa-solid fa-at trailing"></i>
-{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text, value=email) }}
-<!-- ERROS -->
-{% if form.email.errors %}
-{% for e in form.email.errors %}
-<div class="form-helper ms-3 mt-1 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
-</div>
-<!-- *********************************************************** -->
-<!-- BOTOES -->
-<!-- *********************************************************** -->
-<div class="text-center">
-      <input style="width:125px" type="submit" value="ATUALIZAR" class="btn btn-outline-light m-1" />
-      <a     style="width:125px" href="/usuarios" class="btn btn-outline-danger m-1">CANCELAR</a>
-</div>
+            <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
+            <i class="fa-solid fa-user"></i>
+            ATUALIZAR USUÁRIO</h2>
+            <!-- *********************************************************** -->
+            <!-- INPUT NOME -->
+            <!-- *********************************************************** -->
+            <div class="form-outline">	
+            <i class="fa-solid fa-user trailing"></i>
+            {{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase',value=nome, autofocus='true') }}
+            <!-- ERROS -->
+            {% if form.nome.errors %}
+            {% for e in form.nome.errors %}
+            <div class="form-helper ms-3 text-danger">
+            {{ e }}
+            </div> 
+            {% endfor %}
+            {% endif %}
+            </div>
+            <!-- *********************************************************** -->
+            <!-- INPUT EMAIL -->
+            <!-- *********************************************************** -->
+            <div class="form-outline">
+            <i class="fa-solid fa-at trailing"></i>
+            {{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text, value=email) }}
+            <!-- ERROS -->
+            {% if form.email.errors %}
+            {% for e in form.email.errors %}
+            <div class="form-helper ms-3 mt-1 text-danger">
+            {{ e }}
+            </div> 
+            {% endfor %}
+            {% endif %}
+            </div>
+            <!-- *********************************************************** -->
+            <!-- BOTOES -->
+            <!-- *********************************************************** -->
+            <div class="text-center">
+                  <input style="width:125px" type="submit" value="ATUALIZAR" class="btn btn-outline-light m-1" />
+                  <a     style="width:125px" href="" class="btn btn-outline-danger m-1">CANCELAR</a>
+            </div>
 
-</form>
+            </form>
 </div>
 
 {% endblock %}
