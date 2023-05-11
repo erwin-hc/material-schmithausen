@@ -63,6 +63,7 @@ def cadastroUsuarios():
 
             if user:
                 flash('EMAIL JÁ CADASTRADO!', category='error')
+                return redirect(url_for('views.cadastroUsuarios'))
             else:
                 new_user = User(email=email, first_name=first_name, password=generate_password_hash(
                 password1, method='sha256'))
@@ -96,7 +97,7 @@ def deletarUsuario(id):
 def atualizarUsuarios(id): 
     form = CadastroUsuario()
     get_users = User.query.get(id)
-
+    print(form.validate_on_submit())
     if request.method == 'GET':        
         if id != 1:
             return render_template('usuarios_atualizar.html', 
@@ -109,10 +110,14 @@ def atualizarUsuarios(id):
             flash('NÃO PODE SER EDITADO!')
             return redirect(url_for('views.usuarios'))
 
-    if request.method == 'POST':
-        print(request.form.get('nome'))
-        print(request.form.get('email'))
-        
+    if form.validate_on_submit():        
+        if request.method == 'POST':
+            print(request.form.get('nome'))
+            print(request.form.get('email'))
+            print(request.form.get('senha'))
+            print(request.form.get('confirmar'))
+    else:
+        print(form.errors)
         
 
     return redirect(url_for('views.usuarios'))

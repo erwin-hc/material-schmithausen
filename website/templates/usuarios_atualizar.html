@@ -5,6 +5,7 @@
 
 {% set nome = u.first_name %}
 {% set email = u.email %}
+{% set senha = u.password %}
 
 <div class="container pt-5">
 
@@ -14,12 +15,13 @@
             action="/usuarios_atualizar/{{ u.id }}" 
             novalidate
             >
-            {{ form.hidden_tag() }}
-            {{ form.csrf_token }}
 
             <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
             <i class="fa-solid fa-user"></i>
             ATUALIZAR USUÁRIO</h2>
+
+            {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
             <!-- *********************************************************** -->
             <!-- INPUT NOME -->
             <!-- *********************************************************** -->
@@ -40,7 +42,7 @@
             <!-- *********************************************************** -->
             <div class="form-outline">
             <i class="fa-solid fa-at trailing"></i>
-            {{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text, value=email) }}
+            {{ form.email(class='myInputs form-control-sm', placeholder=form.email.label.text, value=email) }}
             <!-- ERROS -->
             {% if form.email.errors %}
             {% for e in form.email.errors %}
@@ -51,11 +53,47 @@
             {% endif %}
             </div>
             <!-- *********************************************************** -->
-            <!-- BOTOES -->
+            <!-- INPUT SENHA -->
             <!-- *********************************************************** -->
+            <div class="form-outline">
+            {{
+            form.senha(class='myInputs form-control-sm', 
+            placeholder=form.senha.label.text,
+            type='text',
+            value=senha)
+            }}
+            <!-- ERROS -->
+            {% if form.senha.errors %}
+            {% for e in form.senha.errors %}
+            <div class="form-helper ms-3 mt-1 text-danger">
+            {{ e }}
+            </div> 
+            {% endfor %}
+            {% endif %}
+            </div>
+            <!-- *********************************************************** -->
+            <!-- INPUT CONFIRMAR -->
+            <!-- *********************************************************** -->
+            <div class="form-outline">
+            {{ 
+            form.confirmar(hide_value=true, 
+            class='myInputs form-control-sm', 
+            type='text',
+            value=senha) 
+            }}
+            <!-- ERROS -->
+            {% if form.confirmar.errors %}
+            {% for e in form.confirmar.errors %}
+            <div class="form-helper ms-3 mt-1 text-danger">
+            {{ e }}
+            </div> 
+            {% endfor %}
+            {% endif %}
+            </div>
+
             <div class="text-center">
                   <input style="width:125px" type="submit" value="ATUALIZAR" class="btn btn-outline-light m-1" />
-                  <a     style="width:125px" href="" class="btn btn-outline-danger m-1">CANCELAR</a>
+                  <a     style="width:125px" href="/usuarios" class="btn btn-outline-danger m-1">CANCELAR</a>
             </div>
 
             </form>
