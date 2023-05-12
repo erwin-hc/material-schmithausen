@@ -12,7 +12,7 @@ style="height: 100vh;">
 
             <form 
             method="POST"
-            class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max" 
+            class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max-form" 
             action="/usuarios_atualizar/{{ u.id }}" 
             novalidate
             >
@@ -56,7 +56,8 @@ style="height: 100vh;">
             <!-- *********************************************************** -->
             <!-- INPUT SENHA -->
             <!-- *********************************************************** -->
-            <div class="form-outline">
+            <div class="form-outline"
+            style="display: none;">
             {{
             form.senha(class='myInputs form-control-sm', 
             placeholder=form.senha.label.text,
@@ -75,7 +76,8 @@ style="height: 100vh;">
             <!-- *********************************************************** -->
             <!-- INPUT CONFIRMAR -->
             <!-- *********************************************************** -->
-            <div class="form-outline">
+            <div class="form-outline"
+            style="display: none;">
             {{ 
             form.confirmar(hide_value=true, 
             class='myInputs form-control-sm', 

@@ -97,7 +97,7 @@ def deletarUsuario(id):
 def atualizarUsuarios(id): 
     form = CadastroUsuario()
     get_users = User.query.get(id)
-    print(form.validate_on_submit())
+
     if request.method == 'GET':        
         if id != 1:
             return render_template('usuarios_atualizar.html', 
@@ -112,13 +112,29 @@ def atualizarUsuarios(id):
 
     if form.validate_on_submit():        
         if request.method == 'POST':
-            print(request.form.get('nome'))
-            print(request.form.get('email'))
-            print(request.form.get('senha'))
-            print(request.form.get('confirmar'))
-    else:
-        print(form.errors)
-        
+            email = request.form.get('email')
+            email_ja_existe = User.query.filter_by(email=email).first()
+            if email_ja_existe == None or email_ja_existe.id == id:
+                nome = request.form.get('nome')
+                email = request.form.get('email')
+                get_users.first_name = nome
+                get_users.email = email 
+                db.session.commit()
+            else:
+                flash('EMAIL JÁ CADASTRADO!', category='error')
+                return render_template('usuarios_atualizar.html', 
+                    user=current_user, 
+                    data=data, 
+                    form=form,
+                    u=get_users
+                    )   
+    else:    
+        return render_template('usuarios_atualizar.html', 
+                user=current_user, 
+                data=data, 
+                form=form,
+                u=get_users
+                )    
 
     return redirect(url_for('views.usuarios'))
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
