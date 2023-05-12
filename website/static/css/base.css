@@ -7,10 +7,19 @@
   --color-warning: #E4A11B;
   --color-info: #54B4D3;
   --color-ligth:#FBFBFB;
-  --color-dark:#332D2D;
-  --color-dark-ligth: #2d2828;
+/*  --color-dark:#332D2D;*/
+/*  --color-dark-ligth: #2d2828;*/
+  --color-dark-ligth: #131313;
+  --color-dark:#191919;
 }
 
+table tbody tr:hover {
+  color: white!important;
+  background-color: rgba(255,165,0,0.1)!important;
+}
+.bg-dark {
+  background-color: var(--color-dark)!important;
+}
 .btn-outline-light {
   border: 2px solid var(--color-secondary);
   color: var(--color-secondary);
@@ -34,7 +43,7 @@
 .myInputs {
   width: 100%;
   border: 1px solid var(--color-secondary);
-  background-color: var(--color-dark);
+  background-color: var(--color-dark-ligth);
   color: var(--color-ligth);
   padding: 0.35rem;
   padding-left: 0.75rem;
@@ -56,7 +65,11 @@
 }
 
 .larg-max {
-  max-width: 1200px!important;
+  max-width: 1000px!important;
+}
+
+.larg-max-form {
+  max-width: 550px!important;
 }
 
 .dark-ligth {
@@ -94,3 +107,4 @@
 .dataTable > thead > tr > th[class*="sort"]:after {
     content: "" !important;
 }
+

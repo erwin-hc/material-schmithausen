@@ -4,14 +4,15 @@
 {% block content %}
 
 
-<div class="container pt-5">
+<div class="container-fluid background-container-form d-flex align-items-center justify-content-center"
+style="height: 100vh;">
 
 <!-- *********************************************************** -->
 <!-- FORM ENTRAR -->
 <!-- *********************************************************** -->
 <form id='cadatroUsuarios' 
 method="POST"
-class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max"
+class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max-form"
 action="{{ url_for('views.cadastroClientes') }}" 
 novalidate
 >

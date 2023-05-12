@@ -2,16 +2,19 @@
 {% block title %} CLIENTES {% endblock %} 
 {% block content %}
 
+<div class="container-fluid"
+style="height:100vh;padding-top:100px"> 
 
-<div class="table-responsive larg-max m-auto pt-5 mb-5">
-  
-  <table id="tb-clientes" class="table table-striped table-hover table-borderless table-sm table-dark ">
+ <div class="table-responsive w-100 card bg-dark larg-max m-auto"
+ style="padding-bottom: 40px">
+
+  <table id="tb-clientes" class="table table-borderless table-sm bg-dark text-secondary">
               <thead>
               	<tr>
               		<th class="text-nowrap" scope="col" colspan="6">
                       <a href="/clientes_cadastrar" class="p-2 btn btn-sm btn-outline-light">
                           <i class="fa-solid fa-user-plus"></i>
-                          &nbsp;&nbsp;&nbsp;NOVO CLIENTE
+                          Novo
                       </a>                       
                   </th>
               	</tr>
@@ -35,7 +38,7 @@
 				<td class="text-center" style="width: 50px"> 
 					<a 
           role="button"
-          class="text-white"
+          class="text-secondary"
           href="/clientes_atualizar/{{ i.id }}">
 						      <i class="fa-regular fa-pen-to-square"></i>
 					</a>					
@@ -51,14 +54,9 @@
       </tr>     
       {% endfor %}
     </tbody>
-    <tfoot>
-    	<th colspan="6">
-
-        </th>
-          
-    </tfoot>
 
   </table>
+  </div>
 </div>
 
 {% endblock %}

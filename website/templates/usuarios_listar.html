@@ -2,16 +2,19 @@
 {% block title %} USUÁRIOS {% endblock %} 
 {% block content %}
 
+<div class="container-fluid"
+style="height:100vh;padding-top:100px"> 
 
-<div class="table-responsive larg-max m-auto pt-5 mb-5">
+ <div class="table-responsive w-100 card bg-dark larg-max m-auto"
+ style="padding-bottom: 40px">
 
-  <table class="table table-striped table-hover table-borderless table-sm table-dark ">
+  <table class="table table-borderless table-sm bg-dark text-secondary">
     <thead>
     	<tr>
     		<th colspan="5" class="text-nowrap" scope="col">
             <a href="/usuarios_cadastrar" class="p-2 btn btn-sm btn-outline-light">
                 <i class="fa-solid fa-user-plus"></i>
-                &nbsp;&nbsp;NOVO USUÁRIO
+                NOVO
             </a>        
     	</tr>
       <tr>
@@ -33,7 +36,7 @@
           scope="row" 
           class="text-center text-nowrap"
           style="width: 50px"> 
-  				<a class="text-white"
+  				<a class="text-secondary"
           role="button"
           href="/usuarios_atualizar/{{ us.id }}">
   				<i class="fa-regular fa-pen-to-square ms-2 me-2"></i></a>					
@@ -52,16 +55,9 @@
       </tr>     
 	{% endfor %}
     </tbody>
-    <tfoot>
-    	<th colspan="5">
-
-        </th>
-          
-    </tfoot>
-
   </table>
 </div>
-
+</div>
 
 
 {% endblock %}

@@ -2,13 +2,12 @@
 {% block title %} ENTRAR {% endblock %}
 <!-- *********************************************************** -->
 {% block content %}
-<div class="container pt-5">
 <!-- *********************************************************** -->
 <!-- FORM ENTRAR -->
 <!-- *********************************************************** -->
 <form id='formEntrar' 
 method="POST"
-class="form-outline form-white mb-4 mt-4 m-auto card bg-dark p-3 larg-max"
+class="form-outline form-white card bg-dark p-3 larg-max-form"
 action="/" 
 novalidate
 >
@@ -24,7 +23,7 @@ Entrar</h2>
 <!-- *********************************************************** -->
 <div class="form-outline mb-5">
 <i class="fa-solid fa-at trailing"></i>
-{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text) }}
+{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text, autofocus='true') }}
 <!-- ERROS -->
 {% if form.email.errors %}
 {% for e in form.email.errors %}
@@ -55,6 +54,6 @@ Entrar</h2>
 <button class="btn btn btn-outline-light " type="submit">Entrar</button>
 </form>
 
-</div>
+
 
 {% endblock %}
