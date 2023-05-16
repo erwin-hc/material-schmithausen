@@ -58,7 +58,7 @@ CADASTRO DE CLIENTES</h2>
 <!-- *********************************************************** -->
 <div class="text-center">
       <input style="width:125px" type="submit" value="CADASTRAR" class="btn btn-outline-light m-1" />
-      <a     style="width:125px" href="/clientes" class="btn btn-outline-danger m-1">CANCELAR</a>
+      <a     style="width:125px" href="/clientes" class="btn btn-outline-primary m-1">CANCELAR</a>
 </div>
 
 </form>
@@ -70,7 +70,7 @@ CADASTRO DE CLIENTES</h2>
 {% block titlefooter %}
 <span style="color:#9FA6B2">
 <i class="fa-regular fa-user fa-sm"></i>
-&nbsp;{{ user.first_name | upper }}
+&nbsp;{{ user.first_name.split()[0] | upper }}
 &nbsp;&nbsp;&nbsp;
 <span style="color:#9FA6B2">
 <i class="fa-regular fa-calendar fa-sm"> </i>
