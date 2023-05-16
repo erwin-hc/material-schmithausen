@@ -18,20 +18,16 @@ style="height:100vh;padding-top:100px">
             </a>        
     	</tr>
       <tr>
+        <th class="text-nowrap" scope="col"></th>
         <th class="text-nowrap" scope="col">#</th>
         <th class="text-nowrap" scope="col">Usuário</th>
         <th class="text-nowrap" scope="col">Email</th>
-        <th class="text-nowrap" scope="col"></th>
         <th class="text-nowrap" scope="col"></th>
       </tr>
     </thead>
     <tbody>
 	{% for us in users %}
       <tr>
-        <td scope="row" class="text-nowrap">{{ us.id }}</td>
-        <td scope="row" class="text-nowrap">{{ us.first_name | upper }}</td>
-        <td scope="row" class="text-nowrap">{{ us.email }}</td>
-   		
 				<td 
           scope="row" 
           class="text-center text-nowrap"
@@ -41,7 +37,15 @@ style="height:100vh;padding-top:100px">
           href="/usuarios_atualizar/{{ us.id }}">
   				<i class="fa-regular fa-pen-to-square ms-2 me-2"></i></a>					
 				</td>
-				<td 
+        
+        <td scope="row" class="text-nowrap">{{ us.id }}</td>
+        <td scope="row" class="text-nowrap">{{ us.first_name | upper }}</td>
+        <td scope="row" class="text-nowrap">{{ us.email }}</td>
+   		
+        <td>
+          
+        </td>
+<!-- 				<td 
           scope="row" 
           class="text-center text-nowrap" 
           style="width: 50px"> 
@@ -50,7 +54,7 @@ style="height:100vh;padding-top:100px">
           href="/usuarios_deletar/{{ us.id }}" >
           <i class="fa-regular fa-trash-can ms-2 me-2"></i>
 					</a>
-				</td>
+				</td> -->
 
       </tr>     
 	{% endfor %}

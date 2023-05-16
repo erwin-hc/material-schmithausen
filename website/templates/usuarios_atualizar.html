@@ -10,97 +10,131 @@
 <div class="container-fluid background-container-form d-flex align-items-center justify-content-center"
 style="height: 100vh;">
 
-            <form 
-            method="POST"
-            class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max-form" 
-            action="/usuarios_atualizar/{{ u.id }}" 
-            novalidate
-            >
+<form 
+method="POST"
+class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max-form" 
+action="/usuarios_atualizar/{{ u.id }}" 
+novalidate
+>
+{{ form.hidden_tag() }}
+{{ form.csrf_token }}
 
-            <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
-            <i class="fa-solid fa-user"></i>
-            ATUALIZAR USUÁRIO</h2>
-
-            {{ form.hidden_tag() }}
-            {{ form.csrf_token }}
-            <!-- *********************************************************** -->
-            <!-- INPUT NOME -->
-            <!-- *********************************************************** -->
-            <div class="form-outline">	
-            <i class="fa-solid fa-user trailing"></i>
-            {{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase',value=nome, autofocus='true') }}
-            <!-- ERROS -->
-            {% if form.nome.errors %}
-            {% for e in form.nome.errors %}
-            <div class="form-helper ms-3 text-danger">
-            {{ e }}
-            </div> 
-            {% endfor %}
-            {% endif %}
-            </div>
-            <!-- *********************************************************** -->
-            <!-- INPUT EMAIL -->
-            <!-- *********************************************************** -->
-            <div class="form-outline">
-            <i class="fa-solid fa-at trailing"></i>
-            {{ form.email(class='myInputs form-control-sm', placeholder=form.email.label.text, value=email) }}
-            <!-- ERROS -->
-            {% if form.email.errors %}
-            {% for e in form.email.errors %}
-            <div class="form-helper ms-3 mt-1 text-danger">
-            {{ e }}
-            </div> 
-            {% endfor %}
-            {% endif %}
-            </div>
-            <!-- *********************************************************** -->
-            <!-- INPUT SENHA -->
-            <!-- *********************************************************** -->
-            <div class="form-outline"
-            style="display: none;">
-            {{
-            form.senha(class='myInputs form-control-sm', 
-            placeholder=form.senha.label.text,
-            type='text',
-            value=senha)
-            }}
-            <!-- ERROS -->
-            {% if form.senha.errors %}
-            {% for e in form.senha.errors %}
-            <div class="form-helper ms-3 mt-1 text-danger">
-            {{ e }}
-            </div> 
-            {% endfor %}
-            {% endif %}
-            </div>
-            <!-- *********************************************************** -->
-            <!-- INPUT CONFIRMAR -->
-            <!-- *********************************************************** -->
-            <div class="form-outline"
-            style="display: none;">
-            {{ 
-            form.confirmar(hide_value=true, 
-            class='myInputs form-control-sm', 
-            type='text',
-            value=senha) 
-            }}
-            <!-- ERROS -->
-            {% if form.confirmar.errors %}
-            {% for e in form.confirmar.errors %}
-            <div class="form-helper ms-3 mt-1 text-danger">
-            {{ e }}
-            </div> 
-            {% endfor %}
-            {% endif %}
-            </div>
-
-            <div class="text-center">
-                  <input style="width:125px" type="submit" value="ATUALIZAR" class="btn btn-outline-light m-1" />
-                  <a     style="width:125px" href="/usuarios" class="btn btn-outline-danger m-1">CANCELAR</a>
-            </div>
-
-            </form>
+<h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
+<i class="fa-solid fa-user"></i>
+ATUALIZAR USUÁRIO</h2>
+<!-- *********************************************************** -->
+<!-- INPUT NOME -->
+<!-- *********************************************************** -->
+<div class="form-outline">	
+<i class="fa-solid fa-user trailing"></i>
+{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase',value=nome, autofocus='true') }}
+<!-- ERROS -->
+{% if form.nome.errors %}
+{% for e in form.nome.errors %}
+<div class="form-helper ms-3 text-danger">
+{{ e }}
+</div> 
+{% endfor %}
+{% endif %}
 </div>
+<!-- *********************************************************** -->
+<!-- INPUT EMAIL -->
+<!-- *********************************************************** -->
+<div class="form-outline">
+<i class="fa-solid fa-at trailing"></i>
+{{ form.email(class='myInputs form-control-sm', placeholder=form.email.label.text, value=email) }}
+<!-- ERROS -->
+{% if form.email.errors %}
+{% for e in form.email.errors %}
+<div class="form-helper ms-3 mt-1 text-danger">
+{{ e }}
+</div> 
+{% endfor %}
+{% endif %}
+</div>
+<!-- *********************************************************** -->
+<!-- INPUT SENHA -->
+<!-- *********************************************************** -->
+<div class="form-outline"
+style="display: none;">
+{{
+form.senha(class='myInputs form-control-sm', 
+placeholder=form.senha.label.text,
+type='text',
+value=senha)
+}}
+<!-- ERROS -->
+{% if form.senha.errors %}
+{% for e in form.senha.errors %}
+<div class="form-helper ms-3 mt-1 text-danger">
+{{ e }}
+</div> 
+{% endfor %}
+{% endif %}
+</div>
+<!-- *********************************************************** -->
+<!-- INPUT CONFIRMAR -->
+<!-- *********************************************************** -->
+<div class="form-outline"
+style="display: none;">
+{{ 
+form.confirmar(hide_value=true, 
+class='myInputs form-control-sm', 
+type='text',
+value=senha) 
+}}
+<!-- ERROS -->
+{% if form.confirmar.errors %}
+{% for e in form.confirmar.errors %}
+<div class="form-helper ms-3 mt-1 text-danger">
+{{ e }}
+</div> 
+{% endfor %}
+{% endif %}
+</div>
+<!-- *********************************************************** -->
+<!-- BOTOES -->
+<!-- *********************************************************** -->
+<div class="text-center">
+      <input style="width:125px" type="submit" value="ATUALIZAR" class="btn btn-outline-light m-1" />
+      <a     style="width:125px" href="/usuarios" class="btn btn-outline-primary m-1">CANCELAR</a>
+      <a     
+      style="width:125px" 
+      class="btn btn-outline-danger m-1"
+      data-mdb-toggle="modal" 
+      data-mdb-target="#confirmmodal">EXCLUIR</a>      
+</div>
+
+</form>
+</div>
+
+<!-- *********************************************************** -->
+<!-- MODAL -->
+<!-- *********************************************************** -->
+<div class="modal top fade" id="confirmmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-mdb-backdrop="true" data-mdb-keyboard="true">
+  <div class="modal-dialog modal-sm  modal-dialog-centered">
+    <div class="modal-content modal-confirm">
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-secondary" id="exampleModalLabel">EXCLUIR</h5>
+      </div>
+      <div class="modal-body">
+            <p class="text-white">CONFIRMA EXCLUIR?
+            <br> <span class='text-danger'>{{ u.first_name | upper}}</span></p>
+      </div>
+      <div class="modal-footer border-0">
+        <a style="width:125px" type="button" class="btn btn-outline-primary m-1" 
+        data-mdb-dismiss="modal">
+          CANCELAR
+        </a>
+        <a style="width:125px" type="button" class="btn btn-outline-danger m-1" href="/usuarios_deletar/{{ u.id }}">EXCLUIR</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- *********************************************************** -->
+<!-- MODAL -->
+<!-- *********************************************************** -->
+
 
 {% endblock %}
 

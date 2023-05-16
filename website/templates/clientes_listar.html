@@ -19,22 +19,17 @@ style="height:100vh;padding-top:100px">
                   </th>
               	</tr>
                 <tr>
+                  <th class="text-nowrap" scope="col"></th>
                   <th class="text-nowrap" scope="col">#</th>
                   <th class="text-nowrap" scope="col">Cliente</th>
                   <th class="text-nowrap" scope="col">Celular</th>
                   <th class="text-nowrap" scope="col">Desde</th>
-                  <th class="text-nowrap" scope="col"></th>
                   <th class="text-nowrap" scope="col"></th>
                 </tr>
               </thead>
     <tbody>
       {% for i in clientes %}
       <tr>
-        <td class="text-nowrap" scope="row"> {{ i.id }} </td>
-        <td class="text-nowrap" scope="row"> {{ i.nome }} </td>
-        <td class="text-nowrap" scope="row"> {{ i.fone }} </td>
-        <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
-   		
 				<td class="text-center" style="width: 50px"> 
 					<a 
           role="button"
@@ -43,13 +38,13 @@ style="height:100vh;padding-top:100px">
 						      <i class="fa-regular fa-pen-to-square"></i>
 					</a>					
 				</td>
-				<td class="text-center" style="width: 50px"> 
-					<a class="text-danger" 
-          href="/clientes_deletar/{{ i.id }}" 
-          role="button">
-						<i class="fa-regular fa-trash-can"></i>
-					</a>
-				</td>
+        <td class="text-nowrap" scope="row"> {{ i.id }} </td>
+        <td class="text-nowrap" scope="row"> {{ i.nome }} </td>
+        <td class="text-nowrap" scope="row"> {{ i.fone }} </td>
+        <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
+   		
+        <td>          
+        </td>
 
       </tr>     
       {% endfor %}
