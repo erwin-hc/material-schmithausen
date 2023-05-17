@@ -36,15 +36,6 @@ def usuarios():
     rows = User.query.all()
     for r in rows:
         users.append(r)   
-    # ADICIONAR USUARIO ROOT      
-    email_ja_existe = User.query.filter_by(email='adm@adm.com.br').first()
-    if email_ja_existe == None:    
-        root_user = User(email='adm@adm.com.br', first_name='ADMINISTRADOR', password=generate_password_hash(
-        '123456', method='sha256')) 
-        db.session.add(root_user)
-        db.session.commit()
-
-
     return render_template("usuarios_listar.html", user=current_user, data=data, users=users)
 # ***********************************************************************************************
 #  CADASTRO USUARIOS
@@ -231,6 +222,7 @@ def atualizarClientes(id):
 # PRODUTOS   
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  
+
 # ***********************************************************************************************
 #  LISTAR PRODUTOS
 # ***********************************************************************************************
@@ -256,3 +248,16 @@ def produtos():
         user=current_user,
         data=data, 
         produtos=produtos)
+# ***********************************************************************************************
+#  CADASTRO PRODUTOS
+# ***********************************************************************************************
+@views.route('/produtos_cadastrar', methods=['GET','POST'])
+@login_required
+def cadastroProdutos():
+    form = CadastroProduto()
+
+
+    return render_template('produtos_cadastrar.html',
+        user=current_user,
+        data=data, 
+        form=form)

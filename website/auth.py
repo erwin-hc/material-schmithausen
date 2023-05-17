@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, Cliente
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -12,6 +12,21 @@ auth = Blueprint('auth', __name__)
 @auth.route('/', methods=['GET', 'POST'])
 def login():
     logout_user()
+    # ADICIONAR USUARIO ROOT      
+    email_ja_existe = User.query.filter_by(email='adm@adm.com.br').first()
+    if email_ja_existe == None:    
+        root_user = User(email='adm@adm.com.br', first_name='ADMINISTRADOR', password=generate_password_hash(
+        '123456', method='sha256')) 
+        db.session.add(root_user)
+        db.session.commit()
+    # ADICIONAR CLIENTE DESCONHECIDO      
+    fone_ja_existe = Cliente.query.filter_by(fone='(99) 9-9999-9999').first()
+    if fone_ja_existe == None:    
+        desconhecido = Cliente(nome='DESCONHECIDO', fone='(99) 9-9999-9999')
+        db.session.add(desconhecido)
+        db.session.commit()
+    # -----------------------------------------------------------------------------------------------    
+
     form=FormLogin()
     if form.validate_on_submit():  
         if request.method == 'POST':

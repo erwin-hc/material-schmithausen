@@ -31,11 +31,18 @@ table tbody tr:hover {
   border: 1px solid var(--color-danger);
 }
 
+.form-select:focus-visible,
+.form-select:active {
+  border: 1px solid var(--color-orange)!important;
+  outline: 2px solid transparent!important;
+}
+
 .btn-outline-light:focus,
 .btn-outline-light:hover {
   border: 1px solid var(--color-orange)!important;
   color: var(--color-orange)!important;
   background-color: rgba(255,165,0,0.1)!important;
+  outline: transparent;
 }
 
 .btn-outline-danger:focus,
@@ -48,15 +55,17 @@ table tbody tr:hover {
   background-color: #3B71CA20!important;
 }
 
+.fa-pen-to-square:active,
+.fa-pen-to-square:focus,
+.fa-pen-to-square:hover {
+  outline: 1px solid transparent!important;
+  color: var(--color-orange)!important;
+  outline: none!important;
+}
+
 .modal-confirm {
   border: 1px solid var(--color-danger);
   background-color: var(--color-dark)!important;
-
-}
-
-.fa-pen-to-square:focus,
-.fa-pen-to-square:hover {
-  color: var(--color-orange)!important;
 }
 
 
