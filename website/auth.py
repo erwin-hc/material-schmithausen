@@ -11,6 +11,7 @@ auth = Blueprint('auth', __name__)
 # ***********************************************************************************************
 @auth.route('/', methods=['GET', 'POST'])
 def login():
+    logout_user()
     form=FormLogin()
     if form.validate_on_submit():  
         if request.method == 'POST':

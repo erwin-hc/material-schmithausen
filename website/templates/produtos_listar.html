@@ -1,10 +1,11 @@
 {% extends "base.html" %} 
-{% block title %} CLIENTES {% endblock %} 
+{% block title %} COMANDAS {% endblock %} 
 {% block content %}
-
 
 <div class="container-fluid"
 style="height:100vh;padding-top:100px"> 
+
+
 
 <div class="table-responsive w-100 card bg-dark larg-max m-auto"
 style="padding-bottom: 40px">
@@ -37,15 +38,18 @@ onkeyup='pesquisarTabelaClientes()'
 <i class="fa-solid fa-user-plus"></i></a>  
 </th>
 <th class="text-nowrap" scope="col">#</th>
+<th class="text-nowrap" scope="col">Descrição</th>
 <th class="text-nowrap" scope="col"
-style="min-width: 275px;">Cliente</th>
-<th class="text-nowrap" scope="col">Celular</th>
-<th class="text-nowrap" scope="col">Desde</th>
+style="min-width: 275px;">Categoria</th>
+<th class="text-nowrap" scope="col">Tamanho</th>
+<th class="text-nowrap" scope="col">Valor</th>
+<th class="text-nowrap" scope="col">Usuário</th>
+<th class="text-nowrap" scope="col">Inclusão</th>
 <th class="text-nowrap" scope="col"></th>
 </tr>
 </thead>
-<tbody id="tb-clientes">
-{% for i in clientes %}
+<tbody id="tb-produtos">
+{% for i in produtos %}
 <tr>
 <td class="text-center" style="width: 50px"> 
 <a 
@@ -56,8 +60,11 @@ href="/clientes_atualizar/{{ i.id }}">
 </a>					
 </td>
 <td class="text-nowrap" scope="row"> {{ i.id }} </td>
-<td class="text-nowrap" scope="row"> {{ i.nome }} </td>
-<td class="text-nowrap" scope="row"> {{ i.fone }} </td>
+<td class="text-nowrap" scope="row"> {{ i.descricao }} </td>
+<td class="text-nowrap" scope="row"> {{ i.categoria }} </td>
+<td class="text-nowrap" scope="row"> {{ i.tamanho }} </td>
+<td class="text-nowrap" scope="row"> {{ i.valor }} </td>
+<td class="text-nowrap" scope="row"> {{ i.produtos }} </td>
 <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
 
 <td>          
@@ -71,30 +78,6 @@ href="/clientes_atualizar/{{ i.id }}">
 </div>
 </div>
 
-<script>
-function pesquisarTabelaClientes() {
-    var input, filter, found, table, tr, td, i, j;
-    input = document.getElementById("inputPesquisarCliente");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("tb-clientes");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td");
-        for (j = 0; j < td.length; j++) {
-            if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                found = true;
-            }
-        }
-        if (found) {
-            tr[i].style.display = "";
-            found = false;
-        } else {
-            tr[i].style.display = "none";
-        }
-    }
-}
-</script>
-
 {% endblock %}
 
 {% block titlefooter %}
@@ -107,5 +90,3 @@ function pesquisarTabelaClientes() {
 &nbsp;{{ data.strftime('%d/%m/%Y') }}
 </span>
 {% endblock %}
-
-

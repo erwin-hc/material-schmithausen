@@ -6,13 +6,11 @@ from .models import *
 from .forms import *
 import datetime
 import json
-
 # ***********************************************************************************************
 # DATA ATUAL
 # ***********************************************************************************************
 data = x = datetime.datetime.now().date()
 # ***********************************************************************************************
-
 views = Blueprint('views', __name__)
 # ***********************************************************************************************
 # COMANDAS
@@ -37,7 +35,16 @@ def usuarios():
     users = []
     rows = User.query.all()
     for r in rows:
-        users.append(r)        
+        users.append(r)   
+    # ADICIONAR USUARIO ROOT      
+    email_ja_existe = User.query.filter_by(email='adm@adm.com.br').first()
+    if email_ja_existe == None:    
+        root_user = User(email='adm@adm.com.br', first_name='ADMINISTRADOR', password=generate_password_hash(
+        '123456', method='sha256')) 
+        db.session.add(root_user)
+        db.session.commit()
+
+
     return render_template("usuarios_listar.html", user=current_user, data=data, users=users)
 # ***********************************************************************************************
 #  CADASTRO USUARIOS
@@ -52,9 +59,7 @@ def cadastroUsuarios():
             first_name = request.form.get('nome')
             password1 = request.form.get('senha')
             password2 = request.form.get('confirmar')
-
             user = User.query.filter_by(email=email).first()
-
             if user:
                 flash('EMAIL JÁ CADASTRADO!', category='error')
                 return redirect(url_for('views.cadastroUsuarios'))
@@ -64,9 +69,7 @@ def cadastroUsuarios():
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user, remember=True)
-
             return redirect(url_for('views.usuarios'))
-
     return render_template("usuarios_cadastrar.html", user=current_user, data=data, form=form)
 # ***********************************************************************************************
 # DELETAR USUARIO
@@ -81,7 +84,6 @@ def deletarUsuario(id):
             db.session.delete(get_users)
             db.session.commit()
             return redirect(url_for('views.usuarios'))
-
     return redirect(url_for('views.usuarios'))
 # ***********************************************************************************************
 # ATUALIZAR USUARIOS
@@ -91,7 +93,6 @@ def deletarUsuario(id):
 def atualizarUsuarios(id): 
     form = CadastroUsuario()
     get_users = User.query.get(id)
-
     if request.method == 'GET':        
         if id != 1:
             return render_template('usuarios_atualizar.html', 
@@ -103,7 +104,6 @@ def atualizarUsuarios(id):
         else:
             flash('NÃO PODE SER EDITADO!')
             return redirect(url_for('views.usuarios'))
-
     if form.validate_on_submit():        
         if request.method == 'POST':
             email = request.form.get('email')
@@ -128,8 +128,7 @@ def atualizarUsuarios(id):
                 data=data, 
                 form=form,
                 u=get_users
-                )    
-
+                ) 
     return redirect(url_for('views.usuarios'))
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
@@ -159,17 +158,14 @@ def cadastroClientes():
         if request.method == 'POST':
             nome = request.form.get('nome').upper()
             fone = request.form.get('fone')
-
             existis_fone = Cliente.query.filter_by(fone=fone).first()
             if existis_fone:
                 flash('CELULAR JÁ CADASTRADO !!!', category='error')
             else:
                 novo_cliente = Cliente(nome=nome, fone=fone)
                 db.session.add(novo_cliente)
-                db.session.commit()    
-
+                db.session.commit()   
                 return redirect(url_for('views.clientes'))
-
     return render_template("clientes_cadastrar.html", user=current_user, data=data, form=form)
 # ***********************************************************************************************
 # DELETAR CLIENTES
@@ -185,7 +181,6 @@ def deletarCliente(id):
             db.session.delete(get_cli)
             db.session.commit()
             return redirect(url_for('views.clientes'))
-
     return redirect(url_for('views.clientes'))
 # ***********************************************************************************************
 # ATUALIZAR CLIENTES
@@ -195,7 +190,6 @@ def deletarCliente(id):
 def atualizarClientes(id): 
     form = CadastroCliente()
     get_cli = Cliente.query.get(id)
-
     if request.method == 'GET':
         if id != 1:
             return render_template('clientes_atualizar.html', 
@@ -206,8 +200,7 @@ def atualizarClientes(id):
                 )
         else:
             flash('NÃO PODE SER EDITADO!')
-            return redirect(url_for('views.clientes'))
-    
+            return redirect(url_for('views.clientes'))    
     if form.validate_on_submit():
         if request.method == 'POST':
             nome = request.form.get('nome').upper()
@@ -232,6 +225,34 @@ def atualizarClientes(id):
             form=form,
             c=get_cli
             )
-
     return redirect(url_for('views.clientes'))
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
+# PRODUTOS   
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  
+# ***********************************************************************************************
+#  LISTAR PRODUTOS
+# ***********************************************************************************************
+@views.route('/produtos', methods=['GET','POST'])
+@login_required
+def produtos():
+    produtos = []
+    rows = Produto.query.all()
+    for r in rows:
+        produtos.append(r)     
 
+    categorias = {
+    'ESPETOS':      ['100-G','110-G','120-G','130-G','140-G','150-G'],
+    'REFRIGERANTES':['200-ML','220-ML','310-ML','350-ML','600-ML','1,0-L','1,5-L','2,0-L'],
+    'CERVEJAS':     ['269-ML','275-ML','300-ML','330-ML','350-ML','355-ML','410-ML','473-ML','600-ML']
+    }
+
+    # produto_teste = Produto(categoria='ESPETOS',descricao='ESPETO CONTRA-FILE',tamanho='100-G',valor=15,user_id=current_user.id)
+    # db.session.add(produto_teste)
+    # db.session.commit() 
+
+    return render_template("produtos_listar.html", 
+        user=current_user,
+        data=data, 
+        produtos=produtos)
