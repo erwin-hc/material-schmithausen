@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField, SubmitField, PasswordField, SelectField
+from wtforms import StringField, EmailField, SubmitField, PasswordField, SelectField, FloatField
 from wtforms.validators import ValidationError, DataRequired, Length, Email, EqualTo
 from wtforms.widgets import PasswordInput
 # ***********************************************************************************************
-# FORMULARIO LOGIN
+# LOGIN
 # ***********************************************************************************************
 class FormLogin(FlaskForm):
 	email = EmailField(
@@ -20,7 +20,7 @@ class FormLogin(FlaskForm):
 		])
 
 # ***********************************************************************************************
-# FORMULARIO CADASTRO USUARIOS
+# CADASTRO USUARIOS
 # ***********************************************************************************************
 class CadastroUsuario(FlaskForm):
 	nome = StringField(
@@ -52,7 +52,7 @@ class CadastroUsuario(FlaskForm):
 		])
 
 # ***********************************************************************************************
-# FORMULARIO CADASTRO CLIENTES
+# CADASTRO CLIENTES
 # ***********************************************************************************************
 class CadastroCliente(FlaskForm):
 	nome = StringField(
@@ -69,9 +69,21 @@ class CadastroCliente(FlaskForm):
 	])
 
 # ***********************************************************************************************
-# FORMULARIO CADASTRO PRODUTOS
+# CADASTRO PRODUTOS
 # ***********************************************************************************************
 class CadastroProduto(FlaskForm):
+	categoria = SelectField(
+	'Categoria',
+	validators = [
+	DataRequired(message=("Selecione a categoria!"))
+	])
+
+	tamanho = SelectField(
+	'Tipo/Tamanho',
+	validators = [
+	DataRequired(message=("Selecione a tipo/tamanho!"))
+	])
+
 	descricao = StringField(
 	'Descrição',
 	validators = [
@@ -79,3 +91,9 @@ class CadastroProduto(FlaskForm):
 	Length(min=4, message=("Pelo menos 4 caracteres!"))
 	])
 
+	valor = FloatField(
+	'Valor',
+	validators = [
+	DataRequired(message=("Este campo é obrigatório!")),
+	Length(min=4, message=("Pelo menos 4 números!"))
+	])

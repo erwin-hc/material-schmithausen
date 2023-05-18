@@ -1,5 +1,5 @@
 {% extends "base.html" %} 
-{% block title %} USUÁRIOS {% endblock %} 
+{% block title %} Cadastro de usuários {% endblock %} 
 
 {% block content %}
 
@@ -9,7 +9,7 @@ style="height: 100vh;">
 <!-- *********************************************************** -->
 <!-- FORM ENTRAR -->
 <!-- *********************************************************** -->
-<form id='cadatroUsuarios' 
+<form 
 method="POST"
 class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max-form"
 action="{{ url_for('views.cadastroUsuarios') }}" 
@@ -19,69 +19,93 @@ novalidate
 {{ form.csrf_token }}
 
 <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
-<i class="fa-solid fa-user"></i>
-CADASTRO DE USUÁRIO</h2>
-<!-- *********************************************************** -->
-<!-- INPUT NOME -->
-<!-- *********************************************************** -->
-<div class="form-outline">	
-<i class="fa-solid fa-user trailing"></i>
-{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase', autofocus='true') }}
-<!-- ERROS -->
-{% if form.nome.errors %}
-{% for e in form.nome.errors %}
-<div class="form-helper ms-3 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
+<i class="fa-solid fa-user-plus"></i>
+CADASTRO DE USUÁRIOS</h2>
+<div class="row">
+      <div class="col">
+            <!-- *********************************************************** -->
+            <!-- INPUT NOME -->
+            <!-- *********************************************************** -->
+            <div class="form-text">
+            Nome
+            </div>
+            <div class="form-outline">	
+            <i class="fa-solid fa-user trailing"></i>
+            {{ form.nome(class='myInputs form-control-sm', style='text-transform:uppercase', autofocus='true') }}
+            <!-- ERROS -->
+            {% if form.nome.errors %}
+            {% for e in form.nome.errors %}
+            <div class="form-helper ms-3 text-danger">
+            {{ e }}
+            </div> 
+            {% endfor %}
+            {% endif %}
+            </div>
+      </div>
 </div>
-<!-- *********************************************************** -->
-
-<!-- *********************************************************** -->
-<!-- INPUT EMAIL -->
-<!-- *********************************************************** -->
-<div class="form-outline">
-<i class="fa-solid fa-at trailing"></i>
-{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text,style='text-transform:lowercase') }}
-<!-- ERROS -->
-{% if form.email.errors %}
-{% for e in form.email.errors %}
-<div class="form-helper ms-3 mt-1 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
+<div class="row">     
+      <div class="col"> 
+            <!-- *********************************************************** -->
+            <!-- INPUT EMAIL -->
+            <!-- *********************************************************** -->
+            <div class="form-text">
+            Email
+            </div>
+            <div class="form-outline">
+            <i class="fa-solid fa-at trailing"></i>
+            {{ form.email(class='myInputs form-control-sm',style='text-transform:lowercase') }}
+            <!-- ERROS -->
+            {% if form.email.errors %}
+            {% for e in form.email.errors %}
+            <div class="form-helper ms-3 mt-1 text-danger">
+            {{ e }}
+            </div> 
+            {% endfor %}
+            {% endif %}
+            </div>
+      </div>
 </div>
-<!-- *********************************************************** -->
-<!-- INPUT SENHA -->
-<!-- *********************************************************** -->
-<div class="form-outline">    
-<i class="fa-solid fa-key trailing"></i>
-{{ form.senha(class='myInputs form-control-sm', placeholder= form.senha.label.text) }}
-<!-- ERROS -->
-{% if form.senha.errors %}
-{% for e in form.senha.errors %}
-<div class="form-helper ms-3 mt-1 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
-</div>
-<!-- *********************************************************** -->
-<!-- INPUT CONFIRMAR SENHA -->
-<!-- *********************************************************** -->
-<div class="form-outline">    
-<i class="fa-solid fa-key trailing"></i>
-{{ form.confirmar(class='myInputs form-control-sm', placeholder= form.confirmar.label.text) }}
-<!-- ERROS -->
-{% if form.confirmar.errors %}
-{% for e in form.confirmar.errors %}
-<div class="form-helper ms-3 mt-1 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
+<div class="row">
+      <div class="col-sm">
+            <!-- *********************************************************** -->
+            <!-- INPUT SENHA -->
+            <!-- *********************************************************** -->
+            <div class="form-text">
+            Senha
+            </div>
+            <div class="form-outline">    
+            <i class="fa-solid fa-key trailing"></i>
+            {{ form.senha(class='myInputs form-control-sm') }}
+            <!-- ERROS -->
+            {% if form.senha.errors %}
+            {% for e in form.senha.errors %}
+            <div class="form-helper ms-3 mt-1 text-danger">
+            {{ e }}
+            </div> 
+            {% endfor %}
+            {% endif %}
+            </div>
+      </div>
+      <div class="col-sm">     
+            <!-- *********************************************************** -->
+            <!-- INPUT CONFIRMAR SENHA -->
+            <!-- *********************************************************** -->
+            <div class="form-text">
+            Senha (Confirmar)
+            </div>
+            <div class="form-outline">    
+            <i class="fa-solid fa-key trailing"></i>
+            {{ form.confirmar(class='myInputs form-control-sm') }}
+            <!-- ERROS -->
+            {% if form.confirmar.errors %}
+            {% for e in form.confirmar.errors %}
+            <div class="form-helper ms-3 mt-1 text-danger">
+            {{ e }}
+            </div> 
+            {% endfor %}
+            {% endif %}
+            </div>
+      </div>
 </div>
 <!-- *********************************************************** -->
 <!-- BOTOES -->

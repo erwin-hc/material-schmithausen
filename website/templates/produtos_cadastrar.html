@@ -5,52 +5,117 @@
 
 <div class="container-fluid background-container-form d-flex align-items-center justify-content-center"
 style="height: 100vh;">
-
 <!-- *********************************************************** -->
 <!-- FORM ENTRAR -->
 <!-- *********************************************************** -->
 <form id='cadatroProdutos' 
 method="POST"
 class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max-form"
-action="{{ url_for('views.cadastroUsuarios') }}" 
+action="{{ url_for('views.cadastroProdutos') }}" 
 novalidate
 >
 {{ form.hidden_tag() }}
 {{ form.csrf_token }}
 
 <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
-<i class="fa-solid fa-user"></i>
-CADASTRO DE USUÁRIO</h2>
-<!-- *********************************************************** -->
-<!-- INPUT NOME -->
-<!-- *********************************************************** -->
-<div class="form-outline">	
-<i class="fa-solid fa-user trailing"></i>
-{{ form.descricao(class='myInputs form-control-sm', placeholder= form.descricao.label.text, style='text-transform:uppercase', autofocus='true') }}
-<!-- ERROS -->
-{% if form.descricao.errors %}
-{% for e in form.descricao.errors %}
-<div class="form-helper ms-3 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
+<i class="fa-solid fa-user-plus"></i>
+CADASTRO DE PRODUTOS</h2>
+
+<div class="row">
+       <div class="col-sm-8">
+              <!-- *********************************************************** -->
+              <!-- INPUT CATEGORIA  -->
+              <!-- *********************************************************** -->
+              <div class="form-text">
+              Categoria
+              </div>
+              <div class="form-outline">  
+              <i class="fa-solid fa-list-ul trailing pe-3"></i>
+              {{ form.categoria(class='myInputs form-control-sm',
+              style='text-transform:uppercase', autofocus='true') }}
+              <!-- ERROS -->
+              {% if form.categoria.errors %}
+              {% for e in form.categoria.errors %}
+              <div class="form-helper ms-3 text-danger">
+              {{ e }}
+              </div> 
+              {% endfor %}
+              {% endif %}
+              </div>
+      </div>
+      <div class="col">
+              <!-- *********************************************************** -->
+              <!-- INPUT TIPO/TAMANHO  -->
+              <!-- *********************************************************** -->
+              <div class="form-text">
+              Tipo/Tamanho
+              </div>
+              <div class="form-outline">  
+              <i class="fa-solid fa-list-ul trailing pe-3"></i>
+              {{ form.tamanho(class='myInputs form-control-sm',
+              style='text-transform:uppercase') }}
+              <!-- ERROS -->
+              {% if form.tamanho.errors %}
+              {% for e in form.tamanho.errors %}
+              <div class="form-helper ms-3 text-danger">
+              {{ e }}
+              </div> 
+              {% endfor %}
+              {% endif %}
+              </div>
+    </div>
 </div>
+<div class="row"> 
+    <div class="col-sm-8">
+              <!-- *********************************************************** -->
+              <!-- INPUT DESCRICAO -->
+              <!-- *********************************************************** -->
+              <div class="form-text">
+              Descrição
+              </div>
+              <div class="form-outline">	
+              <i class="fa-solid fa-square-pen trailing pe-3"></i>
+              {{ form.descricao(class='myInputs form-control-sm',
+              style='text-transform:uppercase') }}
+              <!-- ERROS -->
+              {% if form.descricao.errors %}
+              {% for e in form.descricao.errors %}
+              <div class="form-helper ms-3 text-danger">
+              {{ e }}
+              </div> 
+              {% endfor %}
+              {% endif %}
+              </div>
+    </div>
+    <div class="col">
+              <!-- *********************************************************** -->
+              <!-- INPUT VALOR -->
+              <!-- *********************************************************** -->
+              <div class="form-text">
+              Valor
+              </div>
+              <div class="form-outline">  
+              <i class="fa-solid fa-brazilian-real-sign trailing pe-3"></i>
+              {{ form.valor(class='myInputs form-control-sm',
+              style='text-transform:uppercase') }}
+              <!-- ERROS -->
+              {% if form.valor.errors %}
+              {% for e in form.valor.errors %}
+              <div class="form-helper ms-3 text-danger">
+              {{ e }}
+              </div> 
+              {% endfor %}
+              {% endif %}
+              </div>
 
-
-<div class="form-outline">	
-<select class="form-select myInputs form-control-sm">
-  <option value="CERVEJAS">CERVEJAS</option>
-  <option value="ESPETOS">ESPETOS</option>
-  <option value="REFRIGERANTES">REFRIGERANTES</option>
-</select>
+    </div>
 </div>
 <!-- *********************************************************** -->
 <!-- BOTOES -->
 <!-- *********************************************************** -->
 <div class="text-center">
       <input style="width:125px" type="submit" value="CADASTRAR" class="btn btn-outline-light m-1" />
-      <a     style="width:125px" href="/usuarios" class="btn btn-outline-primary m-1">CANCELAR</a>
+      <a     style="width:125px" href="/produtos" class="btn btn-outline-primary m-1">CANCELAR</a>
 </div>
 
 </form>

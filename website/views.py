@@ -256,7 +256,6 @@ def produtos():
 def cadastroProdutos():
     form = CadastroProduto()
 
-
     return render_template('produtos_cadastrar.html',
         user=current_user,
         data=data, 

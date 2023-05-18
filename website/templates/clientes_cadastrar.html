@@ -1,5 +1,5 @@
 {% extends "base.html" %} 
-{% block title %} USUÁRIOS {% endblock %} 
+{% block title %} Cadastro de clientes {% endblock %} 
 
 {% block content %}
 
@@ -25,9 +25,12 @@ CADASTRO DE CLIENTES</h2>
 <!-- *********************************************************** -->
 <!-- INPUT NOME -->
 <!-- *********************************************************** -->
+<div class="form-text">
+Nome
+</div>
 <div class="form-outline">	
 <i class="fa-solid fa-user trailing"></i>
-{{ form.nome(class='myInputs form-control-sm', placeholder= form.nome.label.text, style='text-transform:uppercase', autofocus='true') }}
+{{ form.nome(class='myInputs form-control-sm', style='text-transform:uppercase', autofocus='true') }}
 <!-- ERROS -->
 {% if form.nome.errors %}
 {% for e in form.nome.errors %}
@@ -40,6 +43,9 @@ CADASTRO DE CLIENTES</h2>
 <!-- *********************************************************** -->
 <!-- INPUT CELUAR -->
 <!-- *********************************************************** -->
+<div class="form-text">
+Celular
+</div>
 <div class="form-outline">
 <i class="fa-solid fa-phone trailing"></i>
 {{ form.fone(class='myInputs form-control-sm phone-mask', placeholder='(XX) X-XXXX-XXXX') }}
@@ -52,6 +58,17 @@ CADASTRO DE CLIENTES</h2>
 {% endfor %}
 {% endif %}
 </div>
+                   <!-- MASCARA TELEFONE -->
+                    <script src="{{ url_for('static', filename='js/imask.js') }}"></script>
+                    <script>
+                    // ---------------------------------------------------------------
+                    // MASK FONE
+                    // ---------------------------------------------------------------
+                    var phoneMask = IMask(
+                      document.querySelector('.phone-mask'), {
+                        mask: '(00) 0-0000-0000'
+                      });
+                    </script>
 
 <!-- *********************************************************** -->
 <!-- BOTOES -->
