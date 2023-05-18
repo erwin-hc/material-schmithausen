@@ -3,15 +3,15 @@
 
 {% block content %}
 
-<div class="container-fluid background-container-form d-flex align-items-center justify-content-center"
-style="height: 100vh;">
+<div class="pt-5 container-fluid background-container-form d-flex align-items-center justify-content-center"
+style="min-height: 100vh;">
 
 <!-- *********************************************************** -->
 <!-- FORM ENTRAR -->
 <!-- *********************************************************** -->
-<form 
+<form id='cadatroClientes' 
 method="POST"
-class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max-form"
+class="form-outline form-white card bg-dark mt-5 mb-5 p-3 larg-max-form"
 action="{{ url_for('views.cadastroUsuarios') }}" 
 novalidate
 >

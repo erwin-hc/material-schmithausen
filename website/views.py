@@ -234,12 +234,6 @@ def produtos():
     for r in rows:
         produtos.append(r)     
 
-    categorias = {
-    'ESPETOS':      ['100-G','110-G','120-G','130-G','140-G','150-G'],
-    'REFRIGERANTES':['200-ML','220-ML','310-ML','350-ML','600-ML','1,0-L','1,5-L','2,0-L'],
-    'CERVEJAS':     ['269-ML','275-ML','300-ML','330-ML','350-ML','355-ML','410-ML','473-ML','600-ML']
-    }
-
     # produto_teste = Produto(categoria='ESPETOS',descricao='ESPETO CONTRA-FILE',tamanho='100-G',valor=15,user_id=current_user.id)
     # db.session.add(produto_teste)
     # db.session.commit() 
@@ -254,8 +248,22 @@ def produtos():
 @views.route('/produtos_cadastrar', methods=['GET','POST'])
 @login_required
 def cadastroProdutos():
+    categorias = {
+    'ESPETOS':
+    [
+    ('1','100-G'),('2','110-G'),('3','120-G'),('4','140-G'),('5','150-G')
+    ],
+    'REFRIGERANTES':
+    [
+    ('1','200-ML'),('2','220-ML'),('3','310-ML'),('4','350-ML'),('5','600-ML'),('6','1,0-L'),('7','1,5-L'),('8','2,0-L')
+    ],
+    'CERVEJAS':
+    [
+    ('1','269-ML'),('2','275-ML'),('3','300-ML'),('4','330-ML'),('5','350-ML'),('6','355-ML'),('7','410-ML'),('8','473-ML'),('9','600-ML')]
+    }
     form = CadastroProduto()
-
+    form.categoria.choices = [('1', 'ESPETOS')]
+    form.tamanho.choices = categorias['CERVEJAS']
     return render_template('produtos_cadastrar.html',
         user=current_user,
         data=data, 

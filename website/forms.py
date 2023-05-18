@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, EmailField, SubmitField, PasswordField, SelectField, FloatField
 from wtforms.validators import ValidationError, DataRequired, Length, Email, EqualTo
-from wtforms.widgets import PasswordInput
+from wtforms.widgets import PasswordInput, Select
 # ***********************************************************************************************
 # LOGIN
 # ***********************************************************************************************
@@ -72,27 +72,23 @@ class CadastroCliente(FlaskForm):
 # CADASTRO PRODUTOS
 # ***********************************************************************************************
 class CadastroProduto(FlaskForm):
-	categoria = SelectField(
-	'Categoria',
+	tamanho = SelectField("tamanho",
 	validators = [
-	DataRequired(message=("Selecione a categoria!"))
-	])
+	DataRequired(message=('Este campo é obrigatório!'))])
 
-	tamanho = SelectField(
-	'Tipo/Tamanho',
+	categoria = SelectField("categoria",
 	validators = [
-	DataRequired(message=("Selecione a tipo/tamanho!"))
-	])
+	DataRequired(message=('Este campo é obrigatório!'))])
 
 	descricao = StringField(
-	'Descrição',
+		'descricao',
 	validators = [
 	DataRequired(message=("Este campo é obrigatório!")),
 	Length(min=4, message=("Pelo menos 4 caracteres!"))
 	])
 
 	valor = FloatField(
-	'Valor',
+		'valor',
 	validators = [
 	DataRequired(message=("Este campo é obrigatório!")),
 	Length(min=4, message=("Pelo menos 4 números!"))

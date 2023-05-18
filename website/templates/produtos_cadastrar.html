@@ -3,37 +3,39 @@
 {% block content %}
 
 
-<div class="container-fluid background-container-form d-flex align-items-center justify-content-center"
-style="height: 100vh;">
+<div class="pt-5 container-fluid background-container-form d-flex align-items-center justify-content-center"
+style="min-height: 100vh;">
 <!-- *********************************************************** -->
 <!-- FORM ENTRAR -->
 <!-- *********************************************************** -->
-<form id='cadatroProdutos' 
+<form id='cadastroProdutos'  
 method="POST"
-class="form-outline form-white mb-4 mt-1 m-auto card bg-dark p-3 larg-max-form"
+class="form-outline form-white card bg-dark mt-5 mb-5 p-3 larg-max-form"
 action="{{ url_for('views.cadastroProdutos') }}" 
-novalidate
->
+novalidate >
+
 {{ form.hidden_tag() }}
 {{ form.csrf_token }}
 
 <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
-<i class="fa-solid fa-user-plus"></i>
-CADASTRO DE PRODUTOS</h2>
+<i class="fa-solid fa-user-plus"></i>CADASTRO DE PRODUTOS</h2>
 
 <div class="row">
        <div class="col-sm-8">
               <!-- *********************************************************** -->
               <!-- INPUT CATEGORIA  -->
               <!-- *********************************************************** -->
+
               <div class="form-text">
               Categoria
               </div>
-              <div class="form-outline">  
-              <i class="fa-solid fa-list-ul trailing pe-3"></i>
-              {{ form.categoria(class='myInputs form-control-sm',
-              style='text-transform:uppercase', autofocus='true') }}
-              <!-- ERROS -->
+              <div class="pb-5">  
+              {{ form.categoria(
+              class='myInputs form-control-sm',
+              style='text-transform:uppercase', 
+              autofocus='true')
+              }}
+
               {% if form.categoria.errors %}
               {% for e in form.categoria.errors %}
               <div class="form-helper ms-3 text-danger">
@@ -42,19 +44,22 @@ CADASTRO DE PRODUTOS</h2>
               {% endfor %}
               {% endif %}
               </div>
+
       </div>
       <div class="col">
               <!-- *********************************************************** -->
               <!-- INPUT TIPO/TAMANHO  -->
               <!-- *********************************************************** -->
+
               <div class="form-text">
               Tipo/Tamanho
               </div>
-              <div class="form-outline">  
-              <i class="fa-solid fa-list-ul trailing pe-3"></i>
-              {{ form.tamanho(class='myInputs form-control-sm',
-              style='text-transform:uppercase') }}
-              <!-- ERROS -->
+              <div class="pb-5">  
+              {{ form.tamanho(
+              class='myInputs form-control-sm',
+              style='text-transform:uppercase')
+              }}
+
               {% if form.tamanho.errors %}
               {% for e in form.tamanho.errors %}
               <div class="form-helper ms-3 text-danger">
@@ -63,6 +68,7 @@ CADASTRO DE PRODUTOS</h2>
               {% endfor %}
               {% endif %}
               </div>
+              
     </div>
 </div>
 <div class="row"> 
@@ -75,8 +81,10 @@ CADASTRO DE PRODUTOS</h2>
               </div>
               <div class="form-outline">	
               <i class="fa-solid fa-square-pen trailing pe-3"></i>
-              {{ form.descricao(class='myInputs form-control-sm',
-              style='text-transform:uppercase') }}
+              {{ form.descricao(
+              class='myInputs form-control-sm',
+              style='text-transform:uppercase')
+              }}
               <!-- ERROS -->
               {% if form.descricao.errors %}
               {% for e in form.descricao.errors %}
@@ -96,8 +104,10 @@ CADASTRO DE PRODUTOS</h2>
               </div>
               <div class="form-outline">  
               <i class="fa-solid fa-brazilian-real-sign trailing pe-3"></i>
-              {{ form.valor(class='myInputs form-control-sm',
-              style='text-transform:uppercase') }}
+              {{ form.valor(
+              class='myInputs form-control-sm',
+              style='text-transform:uppercase') 
+              }}
               <!-- ERROS -->
               {% if form.valor.errors %}
               {% for e in form.valor.errors %}
@@ -113,9 +123,11 @@ CADASTRO DE PRODUTOS</h2>
 <!-- *********************************************************** -->
 <!-- BOTOES -->
 <!-- *********************************************************** -->
-<div class="text-center">
-      <input style="width:125px" type="submit" value="CADASTRAR" class="btn btn-outline-light m-1" />
-      <a     style="width:125px" href="/produtos" class="btn btn-outline-primary m-1">CANCELAR</a>
+<div class="row">
+                <div class="text-center">
+                      <input style="width:125px" type="submit" value="CADASTRAR" class="btn btn-outline-light m-1" />
+                      <a     style="width:125px" href="/produtos" class="btn btn-outline-primary m-1">CANCELAR</a>
+                </div>
 </div>
 
 </form>
