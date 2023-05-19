@@ -229,10 +229,18 @@ def atualizarClientes(id):
 @views.route('/produtos', methods=['GET','POST'])
 @login_required
 def produtos():
-    produtos = []
-    rows = Produto.query.all()
-    for r in rows:
-        produtos.append(r)    
+    produtos = Produto.query.all()
+    criador = User.query.filter_by(id=current_user.id).first()
+
+    # one = Produto(categoria='ESPETOS',descricao='ESPETO ALCATRA',tamanho='100-G',valor=18,criador=criador.id)
+    # db.session.add(one)
+    # db.session.commit()
+
+    # print(produtos[0].id)
+    # print(produtos[0].descricao)
+    # print(produtos[0].tamanho)
+    # print(produtos[0].valor)
+    # print(produtos[0].criador)
 
     return render_template("produtos_listar.html", 
         user=current_user,

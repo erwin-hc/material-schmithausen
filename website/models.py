@@ -37,6 +37,6 @@ class Produto(db.Model):
     tamanho = db.Column(db.String(150))
     valor = db.Column(db.Float)
     data_criacao = db.Column(db.DateTime(timezone=True), default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    criador = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
