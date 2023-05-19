@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} ENTRAR {% endblock %}
+{% block title %} Schmithausen {% endblock %}
 <!-- *********************************************************** -->
 {% block content %}
 <div class="d-flex align-items-center justify-content-center"
@@ -25,7 +25,7 @@ Entrar</h2>
 <!-- *********************************************************** -->
 <div class="form-outline mb-5">
 <i class="fa-solid fa-at trailing"></i>
-{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text) }}
+{{ form.email(class='myInputs form-control-sm', placeholder= form.email.label.text, style='text-transform:lowercase') }}
 <!-- ERROS -->
 {% if form.email.errors %}
 {% for e in form.email.errors %}

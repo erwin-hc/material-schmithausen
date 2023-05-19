@@ -33,6 +33,7 @@ novalidate >
               {{ form.categoria(
               class='myInputs form-control-sm',
               style='text-transform:uppercase', 
+              id='categorias',
               autofocus='true')
               }}
 
@@ -57,7 +58,8 @@ novalidate >
               <div class="pb-5">  
               {{ form.tamanho(
               class='myInputs form-control-sm',
-              style='text-transform:uppercase')
+              style='text-transform:uppercase',
+              id='tamanhos')
               }}
 
               {% if form.tamanho.errors %}
@@ -132,6 +134,27 @@ novalidate >
 
 </form>
 </div>
+
+
+<script>
+  let categorias_selec = document.getElementById('categorias')
+  let tamanhos_selec = document.getElementById('tamanhos')
+
+  categorias_selec.onchange = function () {
+    categoria = this.value
+    fetch('/categoria/' + categoria).then(function (response) {
+      response.json().then(function (data) {
+        let optHTML = "";
+        for (value in data) {
+          values = data[value][0]
+          tamanhos = data[value][1]
+          optHTML += '<option value="' + values + '">' + tamanhos + '</option>'
+        }
+        tamanhos_selec.innerHTML = optHTML;
+      })
+    })
+  }   
+</script>
 
 {% endblock %}
 

@@ -232,11 +232,7 @@ def produtos():
     produtos = []
     rows = Produto.query.all()
     for r in rows:
-        produtos.append(r)     
-
-    # produto_teste = Produto(categoria='ESPETOS',descricao='ESPETO CONTRA-FILE',tamanho='100-G',valor=15,user_id=current_user.id)
-    # db.session.add(produto_teste)
-    # db.session.commit() 
+        produtos.append(r)    
 
     return render_template("produtos_listar.html", 
         user=current_user,
@@ -245,26 +241,27 @@ def produtos():
 # ***********************************************************************************************
 #  CADASTRO PRODUTOS
 # ***********************************************************************************************
+
+categorias = {
+'ESPETOS':[('1','100-G'),('2','110-G'),('3','120-G'),('4','140-G'),('5','150-G')],
+'REFRIGERANTES':[('1','200-ML'),('2','220-ML'),('3','310-ML'),('4','350-ML'),
+('5','600-ML'),('6','1,0-L'),('7','1,5-L'),('8','2,0-L')],
+'CERVEJAS':[('1','269-ML'),('2','275-ML'),('3','300-ML'),('4','330-ML'),('5','350-ML'),
+('6','355-ML'),('7','410-ML'),('8','473-ML'),('9','600-ML')]}
+
 @views.route('/produtos_cadastrar', methods=['GET','POST'])
 @login_required
 def cadastroProdutos():
-    categorias = {
-    'ESPETOS':
-    [
-    ('1','100-G'),('2','110-G'),('3','120-G'),('4','140-G'),('5','150-G')
-    ],
-    'REFRIGERANTES':
-    [
-    ('1','200-ML'),('2','220-ML'),('3','310-ML'),('4','350-ML'),('5','600-ML'),('6','1,0-L'),('7','1,5-L'),('8','2,0-L')
-    ],
-    'CERVEJAS':
-    [
-    ('1','269-ML'),('2','275-ML'),('3','300-ML'),('4','330-ML'),('5','350-ML'),('6','355-ML'),('7','410-ML'),('8','473-ML'),('9','600-ML')]
-    }
     form = CadastroProduto()
-    form.categoria.choices = [('1', 'ESPETOS')]
-    form.tamanho.choices = categorias['CERVEJAS']
+    form.categoria.choices = [(i) for i, item in categorias.items()]
+    form.tamanho.choices = categorias['ESPETOS']
     return render_template('produtos_cadastrar.html',
         user=current_user,
         data=data, 
         form=form)
+
+@views.route('/categoria/<tamanho>')
+def categoria(tamanho):
+    return categorias[tamanho]
+
+    
