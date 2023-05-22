@@ -44,7 +44,7 @@
                     {% for i in produtos %}
                     <tr>
                         <td class="text-center" style="width: 50px"> 
-                            <a role="button" class="text-secondary" href="/clientes_atualizar/{{ i.id }}">
+                            <a role="button" class="text-secondary" href="/produtos_atualizar/{{ i.id }}">
                                 <i class="fa-regular fa-pen-to-square"></i>
                             </a>					
                         </td>
@@ -53,7 +53,7 @@
                         <td class="text-nowrap" scope="row"> {{ i.categoria }} </td>
                         <td class="text-nowrap" scope="row"> {{ i.tamanho }} </td>
                         <td class="text-nowrap" scope="row"> {{ i.valor }} </td>
-                        <td class="text-nowrap" scope="row"> {{ i.criador }} </td>
+                        <td class="text-nowrap" scope="row"> {{ i.first_name.split()[0] }} </td>
                         <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
                     </tr>     
                     {% endfor %}

@@ -236,16 +236,22 @@ def produtos():
     # db.session.add(one)
     # db.session.commit()
 
-    # print(produtos[0].id)
-    # print(produtos[0].descricao)
-    # print(produtos[0].tamanho)
-    # print(produtos[0].valor)
-    # print(produtos[0].criador)
+    myData = db.session.query(Produto)\
+        .join(User, User.id == Produto.criador)\
+            .with_entities(
+                User.first_name,
+                Produto.id,
+                Produto.descricao,
+                Produto.categoria,
+                Produto.tamanho,
+                Produto.valor,
+                Produto.data_criacao
+                ).all()
 
     return render_template("produtos_listar.html", 
         user=current_user,
         data=data, 
-        produtos=produtos)
+        produtos=myData)
 # ***********************************************************************************************
 #  CADASTRO PRODUTOS
 # ***********************************************************************************************
@@ -263,6 +269,24 @@ def cadastroProdutos():
     form = CadastroProduto()
     form.categoria.choices = [(i) for i, item in categorias.items()]
     form.tamanho.choices = categorias['ESPETOS']
+
+    if form.validate_on_submit():
+        if request.method == 'POST':
+            categoria = request.form.get('categoria').upper()
+            tamanho = request.form.get('tamanho')
+            descricao = request.form.get('descricao').upper()
+            valor = request.form.get('valor')
+            criador = current_user.id
+            novo_produto = Produto(categoria=categoria,tamanho=tamanho,descricao=descricao,valor=valor,criador=criador)
+            db.session.add(novo_produto)
+            db.session.commit()
+            return redirect(url_for('views.produtos'))
+        else:
+            return render_template('produtos_cadastrar.html',
+                user=current_user,
+                data=data, 
+                form=form)
+            
     return render_template('produtos_cadastrar.html',
         user=current_user,
         data=data, 

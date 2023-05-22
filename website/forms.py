@@ -73,23 +73,23 @@ class CadastroCliente(FlaskForm):
 # ***********************************************************************************************
 class CadastroProduto(FlaskForm):
 	tamanho = SelectField("tamanho",
+	validate_choice=True,
 	validators = [
-	DataRequired(message=('Este campo é obrigatório!'))])
+	DataRequired(message=('Obrigatório!'))])
 
 	categoria = SelectField("categoria",
+	validate_choice=True,
 	validators = [
-	DataRequired(message=('Este campo é obrigatório!'))])
+	DataRequired(message=('Obrigatório!'))])
 
-	descricao = StringField(
-		'descricao',
+	descricao = StringField('descricao',	
 	validators = [
-	DataRequired(message=("Este campo é obrigatório!")),
+	DataRequired(message=("Obrigatório!")),
 	Length(min=4, message=("Pelo menos 4 caracteres!"))
 	])
 
 	valor = FloatField(
 		'valor',
 	validators = [
-	DataRequired(message=("Este campo é obrigatório!")),
-	Length(min=4, message=("Pelo menos 4 números!"))
+	DataRequired(message=("Obrigatório!"))
 	])
