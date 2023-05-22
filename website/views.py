@@ -274,7 +274,7 @@ def cadastroProdutos():
         if request.method == 'POST':
             categoria = request.form.get('categoria').upper()
             tamanho = request.form.get('tamanho')
-            descricao = request.form.get('descricao').upper()
+            descricao = request.form.get('descricao').upper()   
             valor = request.form.get('valor')
             criador = current_user.id
             novo_produto = Produto(categoria=categoria,tamanho=tamanho,descricao=descricao,valor=valor,criador=criador)
