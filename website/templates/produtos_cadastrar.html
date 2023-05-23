@@ -25,7 +25,6 @@ novalidate >
               <!-- *********************************************************** -->
               <!-- INPUT CATEGORIA  -->
               <!-- *********************************************************** -->
-
               <div class="form-text">
               Categoria
               </div>
@@ -139,20 +138,33 @@ novalidate >
 <script>
   let categorias_selec = document.getElementById('categorias')
   let tamanhos_selec = document.getElementById('tamanhos')
-
+  categorias_selec.selectedIndex = 0;
   categorias_selec.onchange = function () {
     categoria = this.value
-    fetch('/categoria/' + categoria).then(function (response) {
-      response.json().then(function (data) {
-        let optHTML = "";
-        for (value in data) {
-          values = data[value][0]
-          tamanhos = data[value][1]
-          optHTML += '<option value="' + values + '">' + tamanhos + '</option>'
-        }
-        tamanhos_selec.innerHTML = optHTML;
-      })
-    })
+        fetch('/categoria/' + categoria).then(function (resposta) {
+            resposta.json().then(function (dados) {
+            let optsHTML = "";
+            for (i in dados) {
+              valor = dados[i]['valor']
+              nome = dados[i]['nome']
+              optsHTML += '<option value='+ valor + '>' + nome + '</option>'
+            }
+            tamanhos_selec.innerHTML = optsHTML;
+          })
+        })
+
+    // fetch('/categoria/' + categoria).then(function (response) {
+    //   response.json().then(function (data) {
+    //     alert(data)
+    //       let optHTML = "";
+    //       for (value in data) {
+    //         values = data[value][0]
+    //         tamanhos = data[value][1]
+    //         optHTML += '<option value='+ values + '>' + tamanhos + '</option>'
+    //       }
+    //       tamanhos_selec.innerHTML = optHTML;
+    //   })
+    // })
   }   
 </script>
 

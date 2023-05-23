@@ -255,24 +255,37 @@ def produtos():
 # ***********************************************************************************************
 #  CADASTRO PRODUTOS
 # ***********************************************************************************************
-
-categorias = {
-'ESPETOS':[('1','100-G'),('2','110-G'),('3','120-G'),('4','140-G'),('5','150-G')],
-'REFRIGERANTES':[('1','200-ML'),('2','220-ML'),('3','310-ML'),('4','350-ML'),
-('5','600-ML'),('6','1,0-L'),('7','1,5-L'),('8','2,0-L')],
-'CERVEJAS':[('1','269-ML'),('2','275-ML'),('3','300-ML'),('4','330-ML'),('5','350-ML'),
-('6','355-ML'),('7','410-ML'),('8','473-ML'),('9','600-ML')]}
+tamanhos = {
+1:[
+(1,'100-G'),
+(2,'150-G'),
+(3,'200-G')
+],
+2:[
+(1,'LATA 200-ML'),
+(2,'LATA 310-ML'),
+(3,'LATA 350-ML'),
+(4,'PET 600-ML'),
+(5,'PET 1,0-LTS'),
+(6,'PET 1,5-LTS'),
+(7,'PET 2,0-LTS')
+],
+3:[
+(1,'LATA 269-ML'),
+(2,'LATA 275-ML'),
+(3,'LATA 350-ML'),
+(4,'LATAO 473-ML'),
+(5,'GARRAFA 600-ML')
+]}
 
 @views.route('/produtos_cadastrar', methods=['GET','POST'])
 @login_required
 def cadastroProdutos():
     form = CadastroProduto()
-    form.categoria.choices = [(i) for i, item in categorias.items()]
-    form.tamanho.choices = categorias['ESPETOS']
-
+    
     if form.validate_on_submit():
         if request.method == 'POST':
-            categoria = request.form.get('categoria').upper()
+            categoria = request.form.get('categoria')
             tamanho = request.form.get('tamanho')
             descricao = request.form.get('descricao').upper()   
             valor = request.form.get('valor')
@@ -292,8 +305,25 @@ def cadastroProdutos():
         data=data, 
         form=form)
 
-@views.route('/categoria/<tamanho>')
-def categoria(tamanho):
-    return categorias[tamanho]
+@views.route('/categoria/<int:id>')
+def categoria(id):
+    newArray = []
+    for i in tamanhos[id]:
+        obj = {}
+        obj['valor'] = i[0] 
+        obj['nome'] = i[1]
+        newArray.append(obj)
+    print(newArray)
+    return newArray
+# ***********************************************************************************************
+# DELETAR PRODUTO
+# ***********************************************************************************************
+@views.route('/produtos_deletar/<int:id>', methods=['POST','GET'])
+def deletarProduto(id):  
+    get_produto = Produto.query.get(id)
+    if get_produto:
+        db.session.delete(get_produto)
+        db.session.commit()
+    return redirect(url_for('views.produtos'))
 
     

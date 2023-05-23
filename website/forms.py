@@ -73,12 +73,12 @@ class CadastroCliente(FlaskForm):
 # ***********************************************************************************************
 class CadastroProduto(FlaskForm):
 	tamanho = SelectField("tamanho",
-	validate_choice=True,
+	choices=[(1,'100-G'),(2,'150-G'),(3,'200-G')],
 	validators = [
 	DataRequired(message=('Obrigatório!'))])
 
 	categoria = SelectField("categoria",
-	validate_choice=True,
+	choices=[(1,'ESPETOS'),(2,'REFRIGERANTES'),(3,'CERVEJAS')],
 	validators = [
 	DataRequired(message=('Obrigatório!'))])
 
