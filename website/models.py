@@ -3,14 +3,6 @@ import datetime
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 # ---------------------------------------------------------------
-# MODELO NOTES
-# ---------------------------------------------------------------
-# class Note(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     data = db.Column(db.String(10000))
-#     date = db.Column(db.DateTime(timezone=True), default=func.now())
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-# ---------------------------------------------------------------
 # MODELO USUARIOS
 # ---------------------------------------------------------------
 class User(db.Model, UserMixin):
@@ -39,4 +31,18 @@ class Produto(db.Model):
     data_criacao = db.Column(db.DateTime(timezone=True), default=func.now())
     criador = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+class Categoria(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(150))
+    categoria = db.relationship('Tamanho',backref='tamanhos')
 
+    def __repr__(self):
+        return f'<{self.id}, {self.nome}, {self.categoria}>'
+
+class Tamanho(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(150))
+    cat_id = db.Column(db.Integer, db.ForeignKey('categoria.id'))
+
+    def __repr__(self):
+        return f'<{self.id}, {self.nome}, {self.categoria.nome}>'

@@ -18,6 +18,46 @@ views = Blueprint('views', __name__)
 @views.route('/comandas', methods=['GET', 'POST'])
 @login_required
 def comandas():
+
+    print(Categoria.query.all())
+    # ct1 = Categoria(nome='ESPETOS')
+    # ct2 = Categoria(nome='REFRIGERANTES')
+    # ct3 = Categoria(nome='CERVEJAS')
+    # db.session.add(ct1)
+    # db.session.add(ct2)
+    # db.session.add(ct3)
+    # db.session.commit()
+
+# 1:[
+# (1,'100-G'),
+# (2,'150-G'),
+# (3,'200-G')
+# ],
+# 2:[
+# (1,'LATA 200-ML'),
+# (2,'LATA 310-ML'),
+# (3,'LATA 350-ML'),
+# (4,'PET 600-ML'),
+# (5,'PET 1,0-LTS'),
+# (6,'PET 1,5-LTS'),
+# (7,'PET 2,0-LTS')
+# ],
+# 3:[
+# (1,'LATA 269-ML'),
+# (2,'LATA 275-ML'),
+# (3,'LATA 350-ML'),
+# (4,'LATAO 473-ML'),
+# (5,'GARRAFA 600-ML')
+# ]
+    # print(Tamanho.query.all())
+    # tm1 = Tamanho(nome='100-G',cat_id=1)
+    # tm2 = Tamanho(nome='150-G',cat_id=1)
+    # tm3 = Tamanho(nome='200-G',cat_id=1)
+    # db.session.add(tm1)
+    # db.session.add(tm2)
+    # db.session.add(tm3)
+    # db.session.commit()
+
     return render_template("comandas.html", user=current_user, data=data)
 
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
@@ -326,4 +366,3 @@ def deletarProduto(id):
         db.session.commit()
     return redirect(url_for('views.produtos'))
 
-    
