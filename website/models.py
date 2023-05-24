@@ -37,7 +37,8 @@ class Categoria(db.Model):
     categoria = db.relationship('Tamanho',backref='tamanhos')
 
     def __repr__(self):
-        return f'<{self.id}, {self.nome}, {self.categoria}>'
+        return f'<{self.id}, {self.nome}>'
+        # {self.categoria}
 
 class Tamanho(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -45,4 +46,4 @@ class Tamanho(db.Model):
     cat_id = db.Column(db.Integer, db.ForeignKey('categoria.id'))
 
     def __repr__(self):
-        return f'<{self.id}, {self.nome}, {self.categoria.nome}>'
+        return f'<{self.id}, {self.nome}, {self.tamanhos.nome}>'
