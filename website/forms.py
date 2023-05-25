@@ -72,6 +72,10 @@ class CadastroCliente(FlaskForm):
 # ***********************************************************************************************
 # CADASTRO PRODUTOS
 # ***********************************************************************************************
+class NonValidatingSelectField(QuerySelectField):
+    def pre_validate(self, form):
+        pass 
+        
 class CadastroProduto(FlaskForm):
 	categoria = QuerySelectField(get_label='nome')
 	tamanho = QuerySelectField(get_label='nome')

@@ -284,19 +284,6 @@ def atualizarClientes(id):
 @login_required
 def produtos():
     produtos = Produto.query.all()
-    # print(Produto.query.all())
-    # criador = User.query.filter_by(id=current_user.id).first()
-    # myData = db.session.query(Produto)\
-    #     .join(User, User.id == Produto.user_id)\
-    #         .with_entities(
-    #             User.first_name,
-    #             Produto.id,
-    #             Produto.descricao,
-    #             Produto.categoria,
-    #             Produto.tamanho,
-    #             Produto.valor,
-    #             Produto.data_criacao
-    #             ).all()
 
     return render_template("produtos_listar.html", 
         user=current_user,
@@ -305,23 +292,31 @@ def produtos():
 # ***********************************************************************************************
 #  CADASTRO PRODUTOS
 # ***********************************************************************************************
-@views.route('/produtos_cadastrar', methods=['GET','POST'])
+@views.route('/produtos_cadastrar', methods=['POST','GET'])
 @login_required
 def cadastroProdutos():
     form = CadastroProduto()
     form.categoria.query = Categoria.query    
-    form.tamanho.query = Tamanho.query.filter_by(cat_id=1).all()
+    form.tamanho.query = Tamanho.query.limit(3).all()
+    # form.tamanho.query = Tamanho.query.filter_by(cat_id=1).all()
+    catTamJoin = db.session.query(Categoria)\
+                 .join(Tamanho)\
+                 .with_entities(
+                    Categoria.id,
+                    Tamanho.id).all()
+    print(catTamJoin)   
 
     if form.validate_on_submit():
         if request.method == 'POST':
-            categoria = request.form.get('categoria')
+            ct = request.form.get('categoria')
+            categoria = (Categoria.query.filter_by(id=ct).first().nome)
             tamanho = request.form.get('tamanho')
             descricao = request.form.get('descricao').upper()   
             valor = request.form.get('valor')
             criador = current_user.id
-            novo_produto = Produto(categoria=categoria,tamanho=tamanho,descricao=descricao,valor=valor,user_id=criador)
-            db.session.add(novo_produto)
-            db.session.commit()
+            # novo_produto = Produto(categoria=categoria,tamanho=tamanho,descricao=descricao,valor=valor,user_id=criador)
+            # db.session.add(novo_produto)
+            # db.session.commit()
             return redirect(url_for('views.produtos'))
         else:
             return render_template('produtos_cadastrar.html',
@@ -339,12 +334,10 @@ def categoria(id):
     tam = Tamanho.query.filter_by(cat_id=id).all()
     newArray = []
     for row in tam:
-        print(row.cat_id)
         obj = {}
-        obj['valor'] = row.cat_id
+        obj['valor'] = row.id
         obj['nome'] = row.nome
         newArray.append(obj)
-    print(newArray)
     return newArray
 # ***********************************************************************************************
 # DELETAR PRODUTO
