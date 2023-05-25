@@ -71,18 +71,6 @@ def comandas():
     # db.session.commit()
 
 
-    
-    # tipo = 1
-    # tipoJoin = db.session.query(Categoria)\
-    # .join(Tamanho, Categoria.id == Tamanho.cat_id).filter_by(cat_id=tipo)\
-    #     .with_entities(
-    #         Categoria.id,
-    #         Categoria.nome,
-    #         Tamanho.id,
-    #         Tamanho.nome,
-    #         ).all()
-
-
     # existis_fone = Cliente.query.filter_by(fone=fone).first()
     return render_template("comandas.html", user=current_user, data=data)
 
@@ -296,60 +284,33 @@ def atualizarClientes(id):
 @login_required
 def produtos():
     produtos = Produto.query.all()
-    criador = User.query.filter_by(id=current_user.id).first()
-
-    # one = Produto(categoria='ESPETOS',descricao='ESPETO ALCATRA',tamanho='100-G',valor=18,criador=criador.id)
-    # db.session.add(one)
-    # db.session.commit()
-
-    myData = db.session.query(Produto)\
-        .join(User, User.id == Produto.criador)\
-            .with_entities(
-                User.first_name,
-                Produto.id,
-                Produto.descricao,
-                Produto.categoria,
-                Produto.tamanho,
-                Produto.valor,
-                Produto.data_criacao
-                ).all()
+    # print(Produto.query.all())
+    # criador = User.query.filter_by(id=current_user.id).first()
+    # myData = db.session.query(Produto)\
+    #     .join(User, User.id == Produto.user_id)\
+    #         .with_entities(
+    #             User.first_name,
+    #             Produto.id,
+    #             Produto.descricao,
+    #             Produto.categoria,
+    #             Produto.tamanho,
+    #             Produto.valor,
+    #             Produto.data_criacao
+    #             ).all()
 
     return render_template("produtos_listar.html", 
         user=current_user,
         data=data, 
-        produtos=myData)
+        produtos=produtos)
 # ***********************************************************************************************
 #  CADASTRO PRODUTOS
 # ***********************************************************************************************
-tamanhos = {
-1:[
-(1,'100-G'),
-(2,'150-G'),
-(3,'200-G')
-],
-2:[
-(1,'LATA 200-ML'),
-(2,'LATA 310-ML'),
-(3,'LATA 350-ML'),
-(4,'PET 600-ML'),
-(5,'PET 1,0-LTS'),
-(6,'PET 1,5-LTS'),
-(7,'PET 2,0-LTS')
-],
-3:[
-(1,'LATA 269-ML'),
-(2,'LATA 275-ML'),
-(3,'LATA 350-ML'),
-(4,'LATAO 473-ML'),
-(5,'GARRAFA 600-ML')
-]}
-
 @views.route('/produtos_cadastrar', methods=['GET','POST'])
 @login_required
 def cadastroProdutos():
     form = CadastroProduto()
     form.categoria.query = Categoria.query    
-    form.tamanho.query = Tamanho.query
+    form.tamanho.query = Tamanho.query.filter_by(cat_id=1).all()
 
     if form.validate_on_submit():
         if request.method == 'POST':
@@ -358,7 +319,7 @@ def cadastroProdutos():
             descricao = request.form.get('descricao').upper()   
             valor = request.form.get('valor')
             criador = current_user.id
-            novo_produto = Produto(categoria=categoria,tamanho=tamanho,descricao=descricao,valor=valor,criador=criador)
+            novo_produto = Produto(categoria=categoria,tamanho=tamanho,descricao=descricao,valor=valor,user_id=criador)
             db.session.add(novo_produto)
             db.session.commit()
             return redirect(url_for('views.produtos'))
@@ -375,11 +336,13 @@ def cadastroProdutos():
 
 @views.route('/categoria/<int:id>')
 def categoria(id):
+    tam = Tamanho.query.filter_by(cat_id=id).all()
     newArray = []
-    for i in tamanhos[id]:
+    for row in tam:
+        print(row.cat_id)
         obj = {}
-        obj['valor'] = i[0] 
-        obj['nome'] = i[1]
+        obj['valor'] = row.cat_id
+        obj['nome'] = row.nome
         newArray.append(obj)
     print(newArray)
     return newArray

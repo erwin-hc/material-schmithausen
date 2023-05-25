@@ -3,15 +3,6 @@ import datetime
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 # ---------------------------------------------------------------
-# MODELO USUARIOS
-# ---------------------------------------------------------------
-class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(150), unique=True)
-    password = db.Column(db.String(150))
-    first_name = db.Column(db.String(150))
-    produtos = db.relationship('Produto',backref='produto')
-# ---------------------------------------------------------------
 # MODELO CLIENTES
 # ---------------------------------------------------------------    
 class Cliente(db.Model):
@@ -19,6 +10,15 @@ class Cliente(db.Model):
     fone = db.Column(db.String(150))
     data_criacao = db.Column(db.DateTime(timezone=True), default=func.now())
     nome = db.Column(db.String(150))    
+# ---------------------------------------------------------------
+# MODELO USUARIOS
+# ---------------------------------------------------------------
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(150), unique=True)
+    password = db.Column(db.String(150))
+    first_name = db.Column(db.String(150))
+    user = db.relationship('Produto',backref='produto')
 # ---------------------------------------------------------------
 # MODELO PRODUTOS
 # ---------------------------------------------------------------    
@@ -29,21 +29,18 @@ class Produto(db.Model):
     tamanho = db.Column(db.String(150))
     valor = db.Column(db.Float)
     data_criacao = db.Column(db.DateTime(timezone=True), default=func.now())
-    criador = db.Column(db.Integer, db.ForeignKey('user.id'))
-
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+# ---------------------------------------------------------------
+# MODELO CATEGORIAS
+# ---------------------------------------------------------------
 class Categoria(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150))
     categoria = db.relationship('Tamanho',backref='tamanhos')
-
-    def __repr__(self):
-        return f'<{self.id}, {self.nome}>'
-        # {self.categoria}
-
+# ---------------------------------------------------------------
+# MODELO TIPOS/TAMANHOS
+# ---------------------------------------------------------------
 class Tamanho(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150))
     cat_id = db.Column(db.Integer, db.ForeignKey('categoria.id'))
-
-    def __repr__(self):
-        return f'<{self.id}, {self.nome}, {self.tamanhos.nome}>'
