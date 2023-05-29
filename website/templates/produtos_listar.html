@@ -2,6 +2,10 @@
 {% block title %} Listar produtos {% endblock %} 
 {% block content %}
 
+
+
+
+
 <div class="container-fluid" style="min-height:100dvh;padding-top:100px"> 
 <div class="table-responsive w-100 card bg-dark larg-max m-auto" style="padding-bottom: 40px">
 
@@ -74,8 +78,8 @@
                         </td>
                         <td class="text-nowrap" scope="row"> {{ i.id }} </td>
                         <td class="text-nowrap" scope="row"> {{ i.descricao }} </td>
-                        <td class="text-nowrap" scope="row"> {{ i.categoria }} </td>
-                        <td class="text-nowrap" scope="row"> {{ i.tamanho }} </td>
+                        <td class="text-nowrap" scope="row"> {{ categorias[i.categoria | int -1].nome }}</td>
+                        <td class="text-nowrap" scope="row"> {{ tamanhos[i.tamanho | int -1 ].nome }} </td>
                         <td class="text-nowrap" scope="row"> {{ i.valor }} </td>
                         <td class="text-nowrap" scope="row"> {{ i.produto.first_name.split()[0] }} </td>
                         <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>

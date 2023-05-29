@@ -78,7 +78,6 @@ class NonValidatingSelectField(QuerySelectField):
         
 class CadastroProduto(FlaskForm):
 	categoria = QuerySelectField(get_label='nome')
-	tamanho = QuerySelectField(get_label='nome')
 
 	descricao = StringField('descricao',	
 	validators = [

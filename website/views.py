@@ -284,11 +284,15 @@ def atualizarClientes(id):
 @login_required
 def produtos():
     produtos = Produto.query.all()
+    tamanhos = Tamanho.query.all()
+    categorias = Categoria.query.all()
 
     return render_template("produtos_listar.html", 
         user=current_user,
         data=data, 
-        produtos=produtos)
+        produtos=produtos,
+        tamanhos=tamanhos,
+        categorias=categorias)
 # ***********************************************************************************************
 #  CADASTRO PRODUTOS
 # ***********************************************************************************************
@@ -297,37 +301,38 @@ def produtos():
 def cadastroProdutos():
     form = CadastroProduto()
     form.categoria.query = Categoria.query    
-    form.tamanho.query = Tamanho.query.limit(3).all()
-    # form.tamanho.query = Tamanho.query.filter_by(cat_id=1).all()
+    espetos = Tamanho.query.limit(3).all()
+    objTamanhos = Tamanho.query.all()
+
     catTamJoin = db.session.query(Categoria)\
                  .join(Tamanho)\
                  .with_entities(
                     Categoria.id,
                     Tamanho.id).all()
-    print(catTamJoin)   
 
     if form.validate_on_submit():
         if request.method == 'POST':
-            ct = request.form.get('categoria')
-            categoria = (Categoria.query.filter_by(id=ct).first().nome)
+            categoria = request.form.get('categoria')
             tamanho = request.form.get('tamanho')
             descricao = request.form.get('descricao').upper()   
             valor = request.form.get('valor')
             criador = current_user.id
-            # novo_produto = Produto(categoria=categoria,tamanho=tamanho,descricao=descricao,valor=valor,user_id=criador)
-            # db.session.add(novo_produto)
-            # db.session.commit()
+            novo_produto = Produto(categoria=categoria,tamanho=tamanho,descricao=descricao,valor=valor,user_id=criador)
+            db.session.add(novo_produto)
+            db.session.commit()
             return redirect(url_for('views.produtos'))
         else:
             return render_template('produtos_cadastrar.html',
                 user=current_user,
                 data=data, 
-                form=form)
+                form=form,
+                espetos=espetos)
             
     return render_template('produtos_cadastrar.html',
         user=current_user,
         data=data, 
-        form=form)
+        form=form,
+        espetos=espetos)
 
 @views.route('/categoria/<int:id>')
 def categoria(id):
