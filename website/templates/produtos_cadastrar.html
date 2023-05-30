@@ -125,7 +125,7 @@ novalidate >
 <!-- *********************************************************** -->
 <div class="row">
                 <div class="text-center">
-                      <input style="width:125px" type="submit" value="CADASTRAR" class="btn btn-outline-light m-1" />
+                      <input id="btnCadastrar" style="width:125px" type="submit" value="CADASTRAR" class="btn btn-outline-light m-1" />
                       <a     style="width:125px" href="/produtos" class="btn btn-outline-primary m-1">CANCELAR</a>
                 </div>
 </div>
@@ -138,30 +138,27 @@ novalidate >
   let categorias_selec = document.getElementById('categorias')
   let tamanhos_selec = document.getElementById('tamanhos')
   let inputValor = document.getElementById('valor')
+  let btnCadastrar = document.getElementById('btnCadastrar')
 
- 
   categorias_selec.selectedIndex = 0;
-  tamanhos_selec.selectedIndex = 0;
+  tamanhos_selec.selectedIndex = 0; 
+
+  categorias_selec.onchange = optsTamanho;
   
-
-  function formatarMoeda() {
-        var elemento = document.getElementById('valor');
-        var valor = elemento.value;
-
-        valor = valor + '';
-        valor = parseInt(valor.replace(/[\D]+/g, ''));
-        valor = valor + '';
-        valor = valor.replace(/([0-9]{2})$/g, ",$1");
-
-        if (valor.length > 6) {
-            valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+  function optsTamanho() {
+    optsHTML = ""
+    fetch('categoria/' + categorias_selec.value)
+    .then(function (response) {
+      return response.json()
+    }).then( function(data){
+        for (i in data) {
+            nome = data[i]['nome']
+            valor = data[i]['valor']
+            optsHTML += '<option value="' + valor + '">' + nome + '</option>' 
         }
-
-        elemento.value = valor;
-        if(valor == 'NaN') elemento.value = '';
-    }
-
-
+        tamanhos_selec.innerHTML = optsHTML;
+    })
+  }  
 
 </script>
 

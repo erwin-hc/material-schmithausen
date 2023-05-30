@@ -304,12 +304,6 @@ def cadastroProdutos():
     espetos = Tamanho.query.limit(3).all()
     objTamanhos = Tamanho.query.all()
 
-    catTamJoin = db.session.query(Categoria)\
-                 .join(Tamanho)\
-                 .with_entities(
-                    Categoria.id,
-                    Tamanho.id).all()
-
     if form.validate_on_submit():
         if request.method == 'POST':
             categoria = request.form.get('categoria')
