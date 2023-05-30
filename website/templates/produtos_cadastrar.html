@@ -50,7 +50,7 @@ novalidate >
               <!-- *********************************************************** -->
               <!-- INPUT TIPO/TAMANHO  -->
               <!-- *********************************************************** -->
-
+<!-- 
               <div class="form-text">
               Tipo/Tamanho
               </div>
@@ -60,13 +60,33 @@ novalidate >
               style='text-transform:uppercase'
               id="tamanhos"
               name="tamanho">
+              
+              <option value="0" disabled selected>-- SELECIONE --</option>
               {% for t in espetos %}
                 <option value="{{ t.id }}">{{ t.nome }}</option> 
               {% endfor %}
               </select>
+              </div> -->
 
-
-              </div>
+                <div class="form-text">
+                Tipo/Tamanho
+                </div>
+                <div class="pb-5">  
+                {{ form.tamanho(
+                class='myInputs form-control-sm',
+                style='text-transform:uppercase', 
+                id='tamanhos',
+                autofocus='true')
+                }}
+  
+                {% if form.tamanho.errors %}
+                {% for e in form.tamanho.errors %}
+                <div class="form-helper ms-3 text-danger">
+                {{ e }}
+                </div> 
+                {% endfor %}
+                {% endif %}
+                </div>
               
     </div>
 </div>
@@ -139,18 +159,20 @@ novalidate >
   let tamanhos_selec = document.getElementById('tamanhos')
   let inputValor = document.getElementById('valor')
   let btnCadastrar = document.getElementById('btnCadastrar')
+  let ErroTamanho = document.getElementById('ErroTamanho')
 
   categorias_selec.selectedIndex = 0;
   tamanhos_selec.selectedIndex = 0; 
 
   categorias_selec.onchange = optsTamanho;
-  
+
+ 
   function optsTamanho() {
     optsHTML = ""
     fetch('categoria/' + categorias_selec.value)
     .then(function (response) {
       return response.json()
-    }).then( function(data){
+    }).then( function(data){        
         for (i in data) {
             nome = data[i]['nome']
             valor = data[i]['valor']

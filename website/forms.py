@@ -77,7 +77,21 @@ class NonValidatingSelectField(QuerySelectField):
         pass 
         
 class CadastroProduto(FlaskForm):
-	categoria = QuerySelectField(get_label='nome')
+	categoria = QuerySelectField(
+	get_label='nome',
+	allow_blank=True,
+	blank_text='-- SELECIONE --',
+	validators = [
+	DataRequired(message=("Obrigatório!"))
+	])
+
+	tamanho = QuerySelectField(
+	get_label='nome',
+	allow_blank=True,
+	blank_text='-- SELECIONE --',
+	validators = [
+	DataRequired(message=("Obrigatório!"))
+	])	
 
 	descricao = StringField('descricao',	
 	validators = [
@@ -86,7 +100,8 @@ class CadastroProduto(FlaskForm):
 	])
 
 	valor = FloatField(
-		'valor',
+	'valor',
 	validators = [
 	DataRequired(message=("Obrigatório!"))
 	])
+

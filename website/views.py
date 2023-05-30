@@ -300,7 +300,14 @@ def produtos():
 @login_required
 def cadastroProdutos():
     form = CadastroProduto()
-    form.categoria.query = Categoria.query    
+    form.categoria.query = Categoria.query 
+    form.tamanho.query = db.session.query(Tamanho).join(Categoria).filter(Categoria.id == 1).all()
+    
+
+    # t = (Tamanho.query.all())
+    # for i in t:
+    #     print(i.tamanhos.id)
+
     espetos = Tamanho.query.limit(3).all()
     objTamanhos = Tamanho.query.all()
 
@@ -331,7 +338,7 @@ def cadastroProdutos():
 @views.route('/categoria/<int:id>')
 def categoria(id):
     tam = Tamanho.query.filter_by(cat_id=id).all()
-    newArray = []
+    newArray = [{'valor':0, 'nome':'-- SELECIONE --'}]
     for row in tam:
         obj = {}
         obj['valor'] = row.id
