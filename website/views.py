@@ -301,7 +301,7 @@ def produtos():
 def cadastroProdutos():
     form = CadastroProduto()
     form.categoria.query = Categoria.query 
-    form.tamanho.query = db.session.query(Tamanho).join(Categoria).filter(Categoria.id == 1).all()
+    form.tamanho.query = Tamanho.query
 
     espetos =  db.session.query(Tamanho).join(Categoria).filter(Categoria.id == 1).all()
     objTamanhos = Tamanho.query.all()
@@ -309,8 +309,8 @@ def cadastroProdutos():
     catArray = []
     for row in objTamanhos:
         obj = {}
-        obj['id'] = row.id
-        obj['nome'] = row.nome
+        obj['tam_id'] = row.id
+        obj['tam_nome'] = row.nome
         obj['cat_id'] = row.tamanhos.id
         obj['cat_nome'] = row.tamanhos.nome
         catArray.append(obj)
