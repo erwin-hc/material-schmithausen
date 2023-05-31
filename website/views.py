@@ -302,14 +302,18 @@ def cadastroProdutos():
     form = CadastroProduto()
     form.categoria.query = Categoria.query 
     form.tamanho.query = db.session.query(Tamanho).join(Categoria).filter(Categoria.id == 1).all()
-    
 
-    # t = (Tamanho.query.all())
-    # for i in t:
-    #     print(i.tamanhos.id)
-
-    espetos = Tamanho.query.limit(3).all()
+    espetos =  db.session.query(Tamanho).join(Categoria).filter(Categoria.id == 1).all()
     objTamanhos = Tamanho.query.all()
+
+    catArray = []
+    for row in objTamanhos:
+        obj = {}
+        obj['id'] = row.id
+        obj['nome'] = row.nome
+        obj['cat_id'] = row.tamanhos.id
+        obj['cat_nome'] = row.tamanhos.nome
+        catArray.append(obj)
 
     if form.validate_on_submit():
         if request.method == 'POST':
@@ -327,13 +331,15 @@ def cadastroProdutos():
                 user=current_user,
                 data=data, 
                 form=form,
-                espetos=espetos)
+                espetos=espetos,
+                objTamanhos=catArray)
             
     return render_template('produtos_cadastrar.html',
         user=current_user,
         data=data, 
         form=form,
-        espetos=espetos)
+        espetos=espetos,
+        objTamanhos=catArray)
 
 @views.route('/categoria/<int:id>')
 def categoria(id):

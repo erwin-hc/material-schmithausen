@@ -160,9 +160,13 @@ novalidate >
   let inputValor = document.getElementById('valor')
   let btnCadastrar = document.getElementById('btnCadastrar')
   let ErroTamanho = document.getElementById('ErroTamanho')
-
-  categorias_selec.selectedIndex = 0;
-  tamanhos_selec.selectedIndex = 0; 
+  let categList = '{{ objTamanhos|tojson|safe }}'
+  
+  // categorias_selec.selectedIndex = 0;
+  // tamanhos_selec.selectedIndex = 0; 
+  btnCadastrar.onclick = () => {
+    console.log(categList)
+  }
 
   categorias_selec.onchange = optsTamanho;
 
