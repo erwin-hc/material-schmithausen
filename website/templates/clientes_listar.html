@@ -1,114 +1,102 @@
-{% extends "base.html" %} 
-{% block title %} Lista de clientes {% endblock %} 
+{% extends "base.html" %}
+{% block title %} Lista de clientes {% endblock %}
 {% block content %}
 
 
-<div class="container-fluid"
-style="min-height:100dvh;padding-top:100px"> 
+<div class="container-fluid" style="min-height:100dvh;padding-top:100px">
 
-<div class="table-responsive w-100 card bg-dark larg-max m-auto"
-style="padding-bottom: 40px">
+    <div class="table-responsive w-100 card bg-dark larg-max m-auto" style="padding-bottom: 40px">
 
-<table  class="table table-borderless table-sm bg-dark text-secondary">
-<thead>
-<tr>
-<p class="h4 p-3">Lista de clientes</p>
-</tr>
-<tr>
-<tr>
+        <table class="table table-borderless table-sm bg-dark text-secondary">
+            <thead>
+                <tr>
+                    <p class="h4 p-3 text-secondary">Lista de clientes</p>
+                </tr>
+                <tr>
+                <tr>
 
-    <div class="p-3 pt-0">
-            <div class="form-outline"
-            style="margin-bottom: 0!important;padding-bottom: 0!important;">
-            <i class="fa-solid fa-magnifying-glass trailing"></i>
-            <input type="text" 
-            style="text-transform:uppercase" 
-            id="inputPesquisarCliente"
-            class="myInputs form-control-sm"
-            placeholder="Pesquisar..." 
-            onkeyup='pesquisarTabelaClientes()'
-            />
-            </div>
-    </div>        
+                    <div class="p-3 pt-0">
+                        <div class="form-outline" style="margin-bottom: 0!important;padding-bottom: 0!important;">
+                            <i class="fa-solid fa-magnifying-glass trailing"></i>
+                            <input type="text" style="text-transform:uppercase" id="inputPesquisarCliente"
+                                class="myInputs form-control-sm" placeholder="Pesquisar..."
+                                onkeyup='pesquisarTabelaClientes()' />
+                        </div>
+                    </div>
 
 
-</tr>
-<thead>
-<tr>
-<th class="text-nowrap" scope="col">
-<a href="/clientes_cadastrar" class="p-2 btn btn-sm btn-outline-light">
-<i class="fa-solid fa-plus"></i>
-</a>
-</th>
-<th class="text-nowrap" scope="col">#</th>
-<th class="text-nowrap" scope="col" style="min-width: 280px;">Cliente</th>
-<th class="text-nowrap" scope="col">Celular</th>
-<th class="text-nowrap" scope="col">Cliente Desde</th>
-<th class="text-nowrap" scope="col"></th>
-</tr>
-</thead>
-<tbody id="tb-clientes">
-{% for i in clientes %}
-<tr>
-<td class="text-center" style="width: 50px"> 
-<a 
-role="button"
-class="text-secondary"
-href="/clientes_atualizar/{{ i.id }}">
-<i class="fa-regular fa-pen-to-square"></i>
-</a>					
-</td>
-<td class="text-nowrap" scope="row"> {{ i.id }} </td>
-<td class="text-nowrap" scope="row"> {{ i.nome }} </td>
-<td class="text-nowrap" scope="row"> {{ i.fone }} </td>
-<td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
+                </tr>
+                <thead>
+                    <tr>
+                        <th class="text-nowrap" scope="col">
+                            <a href="/clientes_cadastrar" class="p-2 btn btn-sm btn-outline-light">
+                                <i class="fa-solid fa-plus"></i>
+                            </a>
+                        </th>
+                        <th class="text-nowrap" scope="col">#</th>
+                        <th class="text-nowrap" scope="col" style="min-width: 280px;">Cliente</th>
+                        <th class="text-nowrap" scope="col">Celular</th>
+                        <th class="text-nowrap" scope="col">Cliente Desde</th>
+                        <th class="text-nowrap" scope="col"></th>
+                    </tr>
+                </thead>
+            <tbody id="tb-clientes">
+                {% for i in clientes %}
+                <tr>
+                    <td class="text-center" style="width: 50px">
+                        <a role="button" class="text-secondary" href="/clientes_atualizar/{{ i.id }}">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                    <td class="text-nowrap" scope="row"> {{ i.id }} </td>
+                    <td class="text-nowrap" scope="row"> {{ i.nome }} </td>
+                    <td class="text-nowrap" scope="row"> {{ i.fone }} </td>
+                    <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
 
-<td>          
-</td>
+                    <td>
+                    </td>
 
-</tr>     
-{% endfor %}
-</tbody>
+                </tr>
+                {% endfor %}
+            </tbody>
 
-</table>
-</div>
+        </table>
+    </div>
 </div>
 
 <script>
-function pesquisarTabelaClientes() {
-    var input, filter, found, table, tr, td, i, j;
-    input = document.getElementById("inputPesquisarCliente");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("tb-clientes");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td");
-        for (j = 0; j < td.length; j++) {
-            if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
-                found = true;
+    function pesquisarTabelaClientes() {
+        var input, filter, found, table, tr, td, i, j;
+        input = document.getElementById("inputPesquisarCliente");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tb-clientes");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td");
+            for (j = 0; j < td.length; j++) {
+                if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    found = true;
+                }
+            }
+            if (found) {
+                tr[i].style.display = "";
+                found = false;
+            } else {
+                tr[i].style.display = "none";
             }
         }
-        if (found) {
-            tr[i].style.display = "";
-            found = false;
-        } else {
-            tr[i].style.display = "none";
-        }
     }
-}
 </script>
 
 {% endblock %}
 
 {% block titlefooter %}
 <span style="color:#9FA6B2">
-<i class="fa-regular fa-user fa-sm"></i>
-&nbsp;{{ user.first_name.split()[0] | upper }}
-&nbsp;&nbsp;&nbsp;
-<span style="color:#9FA6B2">
-<i class="fa-regular fa-calendar fa-sm"> </i>
-&nbsp;{{ data.strftime('%d/%m/%Y') }}
-</span>
-{% endblock %}
-
-
+    <i class="fa-regular fa-user fa-sm"></i>
+    &nbsp;{{ user.first_name.split()[0] | upper }}
+    &nbsp;&nbsp;&nbsp;
+    <span style="color:#9FA6B2">
+        <i class="fa-regular fa-calendar fa-sm"> </i>
+        &nbsp;{{ data.strftime('%d/%m/%Y') }}
+    </span>
+    {% endblock %}

@@ -1,20 +1,198 @@
-{% extends "base.html" %} 
-{% block title %} COMANDAS {% endblock %} 
-{% block content %}
+{% extends "base.html" %}
+{% block title %} Atualizar Produtos {% endblock %} {% block
+content %}
 
-<h1 class="pt-5 mt-5"> PRODUTOS ATUALIZAR </h1>
+{% set id = p.id %}
+{% set descricao = p.descricao %}
+{% set categoria = p.categoria %}
+{% set tamanho = p.tamanho %}
+{% set valor = p.valor %}
+
+<div class="pt-5 container-fluid background-container-form d-flex align-items-center justify-content-center"
+  style="min-height: 100dvh">
+  <!-- *********************************************************** -->
+  <!-- FORM CADASTRO PRODUTOS -->
+  <!-- *********************************************************** -->
+  <form id="atualizarProdutos" method="POST" class="form-outline form-white card bg-dark mt-5 mb-5 p-3 larg-max-form"
+    action="" novalidate>
+
+    {{ form.hidden_tag() }} {{ form.csrf_token }}
+
+    <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
+      <i class="fa-solid fa-user-plus"></i>
+      ATUALIZAR PRODUTOS
+    </h2>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <!-- *********************************************************** -->
+        <!-- INPUT CATEGORIA  -->
+        <!-- *********************************************************** -->
+        <div class="form-text">Categoria</div>
+        <div class="pb-5">
+          {{ form.categoria( class='myInputs form-control-sm',
+          style='text-transform:uppercase', id='categorias', autofocus='true')
+          }}
+          <!-- ERROS -->
+          {% if form.categoria.errors %} {% for e in form.categoria.errors %}
+          <div class="form-helper ms-3 text-danger">{{ e }}</div>
+          {% endfor %} {% endif %}
+        </div>
+      </div>
+      <div class="col">
+        <!-- *********************************************************** -->
+        <!-- INPUT TIPO/TAMANHO  -->
+        <!-- *********************************************************** -->
+        <div class="form-text">Tipo/Tamanho</div>
+        <div class="pb-5">
+          {{ form.tamanho( class='myInputs form-control-sm',
+          style='text-transform:uppercase', id='tamanhos', autofocus='true') }}
+          <!-- ERROS -->
+          {% if form.tamanho.errors %} {% for e in form.tamanho.errors %}
+          <div class="form-helper ms-3 text-danger">{{ e }}</div>
+          {% endfor %} {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+        <!-- *********************************************************** -->
+        <!-- INPUT DESCRICAO -->
+        <!-- *********************************************************** -->
+        <div class="form-text">Descrição</div>
+        <div class="form-outline">
+          <i class="fa-solid fa-square-pen trailing"></i>
+          {{ form.descricao( class='myInputs form-control-sm',
+          style='text-transform:uppercase', value=p.descricao) }}
+          <!-- ERROS -->
+          {% if form.descricao.errors %} {% for e in form.descricao.errors %}
+          <div class="form-helper ms-3 text-danger">{{ e }}</div>
+          {% endfor %} {% endif %}
+        </div>
+      </div>
+      <div class="col">
+        <!-- *********************************************************** -->
+        <!-- INPUT VALOR -->
+        <!-- *********************************************************** -->
+        <div class="form-text">Valor</div>
+        <div class="form-outline">
+          <i class="fa-solid fa-brazilian-real-sign trailing"></i>
+          {{ form.valor( class='myInputs form-control-sm',
+          style='text-transform:uppercase', value=p.valor, id='valor') }}
+          <!-- ERROS -->
+          {% if form.valor.errors %} {% for e in form.valor.errors %}
+          <div class="form-helper ms-3 text-danger">{{ e }}</div>
+          {% endfor %} {% endif %}
+        </div>
+      </div>
+    </div>
+    <!-- *********************************************************** -->
+    <!-- BOTOES -->
+    <!-- *********************************************************** -->
+    <div class="text-center">
+      <input style="width:125px" type="submit" value="ATUALIZAR" class="btn btn-outline-light m-1" />
+      <a style="width:125px" href="/produtos" class="btn btn-outline-primary m-1">CANCELAR</a>
+      <a style="width:125px" class="btn btn-outline-danger m-1" data-mdb-toggle="modal"
+        data-mdb-target="#confirmmodal">EXCLUIR</a>
+    </div>
+  </form>
+</div>
+
+
+<!-- *********************************************************** -->
+<!-- MODAL -->
+<!-- *********************************************************** -->
+<div class="modal top fade" id="confirmmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-mdb-backdrop="true" data-mdb-keyboard="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-confirm">
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-secondary" id="exampleModalLabel">EXCLUIR</h5>
+      </div>
+      <div class="modal-body">
+        <p class="text-white">REALMENTE EXCLUIR?
+          <br> <span class='text-danger'>{{ catTex }} - {{ p.descricao | upper}} - {{ tamTex }} - {{ p.valor }}</span>
+        </p>
+      </div>
+      <div class="modal-footer border-0">
+        <a style="width:125px" type="button" class="btn btn-outline-primary m-1" data-mdb-dismiss="modal">
+          CANCELAR
+        </a>
+        <a style="width:125px" type="button" class="btn btn-outline-danger m-1"
+          href="/produtos_deletar/{{ p.id }}">EXCLUIR</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- *********************************************************** -->
+<!-- MODAL -->
+<!-- *********************************************************** -->
+
+
+<script>
+  let categorias_selec = document.getElementById('categorias')
+  let tamanhos_selec = document.getElementById('tamanhos')
+  let inputValor = document.getElementById('valor')
+  let btnCadastrar = document.getElementById('btnCadastrar')
+  let ErroTamanho = document.getElementById('ErroTamanho')
+  let categList = {{ objTamanhos| tojson | safe }}
+  let catText = '{{ catTex }}'
+  let tamText = '{{ tamTex }}'
+
+
+  window.onload = preencheOptions
+  categorias_selec.onchange = preencheOptions
+  pegaDoBanco()
+
+  function pegaDoBanco() {
+    var listCategoria = categorias_selec.options;
+    for (var i = 0; i < listCategoria.length; i++) {
+      if (listCategoria[i].text == catText) { //Compare
+        listCategoria[i].selected = true; //Select the option.
+      }
+    }
+    var listTamanho = tamanhos_selec.options;
+    for (var i = 0; i < listTamanho.length; i++) {
+      if (listTamanho[i].text == tamText) { //Compare
+        listTamanho[i].selected = true; //Select the option.
+      }
+    }
+  }
+
+
+  function preencheOptions() {
+    getTexSelected = tamanhos_selec.options[tamanhos_selec.selectedIndex].text
+    optsHTML = '<option value="0">-- SELECIONE --</option>'
+    categoriaSelecionada = categorias_selec.selectedIndex
+    const tamanhos = categList.filter(({ cat_id }) => cat_id === categoriaSelecionada);
+    for (let item in tamanhos) {
+      valor = tamanhos[item]['tam_id']
+      nome = tamanhos[item]['tam_nome']
+      optsHTML += '<option value="' + valor + '">' + nome + '</option>'
+    }
+    tamanhos_selec.innerHTML = optsHTML;
+
+    var list = tamanhos_selec.options;
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].text == getTexSelected) { //Compare
+        list[i].selected = true; //Select the option.
+      }
+    }
+  }
+
+</script>
 
 
 
 {% endblock %}
+
 
 {% block titlefooter %}
-<span style="color:#9FA6B2">
-<i class="fa-regular fa-user fa-sm"></i>
-&nbsp;{{ user.first_name.split()[0] | upper }}
-&nbsp;&nbsp;&nbsp;
-<span style="color:#9FA6B2">
-<i class="fa-regular fa-calendar fa-sm"> </i>
-&nbsp;{{ data.strftime('%d/%m/%Y') }}
-</span>
-{% endblock %}
+<span style="color: #9fa6b2">
+  <i class="fa-regular fa-user fa-sm"></i>
+  &nbsp;{{ user.first_name.split()[0] | upper }} &nbsp;&nbsp;&nbsp;
+  <span style="color: #9fa6b2">
+    <i class="fa-regular fa-calendar fa-sm"> </i>
+    &nbsp;{{ data.strftime('%d/%m/%Y') }}
+  </span>
+  {% endblock %}</span>

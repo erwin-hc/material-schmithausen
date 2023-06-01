@@ -1,26 +1,21 @@
-{% extends "base.html" %} {% block title %} Cadastro de Produtos {% endblock %}
+{% extends "base.html" %}
+{% block title %}
+Cadastro de Produtos
+{% endblock %}
+
+
 {% block content %}
 
-<div
-  class="pt-5 container-fluid background-container-form d-flex align-items-center justify-content-center"
-  style="min-height: 100dvh"
->
+<div class="pt-5 container-fluid background-container-form d-flex align-items-center justify-content-center"
+  style="min-height: 100dvh">
   <!-- *********************************************************** -->
-  <!-- FORM ENTRAR -->
+  <!-- FORM CADASTRO PRODUTOS -->
   <!-- *********************************************************** -->
-  <form
-    id="cadastroProdutos"
-    method="POST"
-    class="form-outline form-white card bg-dark mt-5 mb-5 p-3 larg-max-form"
-    action="{{ url_for('views.cadastroProdutos') }}"
-    novalidate
-  >
+  <form id="cadastroProdutos" method="POST" class="form-outline form-white card bg-dark mt-5 mb-5 p-3 larg-max-form"
+    action="{{ url_for('views.cadastroProdutos') }}" novalidate>
     {{ form.hidden_tag() }} {{ form.csrf_token }}
 
-    <h2
-      align="center"
-      class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5"
-    >
+    <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
       <i class="fa-solid fa-user-plus"></i>CADASTRO DE PRODUTOS
     </h2>
 
@@ -42,24 +37,6 @@
         <!-- *********************************************************** -->
         <!-- INPUT TIPO/TAMANHO  -->
         <!-- *********************************************************** -->
-        <!-- 
-              <div class="form-text">
-              Tipo/Tamanho
-              </div>
-              <div class="pb-5">  
-
-              <select class="myInputs form-control-sm"
-              style='text-transform:uppercase'
-              id="tamanhos"
-              name="tamanho">
-              
-              <option value="0" disabled selected>-- SELECIONE --</option>
-              {% for t in espetos %}
-                <option value="{{ t.id }}">{{ t.nome }}</option> 
-              {% endfor %}
-              </select>
-              </div> -->
-
         <div class="form-text">Tipo/Tamanho</div>
         <div class="pb-5">
           {{ form.tamanho( class='myInputs form-control-sm',
@@ -107,23 +84,14 @@
     <!-- *********************************************************** -->
     <div class="row">
       <div class="text-center">
-        <input
-          id="btnCadastrar"
-          style="width: 125px"
-          type="submit"
-          value="CADASTRAR"
-          class="btn btn-outline-light m-1"
-        />
-        <a
-          style="width: 125px"
-          href="/produtos"
-          class="btn btn-outline-primary m-1"
-          >CANCELAR</a
-        >
+        <input id="btnCadastrar" style="width: 125px" type="submit" value="CADASTRAR"
+          class="btn btn-outline-light m-1" />
+        <a style="width: 125px" href="/produtos" class="btn btn-outline-primary m-1">CANCELAR</a>
       </div>
     </div>
   </form>
 </div>
+
 
 <script>
   let categorias_selec = document.getElementById('categorias')
@@ -174,7 +142,11 @@
   // }
 </script>
 
-{% endblock %} {% block titlefooter %}
+
+{% endblock %}
+
+
+{% block titlefooter %}
 <span style="color: #9fa6b2">
   <i class="fa-regular fa-user fa-sm"></i>
   &nbsp;{{ user.first_name.split()[0] | upper }} &nbsp;&nbsp;&nbsp;
@@ -182,5 +154,4 @@
     <i class="fa-regular fa-calendar fa-sm"> </i>
     &nbsp;{{ data.strftime('%d/%m/%Y') }}
   </span>
-  {% endblock %}</span
->
+  {% endblock %}</span>

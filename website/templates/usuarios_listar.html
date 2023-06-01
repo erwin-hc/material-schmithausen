@@ -1,52 +1,45 @@
-{% extends "base.html" %} 
-{% block title %} Lista de usuários {% endblock %} 
+{% extends "base.html" %}
+{% block title %} Lista de usuários {% endblock %}
 {% block content %}
 
-<div class="container-fluid"
-style="min-height:100dvh;padding-top:100px"> 
+<div class="container-fluid" style="min-height:100dvh;padding-top:100px">
 
- <div class="table-responsive w-100 card bg-dark larg-max m-auto"
- style="padding-bottom: 40px">
+  <div class="table-responsive w-100 card bg-dark larg-max m-auto" style="padding-bottom: 40px">
 
-  <table class="table table-borderless table-sm bg-dark text-secondary">
-    <thead>
-    <tr>
-      <p class="h4 p-3">Lista de usuários</p>
-    </tr>
+    <table class="table table-borderless table-sm bg-dark text-secondary">
+      <thead>
+        <tr>
+          <p class="h4 p-3 text-secondary">Lista de usuários</p>
+        </tr>
 
-      <tr>
-        <th class="text-nowrap" scope="col">
-              <a href="/usuarios_cadastrar" class="p-2 btn btn-sm btn-outline-light">
+        <tr>
+          <th class="text-nowrap" scope="col">
+            <a href="/usuarios_cadastrar" class="p-2 btn btn-sm btn-outline-light">
               <i class="fa-solid fa-plus"></i>
-              </a>   
-        </th>
-        <th class="text-nowrap" scope="col">#</th>
-        <th class="text-nowrap" scope="col" style="min-width: 280px;">Usuário</th>
-        <th class="text-nowrap" scope="col">Email</th>
-        <th class="text-nowrap" scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-	{% for us in users %}
-      <tr>
-				<td 
-          scope="row" 
-          class="text-center text-nowrap"
-          style="width: 50px"> 
-  				<a class="text-secondary"
-          role="button"
-          href="/usuarios_atualizar/{{ us.id }}">
-  				<i class="fa-regular fa-pen-to-square ms-2 me-2"></i></a>					
-				</td>
-        
-        <td scope="row" class="text-nowrap">{{ us.id }}</td>
-        <td scope="row" class="text-nowrap">{{ us.first_name | upper }}</td>
-        <td scope="row" class="text-nowrap">{{ us.email }}</td>
-   		
-        <td>
-          
-        </td>
-<!-- 				<td 
+            </a>
+          </th>
+          <th class="text-nowrap" scope="col">#</th>
+          <th class="text-nowrap" scope="col" style="min-width: 280px;">Usuário</th>
+          <th class="text-nowrap" scope="col">Email</th>
+          <th class="text-nowrap" scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for us in users %}
+        <tr>
+          <td scope="row" class="text-center text-nowrap" style="width: 50px">
+            <a class="text-secondary" role="button" href="/usuarios_atualizar/{{ us.id }}">
+              <i class="fa-regular fa-pen-to-square ms-2 me-2"></i></a>
+          </td>
+
+          <td scope="row" class="text-nowrap">{{ us.id }}</td>
+          <td scope="row" class="text-nowrap">{{ us.first_name | upper }}</td>
+          <td scope="row" class="text-nowrap">{{ us.email }}</td>
+
+          <td>
+
+          </td>
+          <!-- 				<td 
           scope="row" 
           class="text-center text-nowrap" 
           style="width: 50px"> 
@@ -57,11 +50,11 @@ style="min-height:100dvh;padding-top:100px">
 					</a>
 				</td> -->
 
-      </tr>     
-	{% endfor %}
-    </tbody>
-  </table>
-</div>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 
@@ -69,12 +62,11 @@ style="min-height:100dvh;padding-top:100px">
 
 {% block titlefooter %}
 <span style="color:#9FA6B2">
-<i class="fa-regular fa-user fa-sm"></i>
-&nbsp;{{ user.first_name.split()[0] | upper }}
-&nbsp;&nbsp;&nbsp;
-<span style="color:#9FA6B2">
-<i class="fa-regular fa-calendar fa-sm"> </i>
-&nbsp;{{ data.strftime('%d/%m/%Y') }}
-</span>
-{% endblock %}
-
+  <i class="fa-regular fa-user fa-sm"></i>
+  &nbsp;{{ user.first_name.split()[0] | upper }}
+  &nbsp;&nbsp;&nbsp;
+  <span style="color:#9FA6B2">
+    <i class="fa-regular fa-calendar fa-sm"> </i>
+    &nbsp;{{ data.strftime('%d/%m/%Y') }}
+  </span>
+  {% endblock %}

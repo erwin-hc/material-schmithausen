@@ -1,84 +1,83 @@
-{% extends "base.html" %} 
-{% block title %} Cadastro de clientes {% endblock %} 
+{% extends "base.html" %}
+{% block title %}
+Cadastro de clientes
+{% endblock %}
 
 {% block content %}
 
 
 <div class="pt-5 container-fluid background-container-form d-flex align-items-center justify-content-center"
-style="min-height: 100dvh;">
+  style="min-height: 100dvh;">
 
-<!-- *********************************************************** -->
-<!-- FORM ENTRAR -->
-<!-- *********************************************************** -->
-<form id='cadatroUsuarios' 
-method="POST"
-class="form-outline form-white card bg-dark mt-5 mb-5 p-3 larg-max-form"
-action="{{ url_for('views.cadastroClientes') }}" 
-novalidate
->
-{{ form.hidden_tag() }}
-{{ form.csrf_token }}
+  <!-- *********************************************************** -->
+  <!-- FORM ENTRAR -->
+  <!-- *********************************************************** -->
+  <form id='cadatroUsuarios' method="POST" class="form-outline form-white card bg-dark mt-5 mb-5 p-3 larg-max-form"
+    action="{{ url_for('views.cadastroClientes') }}" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
 
-<h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
-<i class="fa-solid fa-user-group"></i>
-CADASTRO DE CLIENTES</h2>
-<!-- *********************************************************** -->
-<!-- INPUT NOME -->
-<!-- *********************************************************** -->
-<div class="form-text">
-Nome
-</div>
-<div class="form-outline">	
-<i class="fa-solid fa-user trailing"></i>
-{{ form.nome(class='myInputs form-control-sm', style='text-transform:uppercase', autofocus='true') }}
-<!-- ERROS -->
-{% if form.nome.errors %}
-{% for e in form.nome.errors %}
-<div class="form-helper ms-3 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
-</div>
-<!-- *********************************************************** -->
-<!-- INPUT CELUAR -->
-<!-- *********************************************************** -->
-<div class="form-text">
-Celular
-</div>
-<div class="form-outline">
-<i class="fa-solid fa-phone trailing"></i>
-{{ form.fone(class='myInputs form-control-sm phone-mask', placeholder='(XX) X-XXXX-XXXX') }}
-<!-- ERROS -->
-{% if form.fone.errors %}
-{% for e in form.fone.errors %}
-<div class="form-helper ms-3 mt-1 text-danger">
-{{ e }}
-</div> 
-{% endfor %}
-{% endif %}
-</div>
-                   <!-- MASCARA TELEFONE -->
-                    <script src="{{ url_for('static', filename='js/imask.js') }}"></script>
-                    <script>
-                    // ---------------------------------------------------------------
-                    // MASK FONE
-                    // ---------------------------------------------------------------
-                    var phoneMask = IMask(
-                      document.querySelector('.phone-mask'), {
-                        mask: '(00) 0-0000-0000'
-                      });
-                    </script>
+    <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
+      <i class="fa-solid fa-user-group"></i>
+      CADASTRO DE CLIENTES
+    </h2>
+    <!-- *********************************************************** -->
+    <!-- INPUT NOME -->
+    <!-- *********************************************************** -->
+    <div class="form-text">
+      Nome
+    </div>
+    <div class="form-outline">
+      <i class="fa-solid fa-user trailing"></i>
+      {{ form.nome(class='myInputs form-control-sm', style='text-transform:uppercase', autofocus='true') }}
+      <!-- ERROS -->
+      {% if form.nome.errors %}
+      {% for e in form.nome.errors %}
+      <div class="form-helper ms-3 text-danger">
+        {{ e }}
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <!-- *********************************************************** -->
+    <!-- INPUT CELUAR -->
+    <!-- *********************************************************** -->
+    <div class="form-text">
+      Celular
+    </div>
+    <div class="form-outline">
+      <i class="fa-solid fa-phone trailing"></i>
+      {{ form.fone(class='myInputs form-control-sm phone-mask', placeholder='(XX) X-XXXX-XXXX') }}
+      <!-- ERROS -->
+      {% if form.fone.errors %}
+      {% for e in form.fone.errors %}
+      <div class="form-helper ms-3 mt-1 text-danger">
+        {{ e }}
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <!-- MASCARA TELEFONE -->
+    <script src="{{ url_for('static', filename='js/imask.js') }}"></script>
+    <script>
+      // ---------------------------------------------------------------
+      // MASK FONE
+      // ---------------------------------------------------------------
+      var phoneMask = IMask(
+        document.querySelector('.phone-mask'), {
+        mask: '(00) 0-0000-0000'
+      });
+    </script>
 
-<!-- *********************************************************** -->
-<!-- BOTOES -->
-<!-- *********************************************************** -->
-<div class="text-center">
+    <!-- *********************************************************** -->
+    <!-- BOTOES -->
+    <!-- *********************************************************** -->
+    <div class="text-center">
       <input style="width:125px" type="submit" value="CADASTRAR" class="btn btn-outline-light m-1" />
-      <a     style="width:125px" href="/clientes" class="btn btn-outline-primary m-1">CANCELAR</a>
-</div>
+      <a style="width:125px" href="/clientes" class="btn btn-outline-primary m-1">CANCELAR</a>
+    </div>
 
-</form>
+  </form>
 </div>
 
 
@@ -86,13 +85,11 @@ Celular
 
 {% block titlefooter %}
 <span style="color:#9FA6B2">
-<i class="fa-regular fa-user fa-sm"></i>
-&nbsp;{{ user.first_name.split()[0] | upper }}
-&nbsp;&nbsp;&nbsp;
-<span style="color:#9FA6B2">
-<i class="fa-regular fa-calendar fa-sm"> </i>
-&nbsp;{{ data.strftime('%d/%m/%Y') }}
-</span>
-{% endblock %}
-
-
+  <i class="fa-regular fa-user fa-sm"></i>
+  &nbsp;{{ user.first_name.split()[0] | upper }}
+  &nbsp;&nbsp;&nbsp;
+  <span style="color:#9FA6B2">
+    <i class="fa-regular fa-calendar fa-sm"> </i>
+    &nbsp;{{ data.strftime('%d/%m/%Y') }}
+  </span>
+  {% endblock %}

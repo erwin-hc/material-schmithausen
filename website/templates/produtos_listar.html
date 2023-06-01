@@ -1,94 +1,86 @@
-{% extends "base.html" %} 
-{% block title %} Listar produtos {% endblock %} 
+{% extends "base.html" %}
+{% block title %} Listar produtos {% endblock %}
 {% block content %}
 
+<div class="container-fluid" style="min-height:100dvh;padding-top:100px">
+  <div class="table-responsive w-100 card bg-dark larg-max m-auto" style="padding-bottom: 40px">
 
-
-
-
-<div class="container-fluid" style="min-height:100dvh;padding-top:100px"> 
-<div class="table-responsive w-100 card bg-dark larg-max m-auto" style="padding-bottom: 40px">
-
-        <table  class="table table-borderless table-sm bg-dark text-secondary">
-        <thead>
+    <table class="table table-borderless table-sm bg-dark text-secondary">
+      <thead>
         <tr>
-            <p class="h4 p-3">Lista de produtos</p>
+          <p class="h4 p-3 text-secondary">Lista de produtos</p>
         </tr>
         <tr>
-            <!-- Tabs navs -->
-<div class="form-control-sm">
-<ul class="nav nav-tabs mb-3 bg-dark">
-  <li class="p-1 nav-item bg-dark" >
-    <a class="nav-link active p-2" data-mdb-toggle="tab" role="button"
-      aria-selected="true" style="min-width:175px"><i class="fas fa-chart-pie fa-fw me-2 me-2"></i>TODOS</a>
-  </li>
-  <li class="p-1 nav-item bg-dark" >
-    <a class="nav-link p-2" data-mdb-toggle="tab" role="button"
-      aria-selected="false" style="min-width:175px"><i class="fa-solid fa-utensils me-2"></i>ESPETOS</a>
-  </li>
-  <li class="p-1 nav-item bg-dark">
-    <a class="nav-link bg-dark p-2" data-mdb-toggle="tab" role="button"
-      aria-selected="false" style="min-width:175px"><i class="fa-solid fa-snowflake me-2"></i>REFRIGERANTES</a>
-  </li>
-  <li class="p-1 nav-item bg-dark">
-    <a class="nav-link bg-dark p-2" data-mdb-toggle="tab" role="button"
-      aria-selected="false" style="min-width:175px"><i class="fa-solid fa-beer-mug-empty me-2"></i>CERVEJAS</a>
-  </li>
-</ul>
-</div>
-<!-- Tabs navs -->
+          <!-- Tabs navs -->
+          <div class="form-control-sm">
+            <ul class="nav nav-tabs mb-3 bg-dark">
+              <li class="p-1 nav-item bg-dark">
+                <a class="nav-link active p-2" data-mdb-toggle="tab" role="button" aria-selected="true"
+                  style="min-width:175px"><i class="fas fa-chart-pie fa-fw me-2 me-2"></i>TODOS</a>
+              </li>
+              <li class="p-1 nav-item bg-dark">
+                <a class="nav-link p-2" data-mdb-toggle="tab" role="button" aria-selected="false"
+                  style="min-width:175px"><i class="fa-solid fa-utensils me-2"></i>ESPETOS</a>
+              </li>
+              <li class="p-1 nav-item bg-dark">
+                <a class="nav-link bg-dark p-2" data-mdb-toggle="tab" role="button" aria-selected="false"
+                  style="min-width:175px"><i class="fa-solid fa-snowflake me-2"></i>REFRIGERANTES</a>
+              </li>
+              <li class="p-1 nav-item bg-dark">
+                <a class="nav-link bg-dark p-2" data-mdb-toggle="tab" role="button" aria-selected="false"
+                  style="min-width:175px"><i class="fa-solid fa-beer-mug-empty me-2"></i>CERVEJAS</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Tabs navs -->
         </tr>
         <tr>
-                 <div class="p-3 pt-0">
-                		<div class="form-outline mt-2 ps-2"
-                		style="margin-bottom: 0!important;padding-bottom: 0!important;">
-                		<i class="fa-solid fa-magnifying-glass trailing"></i>
-                		<input type="text" 
-                		style="text-transform:uppercase" 
-                		id="inputPesquisarProdutos"
-                		class="myInputs form-control-sm"
-                		placeholder="Pesquisar..." 
-                		/>
-                		</div>
-                </div>
+          <div class="p-3 pt-0">
+            <div class="form-outline mt-2 ps-2" style="margin-bottom: 0!important;padding-bottom: 0!important;">
+              <i class="fa-solid fa-magnifying-glass trailing"></i>
+              <input type="text" style="text-transform:uppercase" id="inputPesquisarProdutos"
+                class="myInputs form-control-sm" placeholder="Pesquisar..." />
+            </div>
+          </div>
         </tr>
         <tr>
-                    <th class="text-nowrap" scope="col">
-                    <a href="/produtos_cadastrar" class="p-2 btn btn-sm btn-outline-light">
-                    <i class="fa-solid fa-plus"></i>
-                    </a>  
-                    </th>
-                    <th class="text-nowrap" scope="col">#</th>
-                    <th class="text-nowrap" scope="col" style="min-width: 280px;">Descrição</th>
-                    <th class="text-nowrap" scope="col">Categoria</th>
-                    <th class="text-nowrap" scope="col">Tamanho</th>
-                    <th class="text-nowrap" scope="col">Valor</th>
-                    <th class="text-nowrap" scope="col">Usuário</th>
-                    <th class="text-nowrap" scope="col">Inclusão</th>
-                    <th class="text-nowrap" scope="col"></th>
+          <th class="text-nowrap" scope="col">
+            <a href="/produtos_cadastrar" class="p-2 btn btn-sm btn-outline-light">
+              <i class="fa-solid fa-plus"></i>
+            </a>
+          </th>
+          <th class="text-nowrap" scope="col">#</th>
+          <th class="text-nowrap" scope="col" style="min-width: 280px;">Descrição</th>
+          <th class="text-nowrap" scope="col">Categoria</th>
+          <th class="text-nowrap" scope="col">Tamanho</th>
+          <th class="text-nowrap" scope="col">Valor</th>
+          <th class="text-nowrap" scope="col">Usuário</th>
+          <th class="text-nowrap" scope="col">Inclusão</th>
+          <th class="text-nowrap" scope="col"></th>
         </tr>
-        </thead>
-                    <tbody id="tb-produtos">
-                    {% for i in produtos %}
-                    <tr>
-                        <td class="text-center" style="width: 50px"> 
-                            <a role="button" class="text-secondary" href="/produtos_atualizar/{{ i.id }}">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                            </a>					
-                        </td>
-                        <td class="text-nowrap" scope="row"> {{ i.id }} </td>
-                        <td class="text-nowrap" scope="row"> {{ i.descricao }} </td>
-                        <td class="text-nowrap" scope="row"> {{ categorias[i.categoria | int -1].nome }}</td>
-                        <td class="text-nowrap" scope="row"> {{ tamanhos[i.tamanho | int -1 ].nome }} </td>
-                        <td class="text-nowrap" scope="row"> {{ i.valor }} </td>
-                        <td class="text-nowrap" scope="row"> {{ i.produto.first_name.split()[0] }} </td>
-                        <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
-                    </tr>     
-                    {% endfor %}
-                    </tbody>
-        </table>
+      </thead>
+      <tbody id="tb-produtos">
+        {% for i in produtos %}
+        <tr>
+          <td class="text-center" style="width: 50px">
+            <a role="button" class="text-secondary"
+              href="/produtos_atualizar/{{ i.id }}/{{ i.categoria }}/{{ i.tamanho}}">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </a>
+          </td>
+          <td class="text-nowrap" scope="row"> {{ i.id }} </td>
+          <td class="text-nowrap" scope="row"> {{ i.descricao }} </td>
+          <td class="text-nowrap" scope="row"> {{ categorias[i.categoria | int -1].nome }}</td>
+          <td class="text-nowrap" scope="row"> {{ tamanhos[i.tamanho | int -1 ].nome }} </td>
+          <td class="text-nowrap" scope="row"> {{ i.valor }} </td>
+          <td class="text-nowrap" scope="row"> {{ i.produto.first_name.split()[0] }} </td>
+          <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
-</div>
+  </div>
 </div>
 
 
@@ -96,11 +88,11 @@
 
 {% block titlefooter %}
 <span style="color:#9FA6B2">
-<i class="fa-regular fa-user fa-sm"></i>
-&nbsp;{{ user.first_name.split()[0] | upper }}
-&nbsp;&nbsp;&nbsp;
-<span style="color:#9FA6B2">
-<i class="fa-regular fa-calendar fa-sm"> </i>
-&nbsp;{{ data.strftime('%d/%m/%Y') }}
-</span>
-{% endblock %}
+  <i class="fa-regular fa-user fa-sm"></i>
+  &nbsp;{{ user.first_name.split()[0] | upper }}
+  &nbsp;&nbsp;&nbsp;
+  <span style="color:#9FA6B2">
+    <i class="fa-regular fa-calendar fa-sm"> </i>
+    &nbsp;{{ data.strftime('%d/%m/%Y') }}
+  </span>
+  {% endblock %}

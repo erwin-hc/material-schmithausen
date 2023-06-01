@@ -18,70 +18,13 @@ views = Blueprint('views', __name__)
 @views.route('/comandas', methods=['GET', 'POST'])
 @login_required
 def comandas():
-
-# CATEGORIAS
-    # print(Categoria.query.all())
-    # ct1 = Categoria(nome='ESPETOS')
-    # ct2 = Categoria(nome='REFRIGERANTES')
-    # ct3 = Categoria(nome='CERVEJAS')
-    # db.session.add(ct1)
-    # db.session.add(ct2)
-    # db.session.add(ct3)
-    # db.session.commit()
-
-# TAMANHOS ESPETOS
-    # print(Tamanho.query.all())
-    # e1 = Tamanho(nome='100-G',cat_id=1)
-    # e2 = Tamanho(nome='150-G',cat_id=1)
-    # e3 = Tamanho(nome='200-G',cat_id=1)
-    # db.session.add(e1)
-    # db.session.add(e2)
-    # db.session.add(e3)
-    # db.session.commit()
-
-# TAMANHO REFRIGERANTES
-    # print(Tamanho.query.all())
-    # r1 = Tamanho(nome='LATA 200-ML',cat_id=2)
-    # r2 = Tamanho(nome='LATA 310-ML',cat_id=2)
-    # r3 = Tamanho(nome='LATA 350-ML',cat_id=2)
-    # r4 = Tamanho(nome='PET 600-ML',cat_id=2)
-    # r5 = Tamanho(nome='PET 1,0-LTS',cat_id=2)
-    # r6 = Tamanho(nome='PET 1,5-LTS',cat_id=2)
-    # r7 = Tamanho(nome='PET 2,0-LTS',cat_id=2)
-    # db.session.add(r1)
-    # db.session.add(r2)
-    # db.session.add(r3)
-    # db.session.add(r4)
-    # db.session.add(r5)
-    # db.session.add(r6)
-    # db.session.add(r7)
-    # db.session.commit()
-# TAMANHO CERVEJAS
-    # print(Tamanho.query.all())
-    # c1 = Tamanho(nome='LATA 269-ML',cat_id=3)
-    # c2 = Tamanho(nome='LATA 275-ML',cat_id=3)
-    # c3 = Tamanho(nome='LATA 350-ML',cat_id=3)
-    # c4 = Tamanho(nome='LATAO 473-ML',cat_id=3)
-    # c5 = Tamanho(nome='GARRAFA 600-ML',cat_id=3)
-    # db.session.add(c1)
-    # db.session.add(c2)
-    # db.session.add(c3)
-    # db.session.add(c4)
-    # db.session.add(c5)
-    # db.session.commit()
-
-
-    # existis_fone = Cliente.query.filter_by(fone=fone).first()
     return render_template("comandas.html", user=current_user, data=data)
 
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
 # USUARIOS   
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  
-
 # ***********************************************************************************************
-#  LISTAR USUARIOS
+# USUARIOS -- LISTAR
 # ***********************************************************************************************
 @views.route('/usuarios', methods=['GET','POST'])
 @login_required
@@ -92,7 +35,7 @@ def usuarios():
         users.append(r)   
     return render_template("usuarios_listar.html", user=current_user, data=data, users=users)
 # ***********************************************************************************************
-#  CADASTRO USUARIOS
+# USUARIOS -- CADASTRAR
 # ***********************************************************************************************
 @views.route('/usuarios_cadastrar', methods=['GET','POST'])
 @login_required
@@ -117,7 +60,7 @@ def cadastroUsuarios():
             return redirect(url_for('views.usuarios'))
     return render_template("usuarios_cadastrar.html", user=current_user, data=data, form=form)
 # ***********************************************************************************************
-# DELETAR USUARIO
+# USUARIOS -- DELETAR
 # ***********************************************************************************************
 @views.route('/usuarios_deletar/<int:id>', methods=['POST','GET'])
 def deletarUsuario(id):  
@@ -131,7 +74,7 @@ def deletarUsuario(id):
             return redirect(url_for('views.usuarios'))
     return redirect(url_for('views.usuarios'))
 # ***********************************************************************************************
-# ATUALIZAR USUARIOS
+# USUARIOS -- ATUALIZAR
 # ***********************************************************************************************
 @views.route('/usuarios_atualizar/<int:id>', methods=['GET','POST'])
 @login_required
@@ -175,14 +118,11 @@ def atualizarUsuarios(id):
                 u=get_users
                 ) 
     return redirect(url_for('views.usuarios'))
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
 # CLIENTES   
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
-
 # ***********************************************************************************************
-#  LISTAR CLIENTES
+# CLIENTES -- LISTAR
 # ***********************************************************************************************
 @views.route('/clientes', methods=['GET','POST'])
 @login_required
@@ -193,7 +133,7 @@ def clientes():
         clientes.append(r)        
     return render_template("clientes_listar.html", user=current_user, data=data, clientes=clientes)
 # ***********************************************************************************************
-#  CADASTRO CLIENTES
+# CLIENTES -- CADASTRAR
 # ***********************************************************************************************
 @views.route('/clientes_cadastrar', methods=['GET','POST'])
 @login_required
@@ -213,7 +153,7 @@ def cadastroClientes():
                 return redirect(url_for('views.clientes'))
     return render_template("clientes_cadastrar.html", user=current_user, data=data, form=form)
 # ***********************************************************************************************
-# DELETAR CLIENTES
+# CLIENTES -- DELETAR
 # ***********************************************************************************************
 @views.route('/clientes_deletar/<int:id>', methods=['POST', 'GET'])
 @login_required
@@ -228,7 +168,7 @@ def deletarCliente(id):
             return redirect(url_for('views.clientes'))
     return redirect(url_for('views.clientes'))
 # ***********************************************************************************************
-# ATUALIZAR CLIENTES
+# CLIENTES -- ATUALIZAR
 # ***********************************************************************************************
 @views.route('/clientes_atualizar/<int:id>', methods=['GET','POST'])
 @login_required
@@ -271,14 +211,12 @@ def atualizarClientes(id):
             c=get_cli
             )
     return redirect(url_for('views.clientes'))
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+    
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
 # PRODUTOS   
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
-# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  
-
 # ***********************************************************************************************
-#  LISTAR PRODUTOS
+# PRODUTOS -- LISTAR
 # ***********************************************************************************************
 @views.route('/produtos', methods=['GET','POST'])
 @login_required
@@ -286,15 +224,14 @@ def produtos():
     produtos = Produto.query.all()
     tamanhos = Tamanho.query.all()
     categorias = Categoria.query.all()
-
     return render_template("produtos_listar.html", 
         user=current_user,
         data=data, 
         produtos=produtos,
         tamanhos=tamanhos,
-        categorias=categorias)
+        categorias=categorias)        
 # ***********************************************************************************************
-#  CADASTRO PRODUTOS
+# PRODUTOS -- CADASTRAR
 # ***********************************************************************************************
 @views.route('/produtos_cadastrar', methods=['POST','GET'])
 @login_required
@@ -302,10 +239,8 @@ def cadastroProdutos():
     form = CadastroProduto()
     form.categoria.query = Categoria.query 
     form.tamanho.query = Tamanho.query
-
     espetos =  db.session.query(Tamanho).join(Categoria).filter(Categoria.id == 1).all()
     objTamanhos = Tamanho.query.all()
-
     catArray = []
     for row in objTamanhos:
         obj = {}
@@ -314,7 +249,6 @@ def cadastroProdutos():
         obj['cat_id'] = row.tamanhos.id
         obj['cat_nome'] = row.tamanhos.nome
         catArray.append(obj)
-
     if form.validate_on_submit():
         if request.method == 'POST':
             categoria = request.form.get('categoria')
@@ -332,27 +266,25 @@ def cadastroProdutos():
                 data=data, 
                 form=form,
                 espetos=espetos,
-                objTamanhos=catArray)
-            
+                objTamanhos=catArray)            
     return render_template('produtos_cadastrar.html',
         user=current_user,
         data=data, 
         form=form,
         espetos=espetos,
         objTamanhos=catArray)
-
-@views.route('/categoria/<int:id>')
-def categoria(id):
-    tam = Tamanho.query.filter_by(cat_id=id).all()
-    newArray = [{'valor':0, 'nome':'-- SELECIONE --'}]
-    for row in tam:
-        obj = {}
-        obj['valor'] = row.id
-        obj['nome'] = row.nome
-        newArray.append(obj)
-    return newArray
+# @views.route('/categoria/<int:id>')
+# def categoria(id):
+#     tam = Tamanho.query.filter_by(cat_id=id).all()
+#     newArray = [{'valor':0, 'nome':'-- SELECIONE --'}]
+#     for row in tam:
+#         obj = {}
+#         obj['valor'] = row.id
+#         obj['nome'] = row.nome
+#         newArray.append(obj)
+#     return newArray
 # ***********************************************************************************************
-# DELETAR PRODUTO
+# PRODUTOS -- DELETAR
 # ***********************************************************************************************
 @views.route('/produtos_deletar/<int:id>', methods=['POST','GET'])
 def deletarProduto(id):  
@@ -361,4 +293,51 @@ def deletarProduto(id):
         db.session.delete(get_produto)
         db.session.commit()
     return redirect(url_for('views.produtos'))
+# ***********************************************************************************************
+# PRODUTOS -- ATUALIZAR
+# ***********************************************************************************************
+@views.route('/produtos_atualizar/<int:id>/<int:cat>/<int:tam>', methods=['GET','POST'])
+@login_required
+def atualizarProdutos(id,cat,tam):
+    form = CadastroProduto()
+    form.categoria.query = Categoria.query 
+    form.tamanho.query = Tamanho.query
+    get_pro = Produto.query.get(id)
+    
+    objTamanhos = Tamanho.query.all()
+    catArray = []
+    for row in objTamanhos:
+        obj = {}
+        obj['tam_id'] = row.id
+        obj['tam_nome'] = row.nome
+        obj['cat_id'] = row.tamanhos.id
+        obj['cat_nome'] = row.tamanhos.nome
+        catArray.append(obj)
+  
+    get_cat_text = Categoria.query.get(cat).nome
+    get_tam_text = Tamanho.query.get(tam).nome
 
+    if form.validate_on_submit():
+        if request.method == 'POST':
+            categoria = request.form.get('categoria')
+            tamanho = request.form.get('tamanho')
+            descricao = request.form.get('descricao').upper()   
+            valor = request.form.get('valor')
+            criador = current_user.id
+            get_pro.categoria = categoria
+            get_pro.tamanho = tamanho
+            get_pro.descricao = descricao
+            get_pro.valor = valor
+            db.session.commit()
+            return redirect(url_for('views.produtos'))
+
+
+    return render_template('produtos_atualizar.html', 
+    user=current_user, 
+    data=data, 
+    form=form,
+    p=get_pro,
+    objTamanhos=catArray,
+    tamTex=get_tam_text,
+    catTex=get_cat_text
+    )
