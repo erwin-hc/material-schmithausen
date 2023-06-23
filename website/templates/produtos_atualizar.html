@@ -78,7 +78,7 @@ content %}
         <div class="form-outline">
           <i class="fa-solid fa-brazilian-real-sign trailing"></i>
           {{ form.valor( class='myInputs form-control-sm',
-          style='text-transform:uppercase', value=p.valor, id='valor') }}
+          style='text-transform:uppercase', value=p.valor | replace(".",","), id='valor') }}
           <!-- ERROS -->
           {% if form.valor.errors %} {% for e in form.valor.errors %}
           <div class="form-helper ms-3 text-danger">{{ e }}</div>
@@ -86,6 +86,31 @@ content %}
         </div>
       </div>
     </div>
+    <!-- MASCARA VALOR -->
+    <script src="{{ url_for('static', filename='js/imask.js') }}"></script>
+    <script type="text/javascript">
+            var currencyMask = IMask(
+            document.getElementById('valor'),
+            {
+            mask: [
+              { mask: '' },
+              {
+                  mask: 'num',
+                  lazy: false,
+                  blocks: {
+                      num: {
+                          mask: Number,
+                          scale: 2,
+                          thousandsSeparator: '.',
+                          padFractionalZeros: true,
+                          radix: ',',
+                          mapToRadix: ['.'],
+                      }
+                  }
+              }
+            ]
+            });
+      </script>
     <!-- *********************************************************** -->
     <!-- BOTOES -->
     <!-- *********************************************************** -->

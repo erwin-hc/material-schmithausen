@@ -1,5 +1,5 @@
 :root {
-  --color-orange: orange;
+  --color-orange: #ffa50080; /* hex organge*/
   --color-primary: #3B71CA;
   --color-secondary: #9FA6B2;
   --color-success: #14A44D;
@@ -7,25 +7,30 @@
   --color-warning: #E4A11B;
   --color-info: #54B4D3;
   --color-ligth:#FBFBFB;
-/*  --color-dark:#332D2D;*/
-/*  --color-dark-ligth: #2d2828;*/
-  --color-dark-ligth: #131313;
-  --color-dark:#191919;
+
+  --color-dark-ligth: 30, 30, 30;
+  --color-dark: 25, 25, 25;
+  
+/*  --font-bg-dark: #f2f2f2;   
+  --cor-bg-dark: 68,69,70; 
+  --cor-bg-ligth: 235,235,235;
+  --cor-bg-light-card: #dfdfdf;*/
 }
 .nav-tabs .nav-link,
 .nav-tabs .nav-link{
-  background-color: var(--color-dark);
+  background-color: rgb(var(--color-dark));
   color: var(--color-secondary);
 }
 .nav-tabs .nav-item .nav-link.active {
   color: var(--color-orange);!important;
-  background-color: var(--color-dark);
   border-color: var(--color-orange);
   border: 1px solid var(--color-orange);
   border-radius: 5px;
+  background-color: rgba(255,165,0,0.1)!important;
 }
 .nav-tabs .nav-link:hover{
-  background-color: var(--color-dark);
+  background-color: rgb(var(--color-dark));
+  color: var(--color-orange);
 }
 
 
@@ -34,7 +39,7 @@ table tbody tr:hover {
   background-color: rgba(255,165,0,0.1)!important;
 }
 .bg-dark {
-  background-color: var(--color-dark)!important;
+  background-color: rgb(var(--color-dark))!important;
 }
 .btn-outline-light {
   border: 1px solid var(--color-secondary);
@@ -81,7 +86,7 @@ table tbody tr:hover {
 
 .modal-confirm {
   border: 1px solid var(--color-danger);
-  background-color: var(--color-dark)!important;
+  background-color: rgb(var(--color-dark))!important;
 }
 
 
@@ -92,7 +97,7 @@ table tbody tr:hover {
 .myInputs {
   width: 100%;
   border: 1px solid #9FA6B250;
-  background-color: var(--color-dark-ligth);
+  background-color: rgb(var(--color-dark-ligth));
   color: var(--color-ligth);
   padding: 0.35rem;
   padding-left: 0.75rem;
@@ -123,19 +128,21 @@ table tbody tr:hover {
 }
 
 .dark-ligth {
-  background-color: var(--color-dark-ligth);
+  background-color: rgb(var(--color-dark-ligth));
 }
 
-.my-dropdown-menu {
-  background-color: var(--color-dark);
-  border: 1px solid var(--color-orange);
+.dropdown-menu {
+    background-color: rgb(var(--color-dark))!important;
+    border: 1px solid var(--color-orange);
 }
-.my-dropdown-menu a {
+.dropdown-item {
+   background-color: var(--color-dark)!important;
+}
+.dropdown-menu a {
   color: var(--color-secondary);  
 }
-
-.my-dropdown-menu li :hover {
-  background-color: rgba(255,165,0,0.1);
+.dropdown-menu li :hover {
+  background-color: var(--color-dark)!important;
   color: var(--color-orange)
 }
 
@@ -153,8 +160,4 @@ table tbody tr:hover {
   margin-bottom: 35px!important;
 }
 
-.dataTable > thead > tr > th[class*="sort"]:before,
-.dataTable > thead > tr > th[class*="sort"]:after {
-    content: "" !important;
-}
 

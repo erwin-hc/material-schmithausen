@@ -69,7 +69,8 @@ Cadastro de Produtos
         <!-- *********************************************************** -->
         <div class="form-text">Valor</div>
         <div class="form-outline">
-          <i class="fa-solid fa-brazilian-real-sign trailing"></i>
+          <i class="fa-solid fa-money-check-dollar trailing"></i>
+          <!-- <i class="fa-solid fa-brazilian-real-sign trailing"></i> -->
           {{ form.valor( class='myInputs form-control-sm',
           style='text-transform:uppercase', id='valor') }}
           <!-- ERROS -->
@@ -79,6 +80,31 @@ Cadastro de Produtos
         </div>
       </div>
     </div>
+    <!-- MASCARA VALOR -->
+    <script src="{{ url_for('static', filename='js/imask.js') }}"></script>
+    <script type="text/javascript">
+            var currencyMask = IMask(
+            document.getElementById('valor'),
+            {
+            mask: [
+              { mask: '' },
+              {
+                  mask: 'num',
+                  lazy: false,
+                  blocks: {
+                      num: {
+                          mask: Number,
+                          scale: 2,
+                          thousandsSeparator: '.',
+                          padFractionalZeros: true,
+                          radix: ',',
+                          mapToRadix: ['.'],
+                      }
+                  }
+              }
+            ]
+            });
+      </script>
     <!-- *********************************************************** -->
     <!-- BOTOES -->
     <!-- *********************************************************** -->
@@ -125,21 +151,6 @@ Cadastro de Produtos
 
   }
 
-  // categorias_selec.onchange = optsTamanho;
-  // function optsTamanho() {
-  //   optsHTML = ""
-  //   fetch('categoria/' + categorias_selec.value)
-  //     .then(function (response) {
-  //       return response.json()
-  //     }).then(function (data) {
-  //       for (i in data) {
-  //         nome = data[i]['nome']
-  //         valor = data[i]['valor']
-  //         optsHTML += '<option value="' + valor + '">' + nome + '</option>'
-  //       }
-  //       tamanhos_selec.innerHTML = optsHTML;
-  //     })
-  // }
 </script>
 
 

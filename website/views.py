@@ -254,7 +254,7 @@ def cadastroProdutos():
             categoria = request.form.get('categoria')
             tamanho = request.form.get('tamanho')
             descricao = request.form.get('descricao').upper()   
-            valor = request.form.get('valor')
+            valor = float(request.form.get('valor').replace(",","."))
             criador = current_user.id
             novo_produto = Produto(categoria=categoria,tamanho=tamanho,descricao=descricao,valor=valor,user_id=criador)
             db.session.add(novo_produto)
@@ -322,7 +322,7 @@ def atualizarProdutos(id,cat,tam):
             categoria = request.form.get('categoria')
             tamanho = request.form.get('tamanho')
             descricao = request.form.get('descricao').upper()   
-            valor = request.form.get('valor')
+            valor = float(request.form.get('valor').replace(",","."))
             criador = current_user.id
             get_pro.categoria = categoria
             get_pro.tamanho = tamanho

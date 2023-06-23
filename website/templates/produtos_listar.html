@@ -19,15 +19,15 @@
                   style="min-width:175px"><i class="fas fa-chart-pie fa-fw me-2 me-2"></i>TODOS</a>
               </li>
               <li class="p-1 nav-item bg-dark">
-                <a class="nav-link p-2" data-mdb-toggle="tab" role="button" aria-selected="false"
+                <a class="nav-link  p-2" data-mdb-toggle="tab" role="button" aria-selected="false"
                   style="min-width:175px"><i class="fa-solid fa-utensils me-2"></i>ESPETOS</a>
               </li>
               <li class="p-1 nav-item bg-dark">
-                <a class="nav-link bg-dark p-2" data-mdb-toggle="tab" role="button" aria-selected="false"
-                  style="min-width:175px"><i class="fa-solid fa-snowflake me-2"></i>REFRIGERANTES</a>
+                <a class="nav-link  p-2" data-mdb-toggle="tab" role="button" aria-selected="false"
+                  style="min-width:175px"><i class="fa-solid fa-snowflake me-2"></i>BEBIDAS</a>
               </li>
               <li class="p-1 nav-item bg-dark">
-                <a class="nav-link bg-dark p-2" data-mdb-toggle="tab" role="button" aria-selected="false"
+                <a class="nav-link  p-2" data-mdb-toggle="tab" role="button" aria-selected="false"
                   style="min-width:175px"><i class="fa-solid fa-beer-mug-empty me-2"></i>CERVEJAS</a>
               </li>
             </ul>
@@ -50,8 +50,8 @@
             </a>
           </th>
           <th class="text-nowrap" scope="col">#</th>
-          <th class="text-nowrap" scope="col" style="min-width: 280px;">Descrição</th>
           <th class="text-nowrap" scope="col">Categoria</th>
+          <th class="text-nowrap" scope="col" style="min-width: 280px;">Descrição</th>
           <th class="text-nowrap" scope="col">Tamanho</th>
           <th class="text-nowrap" scope="col">Valor</th>
           <th class="text-nowrap" scope="col">Usuário</th>
@@ -69,10 +69,10 @@
             </a>
           </td>
           <td class="text-nowrap" scope="row"> {{ i.id }} </td>
+          <td class="text-nowrap" scope="row" style="min-width:80px"> {{ categorias[i.categoria | int -1].nome }}</td>
           <td class="text-nowrap" scope="row"> {{ i.descricao }} </td>
-          <td class="text-nowrap" scope="row"> {{ categorias[i.categoria | int -1].nome }}</td>
           <td class="text-nowrap" scope="row"> {{ tamanhos[i.tamanho | int -1 ].nome }} </td>
-          <td class="text-nowrap" scope="row"> {{ i.valor }} </td>
+          <td class="text-nowrap" scope="row"> {{ "R$ {:,.2f}".format( i.valor ) | replace(".",",") }} </td>
           <td class="text-nowrap" scope="row"> {{ i.produto.first_name.split()[0] }} </td>
           <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>
         </tr>
@@ -82,6 +82,7 @@
 
   </div>
 </div>
+
 
 
 {% endblock %}

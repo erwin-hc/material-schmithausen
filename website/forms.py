@@ -72,10 +72,7 @@ class CadastroCliente(FlaskForm):
 # ***********************************************************************************************
 # CADASTRO PRODUTOS
 # ***********************************************************************************************
-class NonValidatingSelectField(QuerySelectField):
-    def pre_validate(self, form):
-        pass 
-        
+   
 class CadastroProduto(FlaskForm):
 	categoria = QuerySelectField(
 	get_label='nome',
@@ -99,7 +96,7 @@ class CadastroProduto(FlaskForm):
 	Length(min=4, message=("Pelo menos 4 caracteres!"))
 	])
 
-	valor = FloatField(
+	valor = StringField(
 	'valor',
 	validators = [
 	DataRequired(message=("Obrigatório!"))
