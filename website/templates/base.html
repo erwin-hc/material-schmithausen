@@ -39,7 +39,7 @@ data-mdb-color="secondary">
 <!-- *********************************************************** -->
 
 <!-- Navbar -->
-<nav id="navbar" class="autohide navbar navbar-expand-lg bg-dark fixed-top navbar-dark ">
+<nav id="navbar" class="autohide navbar navbar-expand-lg fixed-top ">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
@@ -106,6 +106,9 @@ data-mdb-color="secondary">
         {% endif %}
         </li>
       </ul>
+                    <div role="button"class="nav-item m-2">
+                    <i data-theme="dark" class="fa-solid fa-circle-half-stroke"></i>
+                    </div>
     </div>
   </div>
   <!-- Container wrapper -->
@@ -126,7 +129,7 @@ data-mdb-color="secondary">
 <!-- ------------------------------------------ -->
 
 <!-- Footer -->
-<footer class="bg-dark text-center text-white fixed-bottom">
+<footer class="text-center fixed-bottom my-footer">
   <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.2)">
    <small style="color:#ffa50090;">
    {% block titlefooter %}
@@ -142,6 +145,29 @@ data-mdb-color="secondary">
   </div>
 </footer>
 
+<script type="text/javascript">
+  const btnToogleTheme = document.querySelector('.fa-circle-half-stroke');
+
+  btnToogleTheme.addEventListener('click', function () {
+    
+    if (this.dataset.theme == 'ligth') {
+      // document.body.style.setProperty('--color-dark-ligth', '235,235,235');
+      // document.body.style.setProperty('--color-dark', '223,223,223;');
+      // document.body.style.setProperty('--cor-fonte', '#252525;');
+      // document.body.style.setProperty('--cor-da-borda', '#9FA6B2');
+      this.dataset.theme = 'dark'
+    }
+
+    if (this.dataset.theme == 'dark') {
+      // document.body.style.setProperty('--color-dark-ligth', '30,30,30');
+      // document.body.style.setProperty('--color-dark', '25,25,25;');
+      // document.body.style.setProperty('--cor-fonte', '#9FA6B2;');
+      // document.body.style.setProperty('--cor-da-borda', '#9FA6B250');
+      this.dataset.theme = 'ligth'
+    }
+  })
+
+</script>
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/mdb.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
