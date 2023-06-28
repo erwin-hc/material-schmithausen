@@ -5,12 +5,12 @@
 
 <div class="container-fluid" style="min-height:100dvh;padding-top:100px">
 
-    <div class="table-responsive w-100 card bg-dark larg-max m-auto" style="padding-bottom: 40px">
+    <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 40px">
 
-        <table class="table table-borderless table-sm bg-dark text-secondary">
+        <table class="table table-borderless table-sm myTheme-900 ">
             <thead>
                 <tr>
-                    <p class="h4 p-3 text-secondary">Lista de clientes</p>
+                    <p class="h4 p-3 ">Lista de clientes</p>
                 </tr>
                 <tr>
                 <tr>
@@ -44,7 +44,7 @@
                 {% for i in clientes %}
                 <tr>
                     <td class="text-center" style="width: 50px">
-                        <a role="button" class="text-secondary" href="/clientes_atualizar/{{ i.id }}">
+                        <a role="button" class="" href="/clientes_atualizar/{{ i.id }}">
                             <i class="fa-regular fa-pen-to-square"></i>
                         </a>
                     </td>

@@ -13,12 +13,12 @@ content %}
   <!-- *********************************************************** -->
   <!-- FORM CADASTRO PRODUTOS -->
   <!-- *********************************************************** -->
-  <form id="atualizarProdutos" method="POST" class="form-outline form-white card bg-dark mt-5 mb-5 p-3 larg-max-form"
+  <form id="atualizarProdutos" method="POST" class="form-outline form-white card myTheme-900 mt-5 mb-5 p-3 larg-max-form"
     action="" novalidate>
 
     {{ form.hidden_tag() }} {{ form.csrf_token }}
 
-    <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
+    <h2 align="center" class="fw-bold mb-1 text-uppercase  mb-3 h5">
       <i class="fa-solid fa-user-plus"></i>
       ATUALIZAR PRODUTOS
     </h2>
@@ -132,7 +132,7 @@ content %}
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content modal-confirm">
       <div class="modal-header border-0">
-        <h5 class="modal-title text-secondary" id="exampleModalLabel">EXCLUIR</h5>
+        <h5 class="modal-title " id="exampleModalLabel">EXCLUIR</h5>
       </div>
       <div class="modal-body">
         <p class="text-white">REALMENTE EXCLUIR?

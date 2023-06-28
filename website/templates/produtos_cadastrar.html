@@ -11,11 +11,11 @@ Cadastro de Produtos
   <!-- *********************************************************** -->
   <!-- FORM CADASTRO PRODUTOS -->
   <!-- *********************************************************** -->
-  <form id="cadastroProdutos" method="POST" class="form-outline form-white card bg-dark mt-5 mb-5 p-3 larg-max-form"
+  <form id="cadastroProdutos" method="POST" class="form-outline form-white card myTheme-900 mt-5 mb-5 p-3 larg-max-form"
     action="{{ url_for('views.cadastroProdutos') }}" novalidate>
     {{ form.hidden_tag() }} {{ form.csrf_token }}
 
-    <h2 align="center" class="fw-bold mb-1 text-uppercase text-secondary mb-3 h5">
+    <h2 align="center" class="fw-bold mb-1 text-uppercase  mb-3 h5">
       <i class="fa-solid fa-user-plus"></i>CADASTRO DE PRODUTOS
     </h2>
 
