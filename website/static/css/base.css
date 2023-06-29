@@ -11,26 +11,45 @@
 
 /*  DARK*/
 
-/* --color-theme-500: 30, 30, 30;
- --color-theme-900: 25, 25, 25; 
+ --color-theme-500: 32, 33, 36;
+ --color-theme-900: 32, 33, 36; 
  --cor-fonte: 159,166,178;
- --cor-da-borda: 159,166,178 ;*/
+ --cor-da-borda: 53, 56, 59;
 
 /* LIGTH*/
 
-  --color-theme-500: 235,235,235;
+/*  --color-theme-500: 235,235,235;
   --color-theme-900: 223,223,223;
   --cor-fonte: 37,37,37;
-  --cor-da-borda: 159,166,178;
+  --cor-da-borda: 159,166,178;*/
 
 }
 
+/*--------------------------------------------------------------*/
+/* HELPERS*/
+/*--------------------------------------------------------------*/
+.hide-me {
+  display: none;
+}
+.larg-max {
+  max-width: 1000px!important;
+}
+.larg-max-form {
+  max-width: 550px!important;
+}
+
+.alert-dismissible {
+  z-index: 99999!important;
+  width: 100%!important;
+  top: 60px;
+}
+/*--------------------------------------------------------------*/
 /* THEME BACKGROUND */
+/*--------------------------------------------------------------*/
 .myTheme-900 {
    background-color: rgb(var(--color-theme-900))!important;
    color: rgb(var(--cor-fonte))!important;
 }
-
 .myTheme-500 {
   background-color: rgb(var(--color-theme-500))!important;
   color: rgb(var(--cor-fonte))!important;
@@ -41,7 +60,8 @@
 /*NAVBAR*/
 /*--------------------------------------------------------------*/
 .navbar-expand-lg {
-  background-color: rgb(25, 25, 25);
+  background-color: rgb(var(--color-theme-900));
+  border-bottom: 1px solid rgb(var(--cor-da-borda));
 }
 .fa-bars,
 .fa-circle-half-stroke {
@@ -54,39 +74,59 @@
   color: rgba(var(--custom-color),0.5)!important;
 }
 .my-footer {
-   background-color: rgb(25, 25, 25);
+   background-color: rgb(var(--color-theme-500));
+   border-top: 1px solid rgb(var(--cor-da-borda));
 }
 
 /*--------------------------------------------------------------*/
 /*DROP-DOWN-MENU*/
 /*--------------------------------------------------------------*/
-.dropdown-menu {
+.dropdown-menu,
+.dropdown-menu:active,
+.dropdown-menu:focus {
     background-color: rgb(var(--color-theme-900));
     border: 2px solid rgb(var(--cor-da-borda));
 }
-.dropdown-item {
+.dropdown-item,
+.dropdown-item:active,
+.dropdown-item:focus {
    background-color: rgb(var(--color-theme-900));
 }
-.dropdown-menu a {
+.dropdown-menu a,
+.dropdown-menu a:active,
+.dropdown-menu a:focus {
+  background-color: rgb(var(--color-theme-900));
   color: rgb(var(--cor-fonte));  
 }
 .dropdown-menu li :hover {
-  background-color: rgba(var(--custom-color),0.1);
+  background-color: rgb(var(--color-theme-900));
+  color: rgba(var(--custom-color),0.5)!important;
 }
+
 /*--------------------------------------------------------------------*/
 /*TABS */
 /*--------------------------------------------------------------*/
+
+.nav-tabs .nav-link{
+  width: 150px;
+  background-color: rgb(var(--color-theme-900));
+  color: rgb(var(--cor-fonte));
+  border-bottom: none;
+}
+
 .nav-tabs .nav-item .nav-link.active {
+
   border-color: rgb(var(--custom-color));
-  border: 1px solid rgb(var(--custom-color));
+  border-bottom: none;
   border-radius: 5px;
   background-color: rgba(var(--custom-color),0.1)!important;
-  color: rgb(var(--cor-fonte));
+  color: rgba(var(--custom-color),0.5)!important;
 }
 .nav-tabs .nav-link:hover{
   background-color: rgb(var(--color-theme-900));
-  color: rgb(var(--cor-fonte));
+  color: rgba(var(--custom-color),0.5)!important;
 }
+
 /*--------------------------------------------------------------*/
 /*TABLES*/
 /*--------------------------------------------------------------*/
@@ -103,8 +143,11 @@ table tbody tr:hover {
 /*--------------------------------------------------------------*/
 /* BOTOES */
 /*--------------------------------------------------------------*/
+.bnt-entrar {
+  width: 250px;
+}
 .btn-outline-light {
-  border: 1px solid rgb(var(--custom-color));
+  border: 1px solid rgba(var(--custom-color),0.5);
   color: rgb(var(--cor-fonte));
 }
 .btn-outline-light:focus,
@@ -132,6 +175,22 @@ table tbody tr:hover {
 .btn-close:hover {
   background-color: rgb(var(--color-danger))!important;
 }
+.btn-add {
+  background-color: rgb(var(--cor-da-borda));
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(var(--custom-color),0.5);
+  color: rgb(var(--cor-fonte));
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-add:hover {
+  background-color: rgba(var(--custom-color),0.5);
+}
 
 /*--------------------------------------------------------------*/
 /* ICONES */
@@ -139,11 +198,10 @@ table tbody tr:hover {
 .fa-pen-to-square {
   color: rgb(var(--cor-fonte))!important;
 }
-.fa-pen-to-square:active,
-.fa-pen-to-square:focus,
+
 .fa-pen-to-square:hover {
   outline: 1px solid transparent!important;
-  color: rgb(var(--custom-color))!important;
+  color: rgba(var(--custom-color),0.5)!important;
 }
 
 /*--------------------------------------------------------------*/
@@ -154,18 +212,6 @@ table tbody tr:hover {
   background-color: rgb(var(--color-theme-900))!important;
 }
 
-/*--------------------------------------------------------------*/
-/* HELPERS*/
-/*--------------------------------------------------------------*/
-.hide-me {
-  display: none;
-}
-.larg-max {
-  max-width: 1000px!important;
-}
-.larg-max-form {
-  max-width: 550px!important;
-}
 
 /*--------------------------------------------------------------*/
 /* FORMULARIOS */
@@ -176,9 +222,25 @@ table tbody tr:hover {
   outline: 2px solid transparent!important;
 }
 
+.form-outline {
+  margin-bottom: 30px!important; 
+}
+
+.form-border {
+  border: 1px solid rgb(var(--cor-da-borda))!important;
+  margin-bottom: 80px!important;
+}
+
+.my-form {
+   border: 1px solid rgb(var(--cor-da-borda))!important;
+}
+
+/*--------------------------------------------------------------*/
+/* IMPUTS */
+/*--------------------------------------------------------------*/
 .myInputs {
   color: rgb(var(--cor-fonte))!important;
-  border: 1px solid rgb(var(--cor-da-borda));
+  border: 1px solid rgb(var(--cor-da-borda))!important;
   background-color: rgb(var(--color-theme-500));
   width: 100%;
   padding: 0.35rem;
@@ -206,17 +268,5 @@ table tbody tr:hover {
 
 
 
-.alert-dismissible {
-  z-index: 99999!important;
-  width: 100%!important;
-  top: 60px;
-}
 
-.form-outline {
-  margin-bottom: 35px!important;
- 
-}
 
-.my-form {
-   border:1px solid var(--cor-da-borda);
-}
