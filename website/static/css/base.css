@@ -55,7 +55,6 @@
   color: rgb(var(--cor-fonte))!important;
 }
 
-
 /*--------------------------------------------------------------*/
 /*NAVBAR*/
 /*--------------------------------------------------------------*/
@@ -65,14 +64,15 @@
 }
 .fa-bars,
 .fa-circle-half-stroke {
-  color: #9FA6B2!important;
+  color: rgb(var(--cor-fonte))!important;
 }
 #navbar .nav-link {
-  color: #9FA6B2!important;
+  color: rgb(var(--cor-fonte))!important;
 }
 #navbar .nav-link:hover {
   color: rgba(var(--custom-color),0.5)!important;
 }
+
 .my-footer {
    background-color: rgb(var(--color-theme-500));
    border-top: 1px solid rgb(var(--cor-da-borda));
@@ -176,11 +176,10 @@ table tbody tr:hover {
   background-color: rgb(var(--color-danger))!important;
 }
 .btn-add {
-  background-color: rgb(var(--cor-da-borda));
+  background-color: rgba(var(--custom-color),0.1);
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  border: 1px solid rgba(var(--custom-color),0.5);
   color: rgb(var(--cor-fonte));
 
   display: flex;
@@ -256,10 +255,8 @@ table tbody tr:hover {
 }
 
 .myInputs-invalid {
-  border: 1px solid rgb(var(--color-danger));
+  border: 1px solid rgb(var(--color-danger))!important;
 }
-
-  
 
 
 
