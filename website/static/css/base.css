@@ -1,6 +1,8 @@
 :root {
 /*  --color-orange: #ffa50080; */
-  --custom-color: 255,165,0;
+/*  --custom-color: 255,165,0;*/
+/*  --custom-color: 192, 57, 43;*/
+  --custom-color: 211, 84, 0;
   --color-primary: 59, 113, 202;
   --color-secondary: 159,166,178;
   --color-success: 20,164,77;
@@ -11,17 +13,17 @@
 
 /*  DARK*/
 
- --color-theme-500: 32, 33, 36;
+/* --color-theme-500: 32, 33, 36;
  --color-theme-900: 32, 33, 36; 
  --cor-fonte: 159,166,178;
- --cor-da-borda: 53, 56, 59;
+ --cor-da-borda: 53, 56, 59;*/
 
 /* LIGTH*/
 
-/*  --color-theme-500: 235,235,235;
+  --color-theme-500: 235,235,235;
   --color-theme-900: 223,223,223;
   --cor-fonte: 37,37,37;
-  --cor-da-borda: 159,166,178;*/
+  --cor-da-borda: 159,166,178;
 
 }
 
@@ -76,6 +78,10 @@
 .my-footer {
    background-color: rgb(var(--color-theme-500));
    border-top: 1px solid rgb(var(--cor-da-borda));
+   color: rgb(var(--cor-fonte));
+}
+.my-footer span {
+  color: rgb(var(--cor-fonte));
 }
 
 /*--------------------------------------------------------------*/
@@ -135,11 +141,13 @@
   color: rgb(var(--cor-fonte))!important;
   margin-bottom: 80px!important;
 }
+.table-responsive thead th {
+  border-bottom: 1px solid rgb(var(--cor-da-borda))!important;
+}
 
 table tbody tr:hover {
  background-color: rgba(var(--custom-color),0.1)!important;
 }
-
 /*--------------------------------------------------------------*/
 /* BOTOES */
 /*--------------------------------------------------------------*/
@@ -194,6 +202,10 @@ table tbody tr:hover {
 /*--------------------------------------------------------------*/
 /* ICONES */
 /*--------------------------------------------------------------*/
+.navbar-brand {
+  color:rgba(var(--custom-color),0.8);
+  pointer-events: none;"
+}
 .fa-pen-to-square {
   color: rgb(var(--cor-fonte))!important;
 }
@@ -202,13 +214,16 @@ table tbody tr:hover {
   outline: 1px solid transparent!important;
   color: rgba(var(--custom-color),0.5)!important;
 }
-
+.iconDev {
+  color: rgb(var(--custom-color));
+}
 /*--------------------------------------------------------------*/
 /* MODAL */
 /*--------------------------------------------------------------*/
 .modal-confirm {
   border: 1px solid rgb(var(--color-danger));
-  background-color: rgb(var(--color-theme-900))!important;
+  background-color: rgb(var(--color-theme-500))!important;
+/*  background-color: rgba(var(--color-danger),0.8)!important;*/
 }
 
 

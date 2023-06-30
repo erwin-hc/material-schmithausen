@@ -112,7 +112,7 @@
         <h5 class="modal-title " id="exampleModalLabel">EXCLUIR</h5>
       </div>
       <div class="modal-body">
-        <p class="text-white">REALMENTE EXCLUIR?
+        <p class="">REALMENTE EXCLUIR?
           <br> <span class='text-danger'>{{ u.first_name | upper}}</span>
         </p>
       </div>
@@ -134,11 +134,11 @@
 {% endblock %}
 
 {% block titlefooter %}
-<span style="color:#9FA6B2">
+<span>
   <i class="fa-regular fa-user fa-sm"></i>
   &nbsp;{{ user.first_name.split()[0] | upper }}
   &nbsp;&nbsp;&nbsp;
-  <span style="color:#9FA6B2">
+  <span>
     <i class="fa-regular fa-calendar fa-sm"> </i>
     &nbsp;{{ data.strftime('%d/%m/%Y') }}
   </span>

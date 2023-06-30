@@ -43,7 +43,7 @@ data-mdb-color="secondary">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a class="navbar-brand" style="color: #ffa50090;pointer-events: none;"><i class="fa-solid fa-dragon"></i>&nbsp;&nbsp;Schmithausen</a>
+    <a class="navbar-brand"><i class="fa-solid fa-dragon"></i>&nbsp;&nbsp;Schmithausen</a>
     <!-- Toggle button -->
     {% if user.is_authenticated %}
     <button class="navbar-toggler"
@@ -131,16 +131,16 @@ data-mdb-color="secondary">
 
 <!-- Footer -->
 <footer class="text-center fixed-bottom my-footer">
-  <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.2)">
-   <small style="color:#ffa50090;">
+  <div class="text-center p-1">
+   <small>
    {% block titlefooter %}
-     <span style="color:#9FA6B2">
-<i class="fa-solid fa-skull-crossbones"></i>
+     <span class="iconDev">
+           <i class="fa-solid fa-terminal"></i>
      </span> 
      ERWIN GUILHERME STEIN
-     <span style="color:#9FA6B2">
-        <i class="fa-solid fa-skull-crossbones"></i>
-           {% endblock %}  
+     <span class="iconDev">
+        <i class="fa-solid fa-code"></i>
+   {% endblock %}  
    </small>
    
   </div>
