@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from . import db
@@ -6,6 +6,7 @@ from .models import *
 from .forms import *
 import datetime
 import json
+
 # ***********************************************************************************************
 # DATA ATUAL
 # ***********************************************************************************************
@@ -341,3 +342,19 @@ def atualizarProdutos(id,cat,tam):
     tamTex=get_tam_text,
     catTex=get_cat_text
     )
+
+
+# ***********************************************************************************************
+# TOOGLE-THEME
+# ***********************************************************************************************
+@views.route("/toggle-theme")
+def toggle_theme():
+    current_theme = session.get("theme")
+    if current_theme == "dark":
+        session["theme"] = "light"
+        print(current_theme)
+    else:
+        session["theme"] = "dark"
+        print(current_theme)
+
+    return redirect(request.args.get("current_page"))

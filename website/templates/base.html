@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="{{ 'dark-mode' if session.get('theme') == 'dark' }}">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -37,6 +37,7 @@ data-mdb-color="secondary">
   {% endif %}
 {% endwith %}
 <!-- *********************************************************** -->
+
 
 <!-- Navbar -->
 <nav id="navbar" class="autohide navbar navbar-expand-lg fixed-top ">
@@ -130,20 +131,26 @@ data-mdb-color="secondary">
 <!-- ------------------------------------------ -->
 
 <!-- Footer -->
-<footer class="text-center fixed-bottom my-footer">
-  <div class="text-center p-1">
+<footer class="row text-center fixed-bottom my-footer">
+  <div class="col text-center p-1" style="min-width: 250px">
    <small>
    {% block titlefooter %}
      <span class="iconDev">
-           <i class="fa-solid fa-terminal"></i>
+           <i class="fa-solid fa-terminal fa-lg "></i>
      </span> 
-     ERWIN GUILHERME STEIN
+     ERWIN STEIN
      <span class="iconDev">
-        <i class="fa-solid fa-code"></i>
+        <i class="fa-solid fa-code fa-lg"></i>
    {% endblock %}  
-   </small>
-   
-  </div>
+   </small>   
+    </div>
+
+<div class="col text-center p-1 me-2" style="max-width: 60px;">
+            <a href="{{ url_for('views.toggle_theme', current_page=request.path) }}" class="nav__link">
+            <span class="nav__item">
+                <i class="fa-solid fa-circle-half-stroke fa-lg"></i>
+            </span>        
+</div>
 </footer>
 
 
