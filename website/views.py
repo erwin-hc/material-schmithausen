@@ -350,11 +350,28 @@ def atualizarProdutos(id,cat,tam):
 @views.route("/toggle-theme")
 def toggle_theme():
     current_theme = session.get("theme")
-    if current_theme == "dark":
-        session["theme"] = "light"
-        print(current_theme)
-    else:
+    if current_theme == "light":
         session["theme"] = "dark"
-        print(current_theme)
+    else:
+        session["theme"] = "light"
 
     return redirect(request.args.get("current_page"))
+
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
+# CATEGORIAS   
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+# ***********************************************************************************************
+# CATEGORIAS -- LISTAR
+# ***********************************************************************************************
+@views.route('/categorias', methods=['GET','POST'])
+@login_required
+def categorias():
+    produtos = Produto.query.all()
+    tamanhos = Tamanho.query.all()
+    categorias = Categoria.query.all()
+    return render_template("categorias_listar.html", 
+        user=current_user,
+        data=data, 
+        produtos=produtos,
+        tamanhos=tamanhos,
+        categorias=categorias)   

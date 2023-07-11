@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from .models import *
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
@@ -11,6 +11,10 @@ auth = Blueprint('auth', __name__)
 # ***********************************************************************************************
 @auth.route('/', methods=['GET', 'POST'])
 def login():
+    current_theme = session.get("theme")
+    if current_theme == "":
+        session["theme"] = "dark"
+
     logout_user()
     # ADICIONAR USUARIO ROOT      
     email_ja_existe = User.query.filter_by(email='adm@adm.com.br').first()

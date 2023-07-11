@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="{{ 'dark-mode' if session.get('theme') == 'dark' }}">
+<html lang="pt-br" class="{{ 'light-mode' if session.get('theme') == 'light' }}">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -93,6 +93,12 @@ data-mdb-color="secondary">
           <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
             <li>
               <a class="dropdown-item" href="/produtos">Produtos</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/categorias">Categorias</a>
+            </li>
+            <li>
+              <hr>
             </li>
             <li>
               <a class="dropdown-item" href="/clientes">Clientes</a>

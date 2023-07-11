@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %} Lista de categorias {% endblock %}
+{% block content %}
+
+
+<div class="container-fluid" style="min-height:100dvh;padding-top:100px">
+
+    <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 40px">
+
+        <table class="table table-borderless table-sm myTheme-900 ">
+            <thead>
+                <tr>
+                    <p class="h4 p-3 ">Lista de categorias</p>
+                </tr>
+            <thead>
+                    <tr>
+                        <th class="text-nowrap" scope="col">
+                            <a href="/categorias_cadastrar" class="p-2 btn btn-sm btn-floating btn-add">
+                                <i class="fa-solid fa-plus"></i>
+                            </a>
+                        </th>
+                        <th style="width: 50px" class="text-nowrap" scope="col">#</th>
+                        <th class="text-nowrap" scope="col">Categoria</th>
+                    </tr>
+                </thead>
+            <tbody id="tb-categorias">
+
+                <tr>
+                    <td class="text-center" style="width: 50px">
+                        <a role="button" class="" href="/categorias_atualizar/">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </a>
+                    </td>
+                    <td class="text-nowrap" scope="row"> 1 </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<script>
+ 
+</script>
+
+{% endblock %}
+
+{% block titlefooter %}
+<span>
+    <i class="fa-regular fa-user fa-sm"></i>
+    &nbsp;{{ user.first_name.split()[0] | upper }}
+    &nbsp;&nbsp;&nbsp;
+    <span>
+        <i class="fa-regular fa-calendar fa-sm"> </i>
+        &nbsp;{{ data.strftime('%d/%m/%Y') }}
+    </span>
+    {% endblock %}

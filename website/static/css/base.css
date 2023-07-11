@@ -11,18 +11,18 @@
   --color-info: 84,180,211;
   --color-ligth: 251,251,251;
 
-  --color-theme-500: 235,235,235;
-  --color-theme-900: 223,223,223;
-  --cor-fonte: 37,37,37;
-  --cor-da-borda: 159,166,178;
-
-}
-
-:root.dark-mode {
     --color-theme-500: 32, 33, 36;
     --color-theme-900: 32, 33, 36; 
     --cor-fonte: 159,166,178;
     --cor-da-borda: 53, 56, 59;
+
+}
+
+:root.light-mode {
+  --color-theme-500: 235,235,235;
+  --color-theme-900: 223,223,223;
+  --cor-fonte: 37,37,37;
+  --cor-da-borda: 159,166,178;
 }
 
 /*--------------------------------------------------------------*/
