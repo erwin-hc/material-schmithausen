@@ -366,12 +366,11 @@ def toggle_theme():
 @views.route('/categorias', methods=['GET','POST'])
 @login_required
 def categorias():
-    produtos = Produto.query.all()
-    tamanhos = Tamanho.query.all()
     categorias = Categoria.query.all()
+    tamanhos = Tamanho.query.all()
+    print(categorias)
     return render_template("categorias_listar.html", 
         user=current_user,
         data=data, 
-        produtos=produtos,
         tamanhos=tamanhos,
-        categorias=categorias)   
+        categorias=categorias)
