@@ -6,7 +6,7 @@
 
     <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 40px">
 
-        <table class="table table-borderless table-sm myTheme-900 ">
+        <table class="table table-dropdown table-borderless table-sm myTheme-900 ">
             <thead>
                 <tr>
                     <p class="h4 p-3 ">Lista de categorias</p>
@@ -18,42 +18,51 @@
                                 <i class="fa-solid fa-plus"></i>
                             </a>
                         </th>
-                        <th style="width: 50px" class="text-nowrap" scope="col">#</th>
-                        <th class="text-nowrap" scope="col">Categoria</th>
+                        <th class="text-nowrap" scope="col">Categorias</th>
                     </tr>
                 </thead>
             <tbody id="tb-categorias">
                     {% for cat in categorias %}
                      <tr>
                         <td class="text-center" style="width: 50px">
-                        <a role="button" class="" href="/categorias_atualizar/">
-                        <i class="fa-regular fa-pen-to-square"></i>
-                        </a>
+<!--                         <a role="button" class="" href="/categorias_atualizar/">
+                        <i class="far fa-trash-can"></i>
+                        </a> -->
                         </td>
-                        <td class="text-nowrap" scope="row"> {{ cat.id }} </td>
+                        <!-- <td class="text-nowrap" scope="row"> {{ cat.id }} </td> -->
                         
                         <td class="text-nowrap" scope="row"> 
                              <details>
                                     <summary> {{ cat.nome }}</summary>
-                                    <table class="table-responsive w-100">
-                                        <tbody>
-                                            <thead>                                                
-                                                <tr>
-                                                    <th></th>
-                                                    <th>#</th>
-                                                    <th>TAMANHOS</th>
-                                                </tr>
+                                    <table class="table-responsive table-sm w-100">
                                                 <tbody>
                                                     {% for tam in tamanhos %}
+                                                    {% if tam.cat_id == cat.id %}
                                                     <tr>
-                                                        <td></td>
-                                                        <td>{{ tam.cat_id }}</td>
-                                                        <td></td>
+                                                        <td class="text-center" style="width: 20px">
+                                                        <a role="button" class="" href="/categorias_atualizar/">
+                                                        <i class="far fa-trash-can fa-sm"></i>
+                                                        </a>
+                                                        </td>
+                                                        <td>{{ tam.nome }}</td>
                                                     </tr>
-                                                    {% endfor %}
-                                                </tbody>
-                                            </thead>
-                                        </tbody>
+                                                    {% endif %}
+                                                    {% endfor %}                      
+                                                    <tr>                                                       
+                                                    <td colspan="2"> 
+                                                    <div class="input-group">
+                                                    <input
+                                                    type="text"
+                                                    class="form-control-sm myInputs"
+                                                    placeholder="Novo tamanho ..."
+                                                    />
+                                                    <button class="btn btn-outline-light form-control-sm" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                                                    CADASTRAR
+                                                    </button>
+                                                    </div>
+                                                    </tr>                                                    
+                                                </tbody>   
+                                                                           
                                     </table>
                              </details>
   

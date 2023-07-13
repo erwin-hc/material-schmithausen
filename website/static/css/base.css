@@ -12,7 +12,7 @@
   --color-ligth: 251,251,251;
 
     --color-theme-500: 32, 33, 36;
-    --color-theme-900: 32, 33, 36; 
+    --color-theme-900: 30, 31, 34; 
     --cor-fonte: 159,166,178;
     --cor-da-borda: 53, 56, 59;
 
@@ -55,6 +55,9 @@
   color: rgb(var(--cor-fonte))!important;
 }
 
+.form-helper {
+  font-size: 12px!important;
+}
 /*--------------------------------------------------------------*/
 /*NAVBAR*/
 /*--------------------------------------------------------------*/
@@ -146,13 +149,30 @@
 table tbody tr:hover {
  background-color: rgba(var(--custom-color),0.1)!important;
 }
+
+.table-dropdown tbody tr:hover{
+ background-color: transparent!important;
+}
+
+details table {
+  margin-top: 15px;
+}
+details .table-responsive {
+   margin-bottom: 5px!important;
+}
+
+details table tbody tr:hover {
+  background-color: rgba(var(--custom-color),0.1)!important;
+}
 /*--------------------------------------------------------------*/
 /* BOTOES */
 /*--------------------------------------------------------------*/
 .bnt-entrar {
   width: 250px;
 }
+
 .btn-outline-light {
+  min-width: 150px!important;
   border: 1px solid rgba(var(--custom-color),0.5);
   color: rgb(var(--cor-fonte));
 }
@@ -164,6 +184,7 @@ table tbody tr:hover {
 }
 
 .btn-outline-primary {
+  min-width: 150px!important;
   border: 1px solid rgb(var(--color-primary));
 }
 .btn-outline-primary:focus,
@@ -172,6 +193,7 @@ table tbody tr:hover {
 }
 
 .btn-outline-danger {
+  min-width: 150px!important;
   border: 1px solid rgb(var(--color-danger));
 }
 .btn-outline-danger:focus,
@@ -204,10 +226,13 @@ table tbody tr:hover {
   color:rgba(var(--custom-color),0.8);
   pointer-events: none;"
 }
-.fa-pen-to-square {
+.fa-pen-to-square, .fa-trash-can {
   color: rgb(var(--cor-fonte))!important;
 }
 
+.fa-trash-can:hover {
+  color: rgba(var(--color-danger), 0.8)!important;
+}
 .fa-pen-to-square:hover {
   outline: 1px solid transparent!important;
   color: rgba(var(--custom-color),0.5)!important;
@@ -262,7 +287,7 @@ table tbody tr:hover {
 
 .myInputs:focus,
 .myInputs:active {
-  outline: none;
+  outline: 1px transparent;
   border: 1px solid rgb(var(--custom-color));
   color: rgb(var(--cor-fonte))!important;
 }
