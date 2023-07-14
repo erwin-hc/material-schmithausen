@@ -167,6 +167,8 @@ details table tbody tr:hover {
 /*--------------------------------------------------------------*/
 /* BOTOES */
 /*--------------------------------------------------------------*/
+
+
 .bnt-entrar {
   width: 250px;
 }
@@ -219,6 +221,17 @@ details table tbody tr:hover {
   background-color: rgba(var(--custom-color),0.5);
 }
 
+.btn-table-cadastrar {
+  min-width: 120px!important;
+  border: 1px solid rgba(var(--custom-color),0.5);
+  color: rgb(var(--cor-fonte));
+}
+.btn-table-cadastrar:focus,
+.btn-table-cadastrar:hover {
+  border: 1px solid rgb(var(--custom-color))!important;
+  color: rgb(var(--cor-fonte));
+  background-color: rgba(var(--custom-color),0.1);
+}
 /*--------------------------------------------------------------*/
 /* ICONES */
 /*--------------------------------------------------------------*/
@@ -239,6 +252,14 @@ details table tbody tr:hover {
 }
 .iconDev {
   color: rgb(var(--custom-color))!important;
+}
+
+details > summary {
+    list-style-type: '▶️';
+}
+
+details[open] > summary {
+    list-style-type: '🔽';
 }
 /*--------------------------------------------------------------*/
 /* MODAL */
