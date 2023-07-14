@@ -159,10 +159,15 @@ details table {
 }
 details .table-responsive {
    margin-bottom: 5px!important;
+   padding: 5px!important;
 }
 
+details .table tr {
+ padding: 0!important;
+}
 details table tbody tr:hover {
   background-color: rgba(var(--custom-color),0.1)!important;
+
 }
 /*--------------------------------------------------------------*/
 /* BOTOES */
@@ -254,13 +259,13 @@ details table tbody tr:hover {
   color: rgb(var(--custom-color))!important;
 }
 
-details > summary {
+/*details > summary {
     list-style-type: '▶️';
 }
 
 details[open] > summary {
     list-style-type: '🔽';
-}
+}*/
 /*--------------------------------------------------------------*/
 /* MODAL */
 /*--------------------------------------------------------------*/

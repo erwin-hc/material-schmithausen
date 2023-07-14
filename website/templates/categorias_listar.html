@@ -11,30 +11,30 @@
                     <tr>
                     <p class="h4 p-3 ">Lista de categorias</p>
                     </tr>
+                   
                     <tr>
-                    <th class="text-nowrap" scope="col">
+<!--                     <th class="text-nowrap" scope="col">
                     <a href="/categorias_cadastrar" class="p-2 btn btn-sm btn-floating btn-add">
                     <i class="fa-solid fa-plus"></i>
                     </a>
+                    </th> -->
+                    <th>
+                        <div class="d-flex">
+                            <a href="/categorias_cadastrar" class="p-2 btn btn-sm btn-floating btn-add">
+                            <i class="fa-solid fa-plus"></i></a>
+                            <span class="h3 ms-2">Categorias</span>                            
+                        </div>
                     </th>
-                    <th class="text-nowrap" scope="col"><span class="h2">Categorias</span></th>
                     </tr>
                     </thead>
 
                     <tbody id="tb-categorias">
                     {% for cat in categorias %}
                     <tr>
-                    <td class="text-center" style="width: 50px">
-                    <!--                         <a role="button" class="" href="/categorias_atualizar/">
-                    <i class="far fa-trash-can"></i>
-                    </a> -->
-                    </td>
-                    <!-- <td class="text-nowrap" scope="row"> {{ cat.id }} </td> -->
-
                         <td class="text-nowrap" scope="row"> 
                         <details>
                         <summary> {{ cat.nome }}</summary>
-                        <table  class="table-responsive table-sm  myTheme-500">
+                        <table  class="table table-responsive myTheme-900">
                             <tbody>
                                 {% for tam in tamanhos %}
                                 {% if tam.cat_id == cat.id %}
