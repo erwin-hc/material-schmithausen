@@ -33,23 +33,34 @@
                     <tr>
                         <td class="text-nowrap" scope="row"> 
                         <details>
-                        <summary> {{ cat.nome }}</summary>
-                        <table  class="table table-responsive myTheme-900">
+                        <summary > {{ cat.nome }}</summary>
+                        <table  class="mt-2 table-sm w-100 table-responsive myTheme-900">
                             <tbody>
                                 {% for tam in tamanhos %}
                                 {% if tam.cat_id == cat.id %}
                                 <tr>
-                                    <td class="text-center" style="width: 20px">
-                                    <a role="button" class="" href="/categorias_atualizar/">
-                                    <i class="far fa-trash-can fa-sm"></i>
-                                    </a>
-                                    </td>
-                                    <td>{{ tam.nome }}</td>
+
+                                        <div class="input-group mt-3 mb-3">
+                                        <button class="form-control-sm my-btn " type="button">
+                                        <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
+                                        </button>
+                                        <input
+                                        type="text"
+                                        class="form-control-sm myInputs"
+                                        style="min-width: 150px;"
+                                        value="{{ tam.nome }}"
+                                        />
+                                        <button class="form-control-sm my-btn" type="button">
+                                        <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                        </button>
+                                        </div>
+
+
                                 </tr>
                                 {% endif %}
                                 {% endfor %}                      
                                 <tr>                                                       
-                                <td colspan="2"> 
+
                                         <div class="input-group">
                                         <input
                                         type="text"
@@ -57,10 +68,9 @@
                                         placeholder="Novo tamanho ..."
                                         style="min-width: 150px;"
                                         />
-                                        <button class="btn form-control-sm p-0 btn-table-cadastrar" type="button" id="button-addon2" data-mdb-ripple-color="dark"
-                                        >
-                                        CADASTRAR
-                                        </button>
+                                            <button class="btn form-control-sm btn-table-cadastrar" type="button">
+                                            NOVO
+                                            </button>
                                         </div>
                                         </tr>                                                    
                             </tbody>   

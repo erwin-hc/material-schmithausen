@@ -173,7 +173,15 @@ details table tbody tr:hover {
 /* BOTOES */
 /*--------------------------------------------------------------*/
 
-
+.my-btn {
+  width: 50px!important;
+  background-color: rgb(var(--color-theme-500))!important;
+  color: rgb(var(--cor-fonte));
+  border: 1px solid rgb(var(--cor-da-borda));
+}
+.isdanger:hover {
+  color: rgba(var(--color-danger),0.8)!important;
+}
 .bnt-entrar {
   width: 250px;
 }
