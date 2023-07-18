@@ -423,18 +423,54 @@ def categoriaDeletar(id):
 def categoriaAtualizar(id, valor):
     categorias = Categoria.query.all()
     tamanhos = Tamanho.query.all()
+    cat_id = id
+    cat_valor = valor
 
-    get_categorias = Categoria.query.get(id)
+    get_categorias = Categoria.query.get(cat_id)
 
-    print(valor, id)
-    
-    # if get_categorias:
-    #     db.session.delete(get_categorias)
-    #     db.session.commit()
-    #     return redirect(request.args.get("current_page"))
+    if get_categorias:
+        get_categorias.nome = cat_valor.upper()
+        db.session.commit()
+        return render_template("categorias_listar.html", 
+            user=current_user,
+            data=data, 
+            categorias=categorias,
+            tamanhos=tamanhos)
         
     return render_template("categorias_listar.html", 
         user=current_user,
         data=data, 
         categorias=categorias,
         tamanhos=tamanhos)
+
+
+
+
+
+
+# ***********************************************************************************************
+# TAMANHOS -- DELETAR
+# ***********************************************************************************************
+@views.route('/tamanos_deletar/<int:id>', methods=['GET','POST'])
+@login_required
+def tamanhoDeletar(id):
+    categorias = Categoria.query.all()
+    tamanhos = Tamanho.query.all()
+
+    get_tamanho = Tamanho.query.get(id)
+    print(get_tamanho)
+    
+    if get_tamanho:
+        db.session.delete(get_tamanho)
+        db.session.commit()
+        return render_template("categorias_listar.html", 
+            user=current_user,
+            data=data, 
+            categorias=categorias,
+            tamanhos=tamanhos)    
+        
+    return render_template("categorias_listar.html", 
+        user=current_user,
+        data=data, 
+        categorias=categorias,
+        tamanhos=tamanhos)    
