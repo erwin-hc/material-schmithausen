@@ -368,7 +368,7 @@ def toggle_theme():
 def categorias():
     categorias = Categoria.query.all()
     tamanhos = Tamanho.query.all()
-    print(categorias)
+
     return render_template("categorias_listar.html", 
         user=current_user,
         data=data, 
@@ -377,7 +377,7 @@ def categorias():
 # ***********************************************************************************************
 # CATEGORIAS -- CADASTRAR
 # ***********************************************************************************************
-@views.route('/categorias_cadastrar/<string:nome>', methods=['GET','POST'])
+@views.route('/categorias_cadastrar/<string:nome>', methods=['POST'])
 @login_required
 def categoriaCadastrar(nome):
     categorias = Categoria.query.all()
@@ -388,6 +388,50 @@ def categoriaCadastrar(nome):
         db.session.add(nova_categoria)
         db.session.commit() 
         return redirect(request.args.get("current_page"))
+        
+    return render_template("categorias_listar.html", 
+        user=current_user,
+        data=data, 
+        categorias=categorias,
+        tamanhos=tamanhos)
+# ***********************************************************************************************
+# CATEGORIAS -- DELETAR
+# ***********************************************************************************************
+@views.route('/categorias_deletar/<int:id>', methods=['GET','POST'])
+@login_required
+def categoriaDeletar(id):
+    categorias = Categoria.query.all()
+    tamanhos = Tamanho.query.all()
+
+    get_categorias = Categoria.query.get(id)
+    
+    if get_categorias:
+        db.session.delete(get_categorias)
+        db.session.commit()
+        return redirect(request.args.get("current_page"))
+        
+    return render_template("categorias_listar.html", 
+        user=current_user,
+        data=data, 
+        categorias=categorias,
+        tamanhos=tamanhos)
+# ***********************************************************************************************
+# CATEGORIAS -- ATUALIZAR
+# ***********************************************************************************************
+@views.route('/categorias_atualizar/<int:id>/<string:valor>', methods=['GET','POST'])
+@login_required
+def categoriaAtualizar(id, valor):
+    categorias = Categoria.query.all()
+    tamanhos = Tamanho.query.all()
+
+    get_categorias = Categoria.query.get(id)
+
+    print(valor, id)
+    
+    # if get_categorias:
+    #     db.session.delete(get_categorias)
+    #     db.session.commit()
+    #     return redirect(request.args.get("current_page"))
         
     return render_template("categorias_listar.html", 
         user=current_user,

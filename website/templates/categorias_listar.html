@@ -43,7 +43,8 @@
                                 <tr>
 
                                         <div class="input-group mt-3 mb-3">
-                                        <button class="form-control-sm my-btn " type="button">
+                                        <button class="form-control-sm my-btn " type="button"
+                                        >
                                         <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
                                         </button>
                                         <input
@@ -104,24 +105,27 @@
         <h5 class="modal-title h3 " id="exampleModalLabel">Categorias</h5>
       </div>
       <div class="modal-body mb-0">  
-                        <form>
+                        <form >
                         <table  class="mt-2 table-sm w-100 table-responsive myTheme-900">
                             <tbody>
                                 {% for cat in categorias %}
-
                                 <tr>
-
                                         <div class="input-group mt-3 mb-3">
-                                        <button class="form-control-sm my-btn " type="button">
+                                        <button class="form-control-sm my-btn " type="button"                                        
+                                        onclick="revomeCategoria( {{ cat.id }} )" 
+                                        >
                                         <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
                                         </button>
+                                        
                                         <input
+                                        id="inputCat"
                                         type="text"
                                         class="form-control-sm myInputs"
                                         style="min-width: 150px;"
                                         value="{{ cat.nome }}"
                                         />
-                                        <button class="form-control-sm my-btn" type="button">
+                                        <button class="form-control-sm my-btn" type="button"
+                                        onclick="updateCategoria( {{ cat.id }} )" >
                                         <i class="fa-regular fa-pen-to-square fa-lg"></i>
                                         </button>
                                         </div>
@@ -165,16 +169,18 @@ data-mdb-dismiss="modal">CANCELAR</a>
 <script type="text/javascript">
     
 function addCategoria() {
-    const value = document.querySelector('#inputNewCat').value;
+    const catValueNew = document.querySelector('#inputNewCat').value;
+    const catValueUpdate = document.querySelector('#inputCat').value;
 
-    fetch("/categorias_cadastrar/" + value, {
+
+    fetch("/categorias_cadastrar/" + catValueNew, {
     method: "post",
     headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
     },
         body: JSON.stringify({
-        categoria: value,
+        categoria: catValueNew,
     })
     })
     .then( (response) => { 
@@ -182,6 +188,44 @@ function addCategoria() {
     });
 
 }
+
+function revomeCategoria(id) {
+        fetch("/categorias_deletar/" + id, {
+        method:"post",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+            body: JSON.stringify({
+            id: id,
+        })
+        })
+        .then( (response) => {
+            location.reload();
+        });
+};
+
+
+function updateCategoria(id, catValueUpdate) {
+        fetch("/categorias_atualizar/" + id + "/" + catValueUpdate, {
+        method:"post",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+            body: JSON.stringify({
+            id: id,
+            valor: catValueUpdate
+        })
+        })
+        .then( (response) => {
+            location.reload();
+        });
+};
+
+
+
+
 
 </script>
 
