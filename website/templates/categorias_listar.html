@@ -20,7 +20,9 @@
                     </th> -->
                     <th>
                         <div class="d-flex">
-                            <a href="/categorias_cadastrar" class="p-2 btn btn-sm btn-floating btn-add">
+                            <a href="" class="p-2 btn btn-sm btn-floating btn-add"
+                            data-mdb-toggle="modal"
+                            data-mdb-target="#modal-categoria">
                             <i class="fa-solid fa-plus"></i></a>
                             <span class="h3 ms-2">Categorias</span>                            
                         </div>
@@ -33,7 +35,7 @@
                     <tr>
                         <td class="text-nowrap" scope="row"> 
                         <details>
-                        <summary > {{ cat.nome }}</summary>
+                        <summary class="ps-4">&nbsp;&nbsp;&nbsp;&nbsp;{{ cat.nome }}</summary>
                         <table  class="mt-2 table-sm w-100 table-responsive myTheme-900">
                             <tbody>
                                 {% for tam in tamanhos %}
@@ -61,7 +63,7 @@
                                 {% endfor %}                      
                                 <tr>                                                       
 
-                                        <div class="input-group">
+                                        <div class="input-group mt-4">
                                         <input
                                         type="text"
                                         class="form-control-sm myInputs"
@@ -88,11 +90,104 @@
     </div>
 </div>
 
-<script>
- 
+
+
+
+<!-- *********************************************************** -->
+<!-- MODAL -->
+<!-- *********************************************************** -->
+<div class="modal top fade pb-5" id="modal-categoria" aria-hidden="true"
+  data-mdb-backdrop="true" data-mdb-keyboard="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-cat">
+      <div class="modal-header border-0">
+        <h5 class="modal-title h3 " id="exampleModalLabel">Categorias</h5>
+      </div>
+      <div class="modal-body mb-0">  
+                        <form>
+                        <table  class="mt-2 table-sm w-100 table-responsive myTheme-900">
+                            <tbody>
+                                {% for cat in categorias %}
+
+                                <tr>
+
+                                        <div class="input-group mt-3 mb-3">
+                                        <button class="form-control-sm my-btn " type="button">
+                                        <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
+                                        </button>
+                                        <input
+                                        type="text"
+                                        class="form-control-sm myInputs"
+                                        style="min-width: 150px;"
+                                        value="{{ cat.nome }}"
+                                        />
+                                        <button class="form-control-sm my-btn" type="button">
+                                        <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                        </button>
+                                        </div>
+
+
+                                </tr>
+
+                                {% endfor %}                      
+                                <tr>                                                       
+
+                                        <div class="input-group">
+                                        <input
+                                        id="inputNewCat"
+                                        type="text"
+                                        class="form-control-sm myInputs"
+                                        placeholder="Nova categoria ..."
+                                        style="min-width: 150px;text-transform: uppercase;"
+                                        />
+                                            <button class="btn form-control-sm btn-table-cadastrar" type="button"
+                                            onclick="addCategoria()"
+                                            data-mdb-dismiss="modal">
+                                            NOVO
+                                            </button>
+                                        </div>
+                                        </tr>                                                    
+                            </tbody>                                                         
+                        </table>
+                        </form>
+<a style="width:125px" 
+type="button"
+class="float-end btn btn-outline-primary m-1"
+data-mdb-dismiss="modal">CANCELAR</a>
+
+</div>
+</div>
+</div>
+</div>
+<!-- *********************************************************** -->
+<!-- MODAL -->
+<!-- *********************************************************** -->
+<script type="text/javascript">
+    
+function addCategoria() {
+    const value = document.querySelector('#inputNewCat').value;
+
+    fetch("/categorias_cadastrar/" + value, {
+    method: "post",
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    },
+        body: JSON.stringify({
+        categoria: value,
+    })
+    })
+    .then( (response) => { 
+        location.reload();
+    });
+
+}
+
 </script>
 
 {% endblock %}
+
+
 
 {% block titlefooter %}
 <span>
@@ -103,4 +198,4 @@
         <i class="fa-regular fa-calendar fa-sm"> </i>
         &nbsp;{{ data.strftime('%d/%m/%Y') }}
     </span>
-    {% endblock %}
+{% endblock %}

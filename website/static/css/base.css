@@ -169,6 +169,18 @@ details table tbody tr:hover {
   background-color: rgba(var(--custom-color),0.1)!important;
 
 }
+
+details > summary {
+  font-family: FontAwesome;
+  list-style-type: '\f103';
+}
+
+details[open] > summary {
+  font-family: FontAwesome;
+  list-style-type: '\f102';
+}
+
+
 /*--------------------------------------------------------------*/
 /* BOTOES */
 /*--------------------------------------------------------------*/
@@ -267,13 +279,7 @@ details table tbody tr:hover {
   color: rgb(var(--custom-color))!important;
 }
 
-/*details > summary {
-    list-style-type: '▶️';
-}
 
-details[open] > summary {
-    list-style-type: '🔽';
-}*/
 /*--------------------------------------------------------------*/
 /* MODAL */
 /*--------------------------------------------------------------*/
@@ -281,6 +287,11 @@ details[open] > summary {
   border: 1px solid rgb(var(--color-danger));
   background-color: rgb(var(--color-theme-500))!important;
 /*  background-color: rgba(var(--color-danger),0.8)!important;*/
+}
+
+.modal-cat {
+  border: 1px solid rgb(var(--custom-color));
+  background-color: rgb(var(--color-theme-500))!important;
 }
 
 

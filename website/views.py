@@ -374,3 +374,23 @@ def categorias():
         data=data, 
         tamanhos=tamanhos,
         categorias=categorias)
+# ***********************************************************************************************
+# CATEGORIAS -- CADASTRAR
+# ***********************************************************************************************
+@views.route('/categorias_cadastrar/<string:nome>', methods=['GET','POST'])
+@login_required
+def categoriaCadastrar(nome):
+    categorias = Categoria.query.all()
+    tamanhos = Tamanho.query.all()
+
+    if request.method == 'POST':
+        nova_categoria = Categoria(nome=nome.upper())
+        db.session.add(nova_categoria)
+        db.session.commit() 
+        return redirect(request.args.get("current_page"))
+        
+    return render_template("categorias_listar.html", 
+        user=current_user,
+        data=data, 
+        categorias=categorias,
+        tamanhos=tamanhos)
