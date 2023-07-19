@@ -377,17 +377,21 @@ def categorias():
 # ***********************************************************************************************
 # CATEGORIAS -- CADASTRAR
 # ***********************************************************************************************
-@views.route('/categorias_cadastrar/<string:nome>', methods=['POST'])
+@views.route('/categorias_cadastrar/<string:nome>', methods=['GET','POST'])
 @login_required
 def categoriaCadastrar(nome):
     categorias = Categoria.query.all()
     tamanhos = Tamanho.query.all()
 
-    if request.method == 'POST':
+    if request.method == 'GET':
         nova_categoria = Categoria(nome=nome.upper())
         db.session.add(nova_categoria)
         db.session.commit() 
-        return redirect(request.args.get("current_page"))
+        return render_template("categorias_listar.html", 
+            user=current_user,
+            data=data, 
+            categorias=categorias,
+            tamanhos=tamanhos)
         
     return render_template("categorias_listar.html", 
         user=current_user,
@@ -405,10 +409,15 @@ def categoriaDeletar(id):
 
     get_categorias = Categoria.query.get(id)
     
-    if get_categorias:
-        db.session.delete(get_categorias)
-        db.session.commit()
-        return redirect(request.args.get("current_page"))
+    if request.method == 'GET':
+        if get_categorias:
+            db.session.delete(get_categorias)
+            db.session.commit()
+            return render_template("categorias_listar.html", 
+                user=current_user,
+                data=data, 
+                categorias=categorias,
+                tamanhos=tamanhos)
         
     return render_template("categorias_listar.html", 
         user=current_user,
@@ -428,9 +437,37 @@ def categoriaAtualizar(id, valor):
 
     get_categorias = Categoria.query.get(cat_id)
 
-    if get_categorias:
-        get_categorias.nome = cat_valor.upper()
-        db.session.commit()
+    if request.method == 'GET':
+        if get_categorias:
+            get_categorias.nome = cat_valor.upper()
+            db.session.commit()
+            return render_template("categorias_listar.html", 
+                user=current_user,
+                data=data, 
+                categorias=categorias,
+                tamanhos=tamanhos)
+        
+    return render_template("categorias_listar.html", 
+        user=current_user,
+        data=data, 
+        categorias=categorias,
+        tamanhos=tamanhos)
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
+# TAMANHOS   
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
+# ***********************************************************************************************
+# TAMANHOS -- CADASTRAR
+# ***********************************************************************************************
+@views.route('/tamanos_cadastrar/<int:catId>/<string:nome>', methods=['GET','POST'])
+@login_required
+def tamanhosCadastrar(catId, nome):
+    categorias = Categoria.query.all()
+    tamanhos = Tamanho.query.all()
+
+    if request.method == 'GET':
+        novo_tamanho = Tamanho(cat_id=catId, nome=nome.upper())
+        db.session.add(novo_tamanho)
+        db.session.commit() 
         return render_template("categorias_listar.html", 
             user=current_user,
             data=data, 
@@ -442,8 +479,6 @@ def categoriaAtualizar(id, valor):
         data=data, 
         categorias=categorias,
         tamanhos=tamanhos)
-
-
 
 
 

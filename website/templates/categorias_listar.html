@@ -6,67 +6,72 @@
 <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 80px">
 
 <table class="table table-dropdown table-borderless table-sm myTheme-900 ">
-    <thead>
-        <tr>
-            <p class="h4 p-3 ">Lista de categorias</p>
-        </tr>
-        <tr>
-            <th>
-                <div class="d-flex">
-                    <a href="" class="p-2 btn btn-sm btn-floating btn-add"
-                    data-mdb-toggle="modal"
-                    data-mdb-target="#modal-categoria">
-                    <i class="fa-solid fa-plus"></i></a>
-                    <span class="h3 ms-2">Categorias</span>                            
-                </div>
-            </th>
-        </tr>
-    </thead>
+<thead>
+    <tr>
+        <p class="h4 p-3 ">Lista de categorias</p>
+    </tr>
+    <tr>
+        <th>
+            <div class="d-flex">
+                <a href="" class="p-2 btn btn-sm btn-floating btn-add"
+                data-mdb-toggle="modal"
+                data-mdb-target="#modal-categoria">
+                <i class="fa-solid fa-plus"></i></a>
+                <span class="h3 ms-2">Categorias</span>                            
+            </div>
+        </th>
+    </tr>
+</thead>
 
-    <tbody id="tb-categorias">
-        {% for cat in categorias %}
-        <tr>
-            <td class="text-nowrap" scope="row"> 
-            <details data-catId="{{ cat.id }}">
-            <summary class="ps-4">&nbsp;&nbsp;&nbsp;&nbsp;{{ cat.nome }}</summary>
-            <table  class="mt-2 table-sm w-100 table-responsive myTheme-900">
-                <tbody>
-                    {% for tam in tamanhos %}
-                    {% if tam.cat_id == cat.id %}
-                    <tr>
-                        <div class="input-group mt-3 mb-3">
-                            <button class="form-control-sm my-btn " type="button"
-                            onclick="revomeTamanho( {{ tam.id }} , {{ cat.id }})">
-                            <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
-                            </button>
-                                    <input
-                                    type="text"
-                                    class="form-control-sm myInputs"
-                                    style="min-width: 150px;"
-                                    value="{{ tam.nome }}"
-                                    />
-                            <button class="form-control-sm my-btn" type="button">
-                            <i class="fa-regular fa-pen-to-square fa-lg"></i>
+<tbody id="tb-categorias">
+    {% for cat in categorias %}
+    <tr>
+        <td class="text-nowrap" scope="row"> 
+        <details
+        data-detailsId="{{ cat.id }}"
+        onclick="setDetailsOpen({{ cat.id }})">
+        <summary class="ps-4">&nbsp;&nbsp;&nbsp;&nbsp;{{ cat.nome }}</summary>
+        <table  class="mt-2 table-sm w-100 table-responsive myTheme-900">
+            <tbody>
+                {% for tam in tamanhos %}
+                {% if tam.cat_id == cat.id %}
+                <tr>
+                    <div class="input-group mt-3 mb-3">
+                        <button class="form-control-sm my-btn " type="button"
+                        onclick="revomeTamanho( {{ tam.id }} , {{ cat.id }})">
+                        <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
+                        </button>
+                                <input
+                                type="text"
+                                class="form-control-sm myInputs"
+                                style="min-width: 150px; text-transform: uppercase;"
+                                value="{{ tam.nome }}"
+                                />
+                        <button class="form-control-sm my-btn" type="button">
+                        <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                        </button>
+                    </div>
+                </tr>
+                {% endif %}
+                {% endfor %}                      
+                <tr> 
+                        <div class="input-group mt-4">
+                        <input
+                        data-catId="{{ cat.id }}"
+                        type="text"
+                        class="form-control-sm myInputs"
+                        placeholder="Novo tamanho ..."
+                        style="min-width: 150px;"
+                        />
+                            <button
+                            class="btn form-control-sm btn-table-cadastrar" 
+                            type="button"
+                            onclick="addTamanho( {{ cat.id }} )">
+                            NOVO
                             </button>
                         </div>
-                    </tr>
-                    {% endif %}
-                    {% endfor %}                      
-                    <tr>                                                       
-
-                            <div class="input-group mt-4">
-                            <input
-                            type="text"
-                            class="form-control-sm myInputs"
-                            placeholder="Novo tamanho ..."
-                            style="min-width: 150px;"
-                            />
-                                <button class="btn form-control-sm btn-table-cadastrar" type="button">
-                                NOVO
-                                </button>
-                            </div>
-                            </tr>                                                    
-                </tbody>   
+                        </tr>                                                    
+            </tbody>   
                                            
             </table>
             </details>
@@ -74,7 +79,7 @@
             </td>
         </tr>
         {% endfor %}
-    </tbody>
+</tbody>
 </table>
 
 </div>
@@ -154,69 +159,62 @@ data-mdb-dismiss="modal">CANCELAR</a>
 <!-- MODAL -->
 <!-- *********************************************************** -->
 <script type="text/javascript">
-let catValueNew = document.querySelector('#inputNewCat').value;
-    
+
+// ****************************************************************************
+
+function setDetailsOpen(id) {
+  localStorage.setItem("dtId", id);
+}
+catId = localStorage.getItem("dtId")
+let detalhes = document.querySelector('[data-detailsId="' + catId + '"]');
+detalhes.open = true;
+// ****************************************************************************
+
+
+
+// **************************************************************************** 
 function addCategoria() {
-    fetch("/categorias_cadastrar/" + catValueNew, {
-    method: "post",
-    headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-    },
-        body: JSON.stringify({
-        categoria: catValueNew,
-    })
-    })
+    let catValueNew = document.querySelector('#inputNewCat').value;
+    fetch("/categorias_cadastrar/" + catValueNew)
     .then( (response) => { 
         location.reload();
     });
-
 }
-
 function revomeCategoria(id) {
-        fetch("/categorias_deletar/" + id, {
-        method:"post",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-            body: JSON.stringify({
-            id: id,
-        })
-        })
+        fetch("/categorias_deletar/" + id)
         .then( (response) => {
             location.reload();
         });
 };
-
 function updateCategoria(id) {    
         let valor = document.querySelector('[data-id="' + id + '"]').value;
-        fetch("/categorias_atualizar/" + id + "/" + valor, {
-        method:"post",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-            body: JSON.stringify({
-            id: id,
-            valor: valor
-        })
-        })
+        fetch("/categorias_atualizar/" + id + "/" + valor)
         .then( (response) => {
             location.reload();
         });
 };
-
-function revomeTamanho(id, catId) {
-    let detalhes = document.querySelector('[data-catId="' + catId + '"]');
-   
+// ****************************************************************************
+// tamanos_cadastrar
+function addTamanho(catId) {
+    let tamValueNew = document.querySelector('[data-catId="' + catId + '"]').value;
+    fetch("/tamanos_cadastrar/" + catId + "/" + tamValueNew)
+    .then( (response) => { 
+        location.reload();
+    });
+}
+function revomeTamanho(id, catId) {   
     fetch("/tamanos_deletar/" + id)
     .then( (response) => {
         location.reload();
-    })
-    detalhes.open = true;
+    })    
 }
 
+
+
+
+
+
+  
 
 
 </script>
