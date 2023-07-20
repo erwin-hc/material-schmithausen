@@ -29,54 +29,52 @@
         <td class="text-nowrap" scope="row"> 
         <details
         data-detailsId="{{ cat.id }}"
-        
+        class=""
         >
         <summary class="ps-4">&nbsp;&nbsp;&nbsp;&nbsp;{{ cat.nome }}</summary>
-        <table  class="mt-2 table-sm w-100 table-responsive myTheme-900">
-            <tbody>
-                {% for tam in tamanhos %}
-                {% if tam.cat_id == cat.id %}
-                <tr>
-                    <div class="input-group mt-3 mb-3">
-                        <button class="form-control-sm my-btn " type="button"
-                        onclick="revomeTamanho( {{ tam.id }} , {{ cat.id }})">
-                        <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
-                        </button>
+                <table  class="mt-2 table-sm w-100 table-responsive myTheme-900">
+                    <tbody class="">
+                        {% for tam in tamanhos %}
+                        {% if tam.cat_id == cat.id %}
+                        <tr>
+                            <div class="input-group mt-3 mb-3">
+                                <button class="form-control-sm my-btn " type="button"
+                                onclick="revomeTamanho( {{ tam.id }} , {{ cat.id }})">
+                                <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
+                                </button>
+                                        <input
+                                        type="text"
+                                        class="form-control-sm myInputs"
+                                        style="min-width: 150px; text-transform: uppercase;"
+                                        value="{{ tam.nome }}"
+                                        />
+                                <button class="form-control-sm my-btn" type="button">
+                                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                                </button>
+                            </div>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}                      
+                        <tr> 
+                                <div class="input-group mt-4">
                                 <input
+                                data-catId="{{ cat.id }}"
                                 type="text"
                                 class="form-control-sm myInputs"
-                                style="min-width: 150px; text-transform: uppercase;"
-                                value="{{ tam.nome }}"
+                                placeholder="Novo tamanho ..."
+                                style="min-width: 150px;"
                                 />
-                        <button class="form-control-sm my-btn" type="button">
-                        <i class="fa-regular fa-pen-to-square fa-lg"></i>
-                        </button>
-                    </div>
-                </tr>
-                {% endif %}
-                {% endfor %}                      
-                <tr> 
-                        <div class="input-group mt-4">
-                        <input
-                        data-catId="{{ cat.id }}"
-                        type="text"
-                        class="form-control-sm myInputs"
-                        placeholder="Novo tamanho ..."
-                        style="min-width: 150px;"
-                        />
-                            <button
-                            class="btn form-control-sm btn-table-cadastrar" 
-                            type="button"
-                            onclick="addTamanho( {{ cat.id }} )">
-                            NOVO
-                            </button>
-                        </div>
+                                    <button
+                                    class="btn form-control-sm btn-table-cadastrar" 
+                                    type="button"
+                                    onclick="addTamanho( {{ cat.id }} )">
+                                    NOVO
+                                    </button>
+                                </div>
                         </tr>                                                    
-            </tbody>   
-                                           
-            </table>
-            </details>
-
+                    </tbody>                                                     
+                </table>
+        </details>
             </td>
         </tr>
         {% endfor %}
@@ -185,27 +183,48 @@ function updateCategoria(id) {
         });
 };
 // ****************************************************************************
-// tamanos_cadastrar
+
 function addTamanho(catId) {
     let tamValueNew = document.querySelector('[data-catId="' + catId + '"]').value;
     fetch("/tamanos_cadastrar/" + catId + "/" + tamValueNew)
     .then( (response) => { 
-        location.reload();       
-    });
+        location.reload();  
+    })
 }
+
 function revomeTamanho(id, catId) {   
     fetch("/tamanos_deletar/" + id)
     .then( (response) => {
         location.reload();
-    })    
+    })   
 }
 
+// ****************************************************************************
+let allDetails = document.querySelectorAll('details');
 
-// alert('')
-// catId = {{ catId }}
-// document.querySelector('[data-detailsId="' + catId + '"]').open = true;
+function rememberIfDetailsWasDisclosed(id) {
+  let localStorageKey = "detailsWasDisclosed_" + id;
 
-  
+  let details = document.querySelector('[data-detailsId="' + id + '"]');
+
+  details.addEventListener("toggle", event => {
+    if (details.open) {
+      localStorage.setItem(localStorageKey, true);
+    } else {
+      localStorage.removeItem(localStorageKey);
+    }
+  });
+
+  if (localStorage.getItem(localStorageKey)) {
+    details.open = true;
+  }
+}
+// ****************************************************************************
+
+allDetails.forEach( (detail) => {
+    detailId = detail.getAttribute('data-detailsId')
+    rememberIfDetailsWasDisclosed(detailId);
+})  
 
 
 </script>

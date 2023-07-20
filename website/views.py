@@ -10,7 +10,7 @@ import json
 # ***********************************************************************************************
 # DATA ATUAL
 # ***********************************************************************************************
-data = x = datetime.datetime.now().date()
+data = datetime.datetime.now().date()
 # ***********************************************************************************************
 views = Blueprint('views', __name__)
 # ***********************************************************************************************
@@ -473,7 +473,7 @@ def tamanhosCadastrar(catId, nome):
             data=data, 
             categorias=categorias,
             tamanhos=tamanhos)
-        
+
     return render_template("categorias_listar.html", 
         user=current_user,
         data=data, 
@@ -491,7 +491,6 @@ def tamanhoDeletar(id):
     tamanhos = Tamanho.query.all()
 
     get_tamanho = Tamanho.query.get(id)
-    print(get_tamanho)
     
     if get_tamanho:
         db.session.delete(get_tamanho)
