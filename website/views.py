@@ -452,6 +452,7 @@ def categoriaAtualizar(id, valor):
         data=data, 
         categorias=categorias,
         tamanhos=tamanhos)
+
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
 # TAMANHOS   
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX    
@@ -479,8 +480,6 @@ def tamanhosCadastrar(catId, nome):
         data=data, 
         categorias=categorias,
         tamanhos=tamanhos)
-
-
 # ***********************************************************************************************
 # TAMANHOS -- DELETAR
 # ***********************************************************************************************
@@ -506,3 +505,32 @@ def tamanhoDeletar(id):
         data=data, 
         categorias=categorias,
         tamanhos=tamanhos)    
+
+    # ***********************************************************************************************
+# CATEGORIAS -- ATUALIZAR
+# ***********************************************************************************************
+@views.route('/tamanhos_atualizar/<int:id>/<string:valor>', methods=['GET','POST'])
+@login_required
+def tamanhosAtualizar(id, valor):
+    categorias = Categoria.query.all()
+    tamanhos = Tamanho.query.all()
+    tam_id = id
+    tam_valor = valor
+
+    get_tamanhos = Tamanho.query.get(tam_id)
+
+    if request.method == 'GET':
+        if get_tamanhos:
+            get_tamanhos.nome = tam_valor.upper()
+            db.session.commit()
+            return render_template("categorias_listar.html", 
+                user=current_user,
+                data=data, 
+                categorias=categorias,
+                tamanhos=tamanhos)
+        
+    return render_template("categorias_listar.html", 
+        user=current_user,
+        data=data, 
+        categorias=categorias,
+        tamanhos=tamanhos)

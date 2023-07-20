@@ -144,18 +144,17 @@ data-mdb-color="secondary">
      <span class="iconDev">
            <i class="fa-solid fa-terminal fa-lg "></i>
      </span> 
-     ERWIN STEIN
-     <span class="iconDev">
-        <i class="fa-solid fa-code fa-lg"></i>
+     <span class="font-monospace" style="letter-spacing: 5px;">ERWIN STEIN</span>
+
    {% endblock %}  
    </small>   
     </div>
 
 <div class="col text-center p-1 me-2" style="max-width: 60px;">
-            <a href="{{ url_for('views.toggle_theme', current_page=request.path) }}" class="nav__link">
-            <span class="nav__item">
-                <i class="fa-solid fa-circle-half-stroke fa-lg"></i>
-            </span>        
+<a href="{{ url_for('views.toggle_theme', current_page=request.path) }}">
+  <span>
+  <i class="fa-solid fa-circle-half-stroke fa-lg"></i>
+  </span>        
 </div>
 </footer>
 

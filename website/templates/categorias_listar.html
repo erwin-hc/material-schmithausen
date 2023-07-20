@@ -32,23 +32,27 @@
         class=""
         >
         <summary class="ps-4">&nbsp;&nbsp;&nbsp;&nbsp;{{ cat.nome }}</summary>
-                <table  class="mt-2 table-sm w-100 table-responsive myTheme-900">
+                <div class="card card-border p-3 m-3 myTheme-900">
+                <table  class="table-sm w-100 table-responsive myTheme-900">
                     <tbody class="">
                         {% for tam in tamanhos %}
                         {% if tam.cat_id == cat.id %}
                         <tr>
-                            <div class="input-group mt-3 mb-3">
+                            <div class="input-group mt-1 mb-1">
                                 <button class="form-control-sm my-btn " type="button"
                                 onclick="revomeTamanho( {{ tam.id }} , {{ cat.id }})">
                                 <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
                                 </button>
-                                        <input
-                                        type="text"
-                                        class="form-control-sm myInputs"
-                                        style="min-width: 150px; text-transform: uppercase;"
-                                        value="{{ tam.nome }}"
-                                        />
-                                <button class="form-control-sm my-btn" type="button">
+                                <input
+                                type="text"
+                                class="form-control-sm myInputs"
+                                style="min-width: 150px; text-transform: uppercase;"
+                                value="{{ tam.nome }}"
+                                data-inputTamanho="{{ tam.id }}"
+                                />
+                                <button class="form-control-sm my-btn"
+                                type="button"
+                                onclick="updateTamanho( {{ tam.id }} )">
                                 <i class="fa-regular fa-pen-to-square fa-lg"></i>
                                 </button>
                             </div>
@@ -56,14 +60,14 @@
                         {% endif %}
                         {% endfor %}                      
                         <tr> 
-                                <div class="input-group mt-4">
-                                <input
-                                data-catId="{{ cat.id }}"
-                                type="text"
-                                class="form-control-sm myInputs"
-                                placeholder="Novo tamanho ..."
-                                style="min-width: 150px;"
-                                />
+                                    <div class="input-group mt-4 p-1">
+                                    <input
+                                    data-inputTamanhoNew="{{ cat.id }}"
+                                    type="text"
+                                    class="form-control-sm myInputs"
+                                    placeholder="Novo tamanho ..."
+                                    style="min-width: 150px;"
+                                    />
                                     <button
                                     class="btn form-control-sm btn-table-cadastrar" 
                                     type="button"
@@ -71,9 +75,15 @@
                                     NOVO
                                     </button>
                                 </div>
+                                <div style="min-height:40px">
+                                    <div data-msgErroTamanho="{{ cat.id }}" class="msgerror ms-1 text-danger hide ">
+                                    Este campo é obrigatório!
+                                    </div>
+                                </div>
                         </tr>                                                    
                     </tbody>                                                     
                 </table>
+                </div>
         </details>
             </td>
         </tr>
@@ -99,9 +109,8 @@
         <h5 class="modal-title h3 " id="exampleModalLabel">Categorias</h5>
       </div>
       <div class="modal-body mb-0">  
-    <form >
-    <table  class="mt-2 table-sm w-100 table-responsive myTheme-900">
-        <tbody>
+
+            <form >
             {% for cat in categorias %}
             <tr>
                     <div class="input-group mt-3 mb-3">
@@ -118,7 +127,7 @@
                     class="form-control-sm myInputs"
                     style="min-width: 150px;"
                     value="{{ cat.nome }}"
-                    data-id="{{ cat.id }}"
+                    data-inputCategoria="{{ cat.id }}"
                     />
                     <button class="form-control-sm my-btn" type="button"
                     onclick="updateCategoria( {{ cat.id }} )" >
@@ -128,24 +137,29 @@
             </tr>
             {% endfor %}                      
             <tr>   
-                <div class="input-group">
-                <input
-                id="inputNewCat"
-                type="text"
-                class="form-control-sm myInputs"
-                placeholder="Nova categoria ..."
-                style="min-width: 150px;text-transform: uppercase;"
-                />
+                <div class="input-group mb-1">
+                    <input
+                    style="text-transform: uppercase;"
+                    id="inputCategoria_new"
+                    type="text"
+                    class="form-control-sm myInputs"
+                    placeholder="Nova categoria ..."
+                    style="min-width: 150px;text-transform: uppercase;"
+                    />
                     <button class="btn form-control-sm btn-table-cadastrar" type="button"
                     onclick="addCategoria()"
-                    data-mdb-dismiss="modal">
+                    >
                     NOVO
                     </button>
                 </div>
             </tr>                                                    
-        </tbody>                                                         
+                                                       
+                <div style="min-height:80px">
+                <div id="msgErrorCat" class="msgerror text-danger hide ">
+                Este campo é obrigatório!
+                </div>
+                </div>
     </table>
-    </form>
 <a style="width:125px" 
 type="button"
 class="float-end btn btn-outline-primary m-1"
@@ -163,11 +177,20 @@ data-mdb-dismiss="modal">CANCELAR</a>
 
 // **************************************************************************** 
 function addCategoria() {
-    let catValueNew = document.querySelector('#inputNewCat').value;
-    fetch("/categorias_cadastrar/" + catValueNew)
-    .then( (response) => { 
-        location.reload();
-    });
+    let msgError =  document.querySelector('#msgErrorCat');
+    let inputCategoriaNewValue = document.querySelector('#inputCategoria_new').value;
+    let inputCategoriaNew = document.querySelector('#inputCategoria_new');
+
+    if (inputCategoriaNewValue == "") {
+         msgError.classList.toggle('hide')
+         inputCategoriaNew.focus()
+         setTimeout(()=> { msgError.classList.toggle('hide') }, 3000)
+    } else {
+        fetch("/categorias_cadastrar/" + inputCategoriaNewValue)
+        .then( (response) => { 
+            location.reload();
+        });        
+    }
 }
 function revomeCategoria(id) {
         fetch("/categorias_deletar/" + id)
@@ -176,7 +199,7 @@ function revomeCategoria(id) {
         });
 };
 function updateCategoria(id) {    
-        let valor = document.querySelector('[data-id="' + id + '"]').value;
+        let valor = document.querySelector('[data-inputCategoria="' + id + '"]').value;
         fetch("/categorias_atualizar/" + id + "/" + valor)
         .then( (response) => {
             location.reload();
@@ -185,11 +208,22 @@ function updateCategoria(id) {
 // ****************************************************************************
 
 function addTamanho(catId) {
-    let tamValueNew = document.querySelector('[data-catId="' + catId + '"]').value;
-    fetch("/tamanos_cadastrar/" + catId + "/" + tamValueNew)
-    .then( (response) => { 
-        location.reload();  
-    })
+    let msgError = document.querySelector('[data-msgErroTamanho="' + catId + '"]')
+    let inputTamanhoNewValue = document.querySelector('[data-inputTamanhoNew="' + catId + '"]').value;
+    let inputTamanho = document.querySelector('[data-inputTamanhoNew="' + catId + '"]')
+
+    if (inputTamanhoNewValue == "") {
+        msgError.classList.toggle('hide')
+        inputTamanho.focus()
+        setTimeout(()=> { msgError.classList.toggle('hide') }, 3000)
+    } else {
+        fetch("/tamanos_cadastrar/" + catId + "/" + inputTamanhoNewValue)
+        .then( (response) => { 
+            location.reload();  
+        })
+    }
+
+    inputTamanho.focus()
 }
 
 function revomeTamanho(id, catId) {   
@@ -198,6 +232,14 @@ function revomeTamanho(id, catId) {
         location.reload();
     })   
 }
+
+function updateTamanho(id) {    
+        let valor = document.querySelector('[data-inputTamanho="' + id + '"]').value;
+        fetch("/tamanhos_atualizar/" + id + "/" + valor)
+        .then( (response) => {
+            location.reload();
+        });
+};
 
 // ****************************************************************************
 let allDetails = document.querySelectorAll('details');
@@ -219,13 +261,13 @@ function rememberIfDetailsWasDisclosed(id) {
     details.open = true;
   }
 }
-// ****************************************************************************
 
 allDetails.forEach( (detail) => {
     detailId = detail.getAttribute('data-detailsId')
     rememberIfDetailsWasDisclosed(detailId);
 })  
 
+// ****************************************************************************
 
 </script>
 
