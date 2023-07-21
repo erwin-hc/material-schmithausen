@@ -495,7 +495,8 @@ def tamanhoDeletar(id):
     print(exixte_em_produtos)
 
     if exixte_em_produtos:
-        myMessage = 'TAMANHO USADO EM ALGUM PRODUTO CADASTRADO \n NÃO PODE SE EXCLUÍDO!'
+        flash('teste')
+        return
     else:        
         if get_tamanho:   
             db.session.delete(get_tamanho)
@@ -504,16 +505,14 @@ def tamanhoDeletar(id):
                 user=current_user,
                 data=data, 
                 categorias=categorias,
-                tamanhos=tamanhos,
-                msg=myMessage)          
+                tamanhos=tamanhos)     
     
   
     return render_template("categorias_listar.html", 
         user=current_user,
         data=data, 
         categorias=categorias,
-        tamanhos=tamanhos,
-        msg=myMessage)    
+        tamanhos=tamanhos)
 
     # ***********************************************************************************************
 # TAMANHOS -- ATUALIZAR

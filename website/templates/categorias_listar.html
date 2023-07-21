@@ -2,22 +2,10 @@
 {% block title %} Lista de categorias {% endblock %}
 {% block content %}
 
+<!-- *********************************************************** -->
 
 <div class="container-fluid" style="min-height:100dvh;padding-top:100px">
 <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 80px">
-
-{% with errors = get_flashed_messages(category_filter=["error"]) %}
-{% if errors %}
-<div class="alert-message block-message error">
-<a class="close" href="#">×</a>
-<ul>
-{%- for msg in errors %}
-<li>{{ msg }}</li>
-{% endfor -%}
-</ul>
-</div>
-{% endif %}
-{% endwith %}
 
 <table class="table table-dropdown table-borderless table-sm myTheme-900 ">
 <thead>
@@ -52,11 +40,15 @@
                         {% for tam in tamanhos %}
                         {% if tam.cat_id == cat.id %}
                         <tr>
+                            <form>                                
                             <div class="input-group mt-1 mb-1">
                                 <button class="form-control-sm my-btn " type="button"
                                 onclick="revomeTamanho( {{ tam.id }} , {{ cat.id }})">
                                 <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
                                 </button>
+
+                                
+                                
                                 <input
                                 style="text-transform:uppercase;"
                                 type="text"
@@ -71,6 +63,7 @@
                                 <i class="fa-regular fa-pen-to-square fa-lg"></i>
                                 </button>
                             </div>
+                            </form>
                         </tr>
                         {% endif %}
                         {% endfor %}                      
