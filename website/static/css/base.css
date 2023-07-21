@@ -46,6 +46,9 @@
   width: 100%!important;
   top: 60px;
 }
+h2 {
+  letter-spacing: 5px;
+}
 /*--------------------------------------------------------------*/
 /* THEME BACKGROUND */
 /*--------------------------------------------------------------*/
@@ -174,12 +177,12 @@ details table tbody tr:hover {
 }
 
 details > summary {
+  letter-spacing: 5px;
   font-family: FontAwesome;
   list-style-type: '\f103';
 }
 
 details[open] > summary {
-  font-family: FontAwesome;
   list-style-type: '\f102';
 }
 

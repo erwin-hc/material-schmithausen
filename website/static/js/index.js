@@ -6,11 +6,11 @@ var forms = document.querySelectorAll('.form-outline')
 // ---------------------------------------------------------------
 // ESCONDER ALERTAS
 // ---------------------------------------------------------------
-alerts.forEach(function (alert) {
-  setTimeout(function() {
-      alert.classList.add('hide-me')
-  }, 3000)
-})
+// alerts.forEach(function (alert) {
+//   setTimeout(function() {
+//       alert.classList.add('hide-me')
+//   }, 3000)
+// })
 // ---------------------------------------------------------------
 // ESCONDER MENSAGENS DE ERRO IMPUTS
 // ---------------------------------------------------------------

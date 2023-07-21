@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, session
+from flask import get_flashed_messages
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from . import db
@@ -366,6 +367,7 @@ def toggle_theme():
 @views.route('/categorias', methods=['GET','POST'])
 @login_required
 def categorias():
+    get_flashed_messages()
     categorias = Categoria.query.all()
     tamanhos = Tamanho.query.all()
 
@@ -488,26 +490,33 @@ def tamanhosCadastrar(catId, nome):
 def tamanhoDeletar(id):
     categorias = Categoria.query.all()
     tamanhos = Tamanho.query.all()
-
     get_tamanho = Tamanho.query.get(id)
+    exixte_em_produtos = Produto.query.filter_by(tamanho=id).all()
+    print(exixte_em_produtos)
+
+    if exixte_em_produtos:
+        myMessage = 'TAMANHO USADO EM ALGUM PRODUTO CADASTRADO \n NÃO PODE SE EXCLUÍDO!'
+    else:        
+        if get_tamanho:   
+            db.session.delete(get_tamanho)
+            db.session.commit()
+            return render_template("categorias_listar.html", 
+                user=current_user,
+                data=data, 
+                categorias=categorias,
+                tamanhos=tamanhos,
+                msg=myMessage)          
     
-    if get_tamanho:
-        db.session.delete(get_tamanho)
-        db.session.commit()
-        return render_template("categorias_listar.html", 
-            user=current_user,
-            data=data, 
-            categorias=categorias,
-            tamanhos=tamanhos)    
-        
+  
     return render_template("categorias_listar.html", 
         user=current_user,
         data=data, 
         categorias=categorias,
-        tamanhos=tamanhos)    
+        tamanhos=tamanhos,
+        msg=myMessage)    
 
     # ***********************************************************************************************
-# CATEGORIAS -- ATUALIZAR
+# TAMANHOS -- ATUALIZAR
 # ***********************************************************************************************
 @views.route('/tamanhos_atualizar/<int:id>/<string:valor>', methods=['GET','POST'])
 @login_required
