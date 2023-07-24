@@ -121,11 +121,12 @@
             {% for cat in categorias %}
             <tr>
                     <div class="input-group mt-3 mb-3">
-                    <button class="form-control-sm my-btn " type="button"                                        
-                    onclick="revomeCategoria( {{ cat.id }} )" 
+                    <a class="form-control-sm my-btn " type="button" 
+                    href="/categorias_deletar/{{ cat.id }}"                                       
+                    onclick="revomeCategoria( {{ cat.id }} )"
                     >
                     <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
-                    </button>
+                    </a>
                     
                     <input
                     style="text-transform: uppercase;"
