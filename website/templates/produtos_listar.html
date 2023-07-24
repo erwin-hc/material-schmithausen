@@ -71,7 +71,7 @@
           <td class="text-nowrap" scope="row"> {{ i.id }} </td>
           <td class="text-nowrap" scope="row" style="min-width:80px"> {{ categorias[i.categoria | int -1].nome }}</td>
           <td class="text-nowrap" scope="row"> {{ i.descricao }} </td>
-          <td class="text-nowrap" scope="row"> {{ tamanhos[i.tamanho | int -1 ].nome }} </td>
+          <td class="text-nowrap" scope="row"> {{ tamanhos == 1 }} </td>
           <td class="text-nowrap" scope="row"> {{ "R$ {:,.2f}".format( i.valor ) | replace(".",",") }} </td>
           <td class="text-nowrap" scope="row"> {{ i.produto.first_name.split()[0] }} </td>
           <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>

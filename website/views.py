@@ -275,16 +275,6 @@ def cadastroProdutos():
         form=form,
         espetos=espetos,
         objTamanhos=catArray)
-# @views.route('/categoria/<int:id>')
-# def categoria(id):
-#     tam = Tamanho.query.filter_by(cat_id=id).all()
-#     newArray = [{'valor':0, 'nome':'-- SELECIONE --'}]
-#     for row in tam:
-#         obj = {}
-#         obj['valor'] = row.id
-#         obj['nome'] = row.nome
-#         newArray.append(obj)
-#     return newArray
 # ***********************************************************************************************
 # PRODUTOS -- DELETAR
 # ***********************************************************************************************
@@ -485,28 +475,23 @@ def tamanhosCadastrar(catId, nome):
 # ***********************************************************************************************
 # TAMANHOS -- DELETAR
 # ***********************************************************************************************
-@views.route('/tamanos_deletar/<int:id>', methods=['GET','POST'])
+@views.route('/tamanhos_deletar/<int:id>', methods=['GET','POST'])
 @login_required
 def tamanhoDeletar(id):
     categorias = Categoria.query.all()
     tamanhos = Tamanho.query.all()
     get_tamanho = Tamanho.query.get(id)
     exixte_em_produtos = Produto.query.filter_by(tamanho=id).all()
-    print(exixte_em_produtos)
+    produtos = Produto.query.all()
 
     if exixte_em_produtos:
-        flash('teste')
-        return
+        flash('NÃO PODE SER EXCLUÍDO!!!')
+        return redirect(url_for("views.categorias"))
     else:        
         if get_tamanho:   
             db.session.delete(get_tamanho)
             db.session.commit()
-            return render_template("categorias_listar.html", 
-                user=current_user,
-                data=data, 
-                categorias=categorias,
-                tamanhos=tamanhos)     
-    
+            return redirect(url_for("views.categorias"))
   
     return render_template("categorias_listar.html", 
         user=current_user,
@@ -514,7 +499,9 @@ def tamanhoDeletar(id):
         categorias=categorias,
         tamanhos=tamanhos)
 
-    # ***********************************************************************************************
+
+
+# ***********************************************************************************************
 # TAMANHOS -- ATUALIZAR
 # ***********************************************************************************************
 @views.route('/tamanhos_atualizar/<int:id>/<string:valor>', methods=['GET','POST'])

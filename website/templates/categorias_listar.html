@@ -10,7 +10,7 @@
 <table class="table table-dropdown table-borderless table-sm myTheme-900 ">
 <thead>
     <tr>
-        <h2 class="p-3 ">Lista de categorias</h2>
+        <h2 class="p-3 ">Lista de categorias {{ texto }}</h2>
     </tr>
     <tr>
         <th>
@@ -42,13 +42,11 @@
                         <tr>
                             <form>                                
                             <div class="input-group mt-1 mb-1">
-                                <button class="form-control-sm my-btn " type="button"
+                                <a class="form-control-sm my-btn " type="button"
+                                href="/tamanhos_deletar/{{ tam.id }}"
                                 onclick="revomeTamanho( {{ tam.id }} , {{ cat.id }})">
                                 <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
-                                </button>
-
-                                
-                                
+                                </a>                                                 
                                 <input
                                 style="text-transform:uppercase;"
                                 type="text"
@@ -235,12 +233,12 @@ function addTamanho(catId) {
     inputTamanho.focus()
 }
 
-function revomeTamanho(id, catId) {   
-    fetch("/tamanos_deletar/" + id)
-    .then( (response) => {
-        location.reload();
-    })   
-}
+// function revomeTamanho(id, catId) {   
+//     fetch("/tamanhos_deletar/" + id)
+//     .then( (response) => {
+//         location.reload();
+//     })   
+// }
 
 function updateTamanho(id) {    
         let valor = document.querySelector('[data-inputTamanho="' + id + '"]').value;
