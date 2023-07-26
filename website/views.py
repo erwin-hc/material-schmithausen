@@ -533,3 +533,29 @@ def tamanhosAtualizar(id, valor):
         data=data, 
         categorias=categorias,
         tamanhos=tamanhos)
+
+
+# ***********************************************************************************************
+# FILTRO PRODUTOS - CATEGORIAS
+# ***********************************************************************************************
+@views.route('/filtro_produtos/<int:id>', methods=['GET','POST'])
+@login_required
+def filtroprodutos(id):
+    produtos = Produto.query.filter_by(categoria=id).all()
+    
+    if str(id) == "TODOS":
+        produtos = Produto.query.all()
+
+    tamanhos = Tamanho.query.all()
+    categorias = Categoria.query.all()
+    return render_template("produtos_listar.html", 
+        user=current_user,
+        data=data, 
+        produtos=produtos,
+        tamanhos=tamanhos,
+        categorias=categorias)  
+
+
+
+        
+
