@@ -16,24 +16,29 @@
         <div class="form-control-sm">
           <ul class="nav nav-tabs mb-3 myTheme-900">
             <li class="p-1 nav-item myTheme-900">
-              <a class="nav-link active p-2"
+              <a class="nav-link p-2"
+              data-id="0"
               role="button"
-              aria-selected="true"
-              href="/filtro_produtos/todos">
-              <i class="fas fa-chart-pie fa-fw me-2 me-2"></i>TODOS
-              </a>
+              href="/filtro_produtos/0">
+              <i class="fas fa-chart-pie fa-fw me-2 me-2"></i>TODOS</a>
             </li>
             {% for cat in categorias %}
             <li class="p-1 nav-item myTheme-900">
               <a class="nav-link  p-2" 
+              data-id="{{ cat.id }}"
               role="button"
-              aria-selected="false"
               href="/filtro_produtos/{{ cat.id }}">
               <i class="fa-solid fa-list-check"></i>&nbsp;&nbsp;&nbsp;{{ cat.nome }}</a>
             </li>
             {% endfor %}
           </ul>
         </div>
+        <script>
+          onload = ()=> {
+            const tabLink = document.querySelector('[data-id="{{ id }}"]');
+            tabLink.classList.toggle('active');
+          };
+        </script>
         <!-- Tabs navs -->
       </tr>
       <tr>
@@ -43,6 +48,7 @@
             <i class="fa-solid fa-magnifying-glass trailing"></i>
             <input type="text" style="text-transform:uppercase" id="inputPesquisarProduto"
             class="myInputs form-control-sm" placeholder="Pesquisar..."
+            onkeyup='pesquisarTabelaProdutos()' 
             >
           </div>
         </div>
@@ -97,7 +103,29 @@
 </div>
 </div>
 
-
+<script>
+  function pesquisarTabelaProdutos() {
+      var input, filter, found, table, tr, td, i, j;
+      input = document.getElementById("inputPesquisarProduto");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("tb-produtos");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td");
+          for (j = 0; j < td.length; j++) {
+              if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                  found = true;
+              }
+          }
+          if (found) {
+              tr[i].style.display = "";
+              found = false;
+          } else {
+              tr[i].style.display = "none";
+          }
+      }
+  }
+</script>
 
 {% endblock %}
 

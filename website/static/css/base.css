@@ -11,8 +11,10 @@
   --color-info: 84,180,211;
   --color-ligth: 251,251,251;
 
-    --color-theme-500: 32, 33, 36;
-    --color-theme-900: 30, 31, 34; 
+   --color-theme-500: 32, 33, 36;
+    --color-theme-900: 30, 31, 34;
+    /* --color-theme-500: 35, 39, 47;
+    --color-theme-900: 22, 24, 29;  */
     --cor-fonte: 159,166,178;
     --cor-da-borda: 53, 56, 59;
 
