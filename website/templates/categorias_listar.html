@@ -243,13 +243,6 @@ function addTamanho(catId) {
   inputTamanho.focus()
 }
 
-    // function revomeTamanho(id, catId) {   
-    //     fetch("/tamanhos_deletar/" + id)
-    //     .then( (response) => {
-    //         location.reload();
-    //     })   
-    // }
-
 function updateTamanho(id) {    
   let valor = document.querySelector('[data-inputTamanho="' + id + '"]').value;
   fetch("/tamanhos_atualizar/" + id + "/" + valor)

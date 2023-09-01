@@ -75,23 +75,14 @@
       <tr>
         <td class="text-center" style="width: 50px">
           <a role="button" class=""
-          href="/produtos_atualizar/{{ i.id }}/{{ i.categoria }}/{{ i.tamanho}}">
+          href="/produtos_atualizar/{{ i.id }}/{{ i.categoria.id }}/{{ i.tamanho.id }}">
           <i class="fa-regular fa-pen-to-square"></i>
         </a>
       </td>
       <td class="text-nowrap" scope="row"> {{ i.id }} </td>
-      {% for c in categorias %}
-      {% if c.id == i.categoria | int %}
-      <td class="text-nowrap" scope="row" style="min-width:80px"> {{ c.nome }}</td>
-      {% endif %}
-      {% endfor%}
+      <td class="text-nowrap" scope="row" style="min-width:80px"> {{ i.categoria.nome }}</td>
       <td class="text-nowrap" scope="row"> {{ i.descricao }} </td>
-      {% for t in tamanhos %}
-      {% if t.id == i.tamanho | int %}
-      <td class="text-nowrap" scope="row"> {{ t.nome }} </td>
-      {% endif %}      
-      {% endfor %}      
-
+      <td class="text-nowrap" scope="row"> {{ i.tamanho.nome }} </td>  
       <td class="text-nowrap" scope="row"> {{ "R$ {:,.2f}".format( i.valor ) | replace(".",",") }} </td>
       <td class="text-nowrap" scope="row"> {{ i.produto.first_name.split()[0] }} </td>
       <td class="text-nowrap" scope="row"> {{ i.data_criacao.strftime('%d/%m/%Y') }} </td>

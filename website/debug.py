@@ -1,4 +1,3 @@
-from .models import *
-from . import db   ##means from __init__.py import db
+from models import Categoria
 
-print(categoria.query.all())
+print(Categoria.query.all())

@@ -7,7 +7,6 @@ from .models import *
 from .forms import *
 import datetime
 import json
-
 # ***********************************************************************************************
 # DATA ATUAL
 # ***********************************************************************************************
@@ -20,7 +19,11 @@ views = Blueprint('views', __name__)
 @views.route('/comandas', methods=['GET', 'POST'])
 @login_required
 def comandas():
-    return render_template("comandas.html", user=current_user, data=data)
+    df_produtos = Produto.query.all()
+    return render_template("comandas.html",
+                           user=current_user,
+                           data=data,
+                           dfProdutos = df_produtos)
 
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 
 # USUARIOS   
@@ -258,7 +261,7 @@ def cadastroProdutos():
             descricao = request.form.get('descricao').upper()   
             valor = float(request.form.get('valor').replace(",","."))
             criador = current_user.id
-            novo_produto = Produto(categoria=categoria,tamanho=tamanho,descricao=descricao,valor=valor,user_id=criador)
+            novo_produto = Produto(cat_id=categoria,tam_id=tamanho,descricao=descricao,valor=valor,user_id=criador)
             db.session.add(novo_produto)
             db.session.commit()
             return redirect(url_for('views.produtos'))
@@ -316,8 +319,8 @@ def atualizarProdutos(id,cat,tam):
             descricao = request.form.get('descricao').upper()   
             valor = float(request.form.get('valor').replace(",","."))
             criador = current_user.id
-            get_pro.categoria = categoria
-            get_pro.tamanho = tamanho
+            get_pro.cat_id = categoria
+            get_pro.tam_id = tamanho
             get_pro.descricao = descricao
             get_pro.valor = valor
             db.session.commit()
@@ -548,7 +551,7 @@ def filtroprodutos(id):
     id=id
 
     if get_categoria:
-        produtos = Produto.query.filter_by(categoria=id).all()
+        produtos = Produto.query.filter_by(cat_id=id).all()
     else:    
         produtos = Produto.query.all()
 
@@ -562,5 +565,4 @@ def filtroprodutos(id):
 
 
 
-        
 
