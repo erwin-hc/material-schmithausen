@@ -2,7 +2,16 @@
 {% block title %} COMANDAS {% endblock %} 
 {% block content %}
 
-<h1 class="pt-5 mt-5"> COMANDAS </h1>
+
+<section class="painel w-100 card myTheme-900 larg-max m-auto">
+<div class="painel-one">
+    <a style="width:125px" href="#" class="btn btn-outline-primary m-1">INICIAR</a>
+    <h1 class="h4"><i class="fa-regular fa-calendar fa-sm"></i>&nbsp;&nbsp;14/09/23</h1>
+</div>
+<div class="painel-two">
+
+</div>
+</section>
 
 <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 40px">
     <table class="table table-borderless table-sm">
@@ -19,8 +28,6 @@
            <td>{{produto.categoria.nome}}</td>
            <td>{{produto.descricao}}</td>
            <td>{{produto.tamanho.nome}}</td>
-           <!-- <td>{{produto.valor}}</td> -->
-           <!-- <td>{{produto.data_criacao}}</td> -->
            <td>{{produto.usuario.first_name}}</td>   
         </tr>
         {% endfor %}

@@ -352,8 +352,38 @@ details[open] > summary {
 }
 
 
+/*--------------------------------------------------------------*/
+/* COMANDAS */
+/*--------------------------------------------------------------*/
+.painel {
+  border: 1px solid rgb(var(--cor-da-borda))!important;
+  margin-top: 120px!important;
+  margin-bottom: 20px!important;
+  min-height: 150px;
 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
+  .btn {
+    position: relative;
+    left: 15px;
+    top: 15px;
+  }
+
+  .h4 {
+    position: relative;
+    left: 25px;
+    top: 20px;
+
+  }
+
+  > div {
+    min-width: 300px;
+    flex:1;
+    /* border: 1px solid tomato; */
+  }
+}
 
 
 
