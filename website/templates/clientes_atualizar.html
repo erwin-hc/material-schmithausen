@@ -72,24 +72,25 @@
       <input style="width:125px" type="submit" value="ATUALIZAR" class="btn btn-outline-light m-1" />
       <a style="width:125px" href="/clientes" class="btn btn-outline-primary m-1">CANCELAR</a>
       <a style="width:125px" class="btn btn-outline-danger m-1" data-mdb-toggle="modal"
-        data-mdb-target="#confirmmodal">EXCLUIR</a>
+        data-mdb-target="#confirmmodalClientes">EXCLUIR</a>
     </div>
   </form>
 </div>
 <!-- *********************************************************** -->
 <!-- MODAL -->
 <!-- *********************************************************** -->
-<div class="modal top fade" id="confirmmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+<div class="modal top  " id="confirmmodalClientes" tabindex="-1" aria-hidden="true"
   data-mdb-backdrop="true" data-mdb-keyboard="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content modal-confirm">
       <div class="modal-header border-0">
-        <h5 class="modal-title " id="exampleModalLabel">EXCLUIR</h5>
+        <h5 class="modal-title " >
+          <i class="fa-regular fa-circle-question fa-2xl"></i>
+          &nbsp;&nbsp;
+          EXCLUIR</h5>
       </div>
       <div class="modal-body">  
-        <p class="">REALMENTE EXCLUIR?
-          <br> <span class='text-danger'>{{ c.nome | upper}}</span>
-        </p>
+       <span>{{ c.nome | upper}}</span>
       </div>
       <div class="modal-footer border-0">
         <a style="width:125px" type="button" class="btn btn-outline-primary m-1" data-mdb-dismiss="modal">

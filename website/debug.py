@@ -1,3 +1,3 @@
-from models import Categoria
+my = '2000006456888846'
 
-print(Categoria.query.all())
+print(len(my))

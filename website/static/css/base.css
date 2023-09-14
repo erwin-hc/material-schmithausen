@@ -49,7 +49,7 @@
   top: 60px;
 }
 h2 {
-  letter-spacing: 5px;
+  letter-spacing: 2.5px;
 }
 /*--------------------------------------------------------------*/
 /* THEME BACKGROUND */
@@ -130,7 +130,6 @@ h2 {
 }
 
 .nav-tabs .nav-item .nav-link.active {
-
   border-color: rgb(var(--custom-color));
   border-bottom: none;
   border-radius: 5px;
@@ -210,32 +209,41 @@ details[open] > summary {
 
 .btn-outline-light {
   min-width: 150px!important;
-  border: 1px solid rgba(var(--custom-color),0.5);
-  color: rgb(var(--cor-fonte));
+  border: 1px solid rgba(var(--custom-color),0.8);
+  background-color: rgba(var(--custom-color),0.8);
+  color: whitesmoke;
 }
 .btn-outline-light:focus,
 .btn-outline-light:hover {
-  border: 1px solid rgb(var(--custom-color))!important;
-  color: rgb(var(--cor-fonte));
-  background-color: rgba(var(--custom-color),0.1);
+  border: 1px solid rgba(var(--custom-color),0.5)!important;
+  background-color: rgba(var(--custom-color),0.5);
+  color: whitesmoke;
 }
 
 .btn-outline-primary {
   min-width: 150px!important;
-  border: 1px solid rgb(var(--color-primary));
+  border: 1px solid rgba(var(--color-primary),1);
+  background-color: rgba(var(--color-primary),1);
+  color: whitesmoke;
 }
 .btn-outline-primary:focus,
 .btn-outline-primary:hover {
-  background-color: #3B71CA20!important;
+  border: 1px solid rgba(var(--color-primary),0.7);
+  background-color: rgba(var(--color-primary),0.7)!important;
+  color: whitesmoke;
 }
 
 .btn-outline-danger {
   min-width: 150px!important;
-  border: 1px solid rgb(var(--color-danger));
+  border: 1px solid rgba(var(--color-danger),1);
+  background-color: rgba(var(--color-danger),1)!important;
+  color: whitesmoke;
 }
 .btn-outline-danger:focus,
 .btn-outline-danger:hover {
-  background-color: rgba(var(--color-danger),0.2)!important;
+  border: 1px solid rgba(var(--color-danger),1);
+  background-color: rgba(var(--color-danger),0.7)!important;
+  color: whitesmoke;
 }
 .btn-close:hover {
   background-color: rgb(var(--color-danger))!important;
@@ -257,15 +265,20 @@ details[open] > summary {
 }
 
 .btn-table-cadastrar {
-  min-width: 120px!important;
-  border: 1px solid rgba(var(--custom-color),0.5);
-  color: rgb(var(--cor-fonte));
+  width: 30px!important;
+  border: 1px solid rgba(var(--color-primary),0.8);
+  background-color: rgba(var(--color-primary),0.8);
+  color: whitesmoke;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn-table-cadastrar:focus,
 .btn-table-cadastrar:hover {
-  border: 1px solid rgb(var(--custom-color))!important;
-  color: rgb(var(--cor-fonte));
-  background-color: rgba(var(--custom-color),0.1);
+  border: 1px solid rgba(var(--color-primary),0.5)!important;
+  background-color: rgba(var(--color-primary),0.5);
+  color: whitesmoke;
 }
 /*--------------------------------------------------------------*/
 /* ICONES */
@@ -294,17 +307,31 @@ details[open] > summary {
 /* MODAL */
 /*--------------------------------------------------------------*/
 .modal-confirm {
-  border: 1px solid rgb(var(--color-danger));
+  border: 1px solid rgb(var(--cor-da-borda));
   background-color: rgb(var(--color-theme-500))!important;
 /*  background-color: rgba(var(--color-danger),0.8)!important;*/
 }
 
 .modal-cat {
-  border: 1px solid rgb(var(--custom-color));
+  border: 1px solid rgb(var(--cor-da-borda));
   background-color: rgb(var(--color-theme-500))!important;
 }
 
+#modal-categoria {
+  background-color: rgba(var(--color-theme-500),0.8)!important;
+}
 
+#confirmmodalProdutos {
+  background-color: rgba(var(--color-theme-500),0.8)!important;
+}
+
+#confirmmodalClientes {
+  background-color: rgba(var(--color-theme-500),0.8)!important;
+}
+
+#confirmmodalUsuarios {
+  background-color: rgba(var(--color-theme-500),0.8)!important;
+}
 /*--------------------------------------------------------------*/
 /* FORMULARIOS */
 /*--------------------------------------------------------------*/
@@ -357,34 +384,28 @@ details[open] > summary {
 /*--------------------------------------------------------------*/
 .painel {
   border: 1px solid rgb(var(--cor-da-borda))!important;
-  margin-top: 120px!important;
-  margin-bottom: 20px!important;
   min-height: 150px;
 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 
-  .btn {
-    position: relative;
-    left: 15px;
-    top: 15px;
-  }
+  justify-content: start;
+  align-items: start;
 
-  .h4 {
-    position: relative;
-    left: 25px;
-    top: 20px;
+  padding: 20px;
 
-  }
-
-  > div {
-    min-width: 300px;
-    flex:1;
-    /* border: 1px solid tomato; */
-  }
 }
 
+.painel > div {
+  min-width: 300px;
+  flex:1;
+}
+
+.painel-one .btn {
+    margin-bottom: 20px!important;
+
+}
 
 
 
