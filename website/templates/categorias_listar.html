@@ -15,7 +15,7 @@
             <tr>
               <th>
                 <div class="d-flex">
-                  <a href="" class="p-2 btn btn-sm btn-floating btn-add"
+                  <a href="" class="btn btn-primary btn-floating d-flex justify-content-center align-items-center"
                   data-mdb-toggle="modal"
                   data-mdb-target="#modal-categoria">
                   <i class="fa-solid fa-plus"></i></a>
@@ -43,7 +43,7 @@
                       <tr>
                         <div class="input-group mt-1 mb-1">
                           <form action="#" method="POST">      
-                            <a class="form-control-sm my-btn " type="button"
+                            <a class="form-control-sm my-btn d-flex justify-content-center align-items-center" type="button"
                             href="/tamanhos_deletar/{{ tam.id }}"
                             onclick="revomeTamanho( {{ tam.id }} , {{ cat.id }})">
                             <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
@@ -81,12 +81,12 @@
                         name="inputTamanhoNovo{{ cat.id }}"                               
                         id="inputTamanhoNovo{{ cat.id }}"             
                         />                                                                                
-                        <button
-                        class="btn form-control-sm btn-table-cadastrar" 
+                        <a
+                        class="form-control-sm btn-table-cadastrar d-flex justify-content-center align-items-center" 
                         type="button"
                         onclick="addTamanho( {{ cat.id }} )">
                         <i class="fa-regular fa-plus fa-xl"></i>
-                        </button>
+                      </a>
                       </form>
                   </div>
                   <div style="min-height:40px">
@@ -117,7 +117,7 @@
 <!-- *********************************************************** -->
 <!-- MODAL -->
 <!-- *********************************************************** -->
-<div class="modal top fade pb-5" id="modal-categoria" aria-hidden="true"
+<div class="modal top pb-5" id="modal-categoria" aria-hidden="true"
 data-mdb-backdrop="true" data-mdb-keyboard="true">
 <div class="modal-dialog modal-dialog-centered">
   <div class="modal-content modal-cat">
@@ -130,7 +130,7 @@ data-mdb-backdrop="true" data-mdb-keyboard="true">
         {% for cat in categorias %}
         <tr>
           <div class="input-group mt-3 mb-3">
-            <a class="form-control-sm my-btn " type="button" 
+            <a class="form-control-sm my-btn d-flex justify-content-center align-items-center" type="button" 
             href="/categorias_deletar/{{ cat.id }}"                                       
             onclick="revomeCategoria( {{ cat.id }} )"
             >
@@ -146,10 +146,10 @@ data-mdb-backdrop="true" data-mdb-keyboard="true">
           value="{{ cat.nome }}"
           data-inputCategoria="{{ cat.id }}"
           />
-          <button class="form-control-sm my-btn" type="button"
+          <a class="form-control-sm my-btn d-flex justify-content-center align-items-center" type="button"
           onclick="updateCategoria( {{ cat.id }} )" >
           <i class="fa-regular fa-pen-to-square fa-lg"></i>
-        </button>
+        </a>
       </div>
     </tr>
     {% endfor %}                      
@@ -163,7 +163,7 @@ data-mdb-backdrop="true" data-mdb-keyboard="true">
         placeholder="Nova categoria ..."
         style="min-width: 150px;text-transform: uppercase;"
         />
-        <button class="btn form-control-sm btn-table-cadastrar" type="button"
+        <button class="form-control-sm btn-table-cadastrar" type="button"
         onclick="addCategoria()"
         >
         <i class="fa-regular fa-plus fa-xl"></i>
@@ -179,7 +179,7 @@ data-mdb-backdrop="true" data-mdb-keyboard="true">
 </table>
 <a style="width:125px" 
 type="button"
-class="float-end btn btn-outline-primary m-1"
+class="float-end btn btn-primary m-1"
 data-mdb-dismiss="modal">CANCELAR</a>
 
 </div>

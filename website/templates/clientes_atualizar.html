@@ -69,9 +69,9 @@
     <!-- BOTOES -->
     <!-- *********************************************************** -->
     <div class="text-center">
-      <input style="width:125px" type="submit" value="ATUALIZAR" class="btn btn-outline-light m-1" />
-      <a style="width:125px" href="/clientes" class="btn btn-outline-primary m-1">CANCELAR</a>
-      <a style="width:125px" class="btn btn-outline-danger m-1" data-mdb-toggle="modal"
+      <input style="width:125px" type="submit" value="ATUALIZAR" class="btn btn-warning m-1" />
+      <a style="width:125px" href="/clientes" class="btn btn-primary m-1">CANCELAR</a>
+      <a style="width:125px" class="btn btn-danger m-1" data-mdb-toggle="modal"
         data-mdb-target="#confirmmodalClientes">EXCLUIR</a>
     </div>
   </form>
@@ -93,10 +93,10 @@
        <span class="">{{ c.nome | upper}}</span>
       </div>
       <div class="modal-footer border-0">
-        <a style="width:125px" type="button" class="btn btn-outline-primary m-1" data-mdb-dismiss="modal">
+        <a style="width:125px" type="button" class="btn btn-primary m-1" data-mdb-dismiss="modal">
           CANCELAR
         </a>
-        <a style="width:125px" type="button" class="btn btn-outline-danger m-1"
+        <a style="width:125px" type="button" class="btn btn-danger m-1"
           href="/clientes_deletar/{{ c.id }}">EXCLUIR</a>
       </div>
     </div>

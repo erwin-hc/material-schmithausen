@@ -81,7 +81,7 @@ h2 {
   color: rgb(var(--cor-fonte))!important;
 }
 #navbar .nav-link:hover {
-  color: rgba(var(--custom-color),0.5)!important;
+  color: rgba(var(--cor-fonte),0.5)!important;
 }
 
 .my-footer {
@@ -115,7 +115,7 @@ h2 {
 }
 .dropdown-menu li :hover {
   background-color: rgb(var(--color-theme-900));
-  color: rgba(var(--custom-color),0.5)!important;
+  color: rgba(var(--cor-fonte),0.5)!important;
 }
 
 /*--------------------------------------------------------------------*/
@@ -138,7 +138,7 @@ h2 {
 }
 .nav-tabs .nav-link:hover{
   background-color: rgb(var(--color-theme-900));
-  color: rgba(var(--custom-color),0.5)!important;
+  color: rgba(var(--cor-fonte),0.5)!important;
 }
 
 /*--------------------------------------------------------------*/
@@ -154,7 +154,7 @@ h2 {
 }
 
 table tbody tr:hover {
- background-color: rgba(var(--custom-color),0.1)!important;
+ background-color: rgba(var(--cor-fonte),0.1)!important;
 }
 
 .table-dropdown tbody tr:hover{
@@ -203,71 +203,30 @@ details[open] > summary {
 .isdanger:hover {
   color: rgba(var(--color-danger),0.8)!important;
 }
-.bnt-entrar {
-  width: 250px;
+
+
+
+.btn {
+  box-shadow: none!important;
 }
 
-.btn-outline-light {
-  min-width: 150px!important;
-  border: 1px solid rgba(var(--custom-color),0.8);
-  background-color: rgba(var(--custom-color),0.8);
-  color: whitesmoke;
-}
-.btn-outline-light:focus,
-.btn-outline-light:hover {
-  border: 1px solid rgba(var(--custom-color),0.5)!important;
-  background-color: rgba(var(--custom-color),0.5);
-  color: whitesmoke;
+.btn.btn-primary.add {
+  width: 50px!important;
 }
 
-.btn-outline-primary {
-  min-width: 150px!important;
-  border: 1px solid rgba(var(--color-primary),1);
-  background-color: rgba(var(--color-primary),1);
-  color: whitesmoke;
-}
-.btn-outline-primary:focus,
-.btn-outline-primary:hover {
-  border: 1px solid rgba(var(--color-primary),0.7);
-  background-color: rgba(var(--color-primary),0.7)!important;
-  color: whitesmoke;
+
+.btn-primary:hover {
+  background-color: rgba(var(--color-primary),0.8)!important;
 }
 
-.btn-outline-danger {
-  min-width: 150px!important;
-  border: 1px solid rgba(var(--color-danger),1);
-  background-color: rgba(var(--color-danger),1)!important;
-  color: whitesmoke;
-}
-.btn-outline-danger:focus,
-.btn-outline-danger:hover {
-  border: 1px solid rgba(var(--color-danger),1);
-  background-color: rgba(var(--color-danger),0.7)!important;
-  color: whitesmoke;
-}
 .btn-close:hover {
   background-color: rgb(var(--color-danger))!important;
-}
-.btn-add {
-  background-color: rgba(var(--custom-color),0.1);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  color: rgb(var(--cor-fonte));
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-add:hover {
-  background-color: rgba(var(--custom-color),0.5);
 }
 
 .btn-table-cadastrar {
   width: 30px!important;
-  border: 1px solid rgba(var(--color-primary),0.8);
-  background-color: rgba(var(--color-primary),0.8);
+  border: 1px solid rgba(var(--color-primary),1);
+  background-color: rgba(var(--color-primary),1);
   color: whitesmoke;
 
   display: flex;
@@ -276,15 +235,15 @@ details[open] > summary {
 }
 .btn-table-cadastrar:focus,
 .btn-table-cadastrar:hover {
-  border: 1px solid rgba(var(--color-primary),0.5)!important;
-  background-color: rgba(var(--color-primary),0.5);
+  border: 1px solid rgba(var(--color-primary),0.8)!important;
+  background-color: rgba(var(--color-primary),0.8)!important;
   color: whitesmoke;
 }
 /*--------------------------------------------------------------*/
 /* ICONES */
 /*--------------------------------------------------------------*/
 .navbar-brand {
-  color:rgba(var(--custom-color),0.8);
+  color:rgba(var(--color-warning),1);
   pointer-events: none;"
 }
 .fa-pen-to-square, .fa-trash-can {
@@ -296,7 +255,7 @@ details[open] > summary {
 }
 .fa-pen-to-square:hover {
   outline: 1px solid transparent!important;
-  color: rgba(var(--custom-color),0.5)!important;
+  color: rgba(var(--color-warning),0.8)!important;
 }
 .iconDev {
   color: rgb(var(--custom-color))!important;
@@ -372,6 +331,12 @@ details[open] > summary {
   outline: 1px transparent;
   border: 1px solid rgb(var(--custom-color));
   color: rgb(var(--cor-fonte))!important;
+}
+
+input:target
+{
+  outline: 1px transparent!important;
+  background-color: transparent!important;
 }
 
 .myInputs-invalid {
