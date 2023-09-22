@@ -7,6 +7,17 @@
     <div class="container-fluid" style="min-height:100dvh;padding-top:100px">
       <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 80px">
 
+
+
+        {% for tamanhos in categorias %}
+          {% for tam in tamanhos.categoria %}
+            {% if tam.id == 1 %}
+            <li>{{ tam.nome }}</li>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+
+
         <table class="table table-dropdown table-borderless table-sm myTheme-900 ">
           <thead>
             <tr>
@@ -38,6 +49,8 @@
                   <table  class="table-sm w-100 table-responsive myTheme-900">
                     <tbody class="">
 
+
+
                       {% for tam in tamanhos %}
                       {% if tam.cat_id == cat.id %}
                       <tr>
@@ -57,7 +70,7 @@
                             data-inputTamanho="{{ tam.id }}"
                             name="inputNome_{{ tam.id }}"
                             />
-                            <button class="form-control-sm my-btn"
+                            <button class="form-control-sm my-btn d-flex justify-content-center align-items-center"
                             type="button"
                             onclick="updateTamanho( {{ tam.id }} )">
                             <i class="fa-regular fa-pen-to-square fa-lg"></i>
