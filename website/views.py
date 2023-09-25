@@ -488,19 +488,18 @@ def tamanhoDeletar(id):
     categorias = Categoria.query.all()
     tamanhos = Tamanho.query.all()
     get_tamanho = Tamanho.query.get(id)
-    exixte_em_produtos = Produto.query.get(tamanhos.id).all()
-   
+    exixte_em_produtos = Produto.query.join(Produto.tamanho).filter(Tamanho.id == id).all()
     produtos = Produto.query.all()
-    print(produtos)
+    
 
-    # if exixte_em_produtos:
-    #     flash('NÃO PODE SER EXCLUÍDO!!!')
-    #     return redirect(url_for("views.categorias"))
-    # else:        
-    #     if get_tamanho:   
-    #         db.session.delete(get_tamanho)
-    #         db.session.commit()
-    #         return redirect(url_for("views.categorias"))
+    if exixte_em_produtos:
+        flash('NÃO PODE SER EXCLUÍDO!!!')
+        return redirect(url_for("views.categorias"))
+    else:        
+        if get_tamanho:   
+            db.session.delete(get_tamanho)
+            db.session.commit()
+            return redirect(url_for("views.categorias"))
   
     return render_template("categorias_listar.html", 
         user=current_user,

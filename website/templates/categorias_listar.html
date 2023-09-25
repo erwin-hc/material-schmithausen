@@ -7,17 +7,6 @@
     <div class="container-fluid" style="min-height:100dvh;padding-top:100px">
       <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 80px">
 
-
-
-        {% for tamanhos in categorias %}
-          {% for tam in tamanhos.categoria %}
-            {% if tam.id == 1 %}
-            <li>{{ tam.nome }}</li>
-            {% endif %}
-          {% endfor %}
-        {% endfor %}
-
-
         <table class="table table-dropdown table-borderless table-sm myTheme-900 ">
           <thead>
             <tr>
@@ -49,10 +38,6 @@
                   <table  class="table-sm w-100 table-responsive myTheme-900">
                     <tbody class="">
 
-
-
-                      {% for tam in tamanhos %}
-                      {% if tam.cat_id == cat.id %}
                       <tr>
                         <div class="input-group mt-1 mb-1">
                           <form action="#" method="POST">      
@@ -79,8 +64,8 @@
                         </div>
 
                   </tr>
-                  {% endif %}
-                  {% endfor %}                      
+          {% endfor %}    
+                                     
                   <tr> 
 
                     <div class="input-group mt-4 p-1">
@@ -116,7 +101,7 @@
         </details>
       </td>
     </tr>
-    {% endfor %}
+   
   </tbody>
 </table>
 
