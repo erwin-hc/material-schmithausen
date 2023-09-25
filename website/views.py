@@ -247,6 +247,7 @@ def cadastroProdutos():
     espetos =  db.session.query(Tamanho).join(Categoria).filter(Categoria.id == 1).all()
     objTamanhos = Tamanho.query.all()
     catArray = []
+    
     for row in objTamanhos:
         obj = {}
         obj['tam_id'] = row.id
@@ -401,22 +402,19 @@ def categoriaCadastrar(nome):
 def categoriaDeletar(id):
     categorias = Categoria.query.all()
     tamanhos = Tamanho.query.all()
-    exixte_em_produtos = Produto.query.filter_by(categoria=id).all()
+    # exixte_em_produtos = Produto.query.filter_by(categoria=id).all()
+    exixte_em_produtos = Produto.query.join(Produto.categoria).filter(Categoria.id == id).all()
     get_categorias = Categoria.query.get(id)
 
     if exixte_em_produtos:
         flash('NÃO PODE SER EXCLUÍDO!!!')
+        return redirect(url_for("views.categorias"))
     else:
         if request.method == 'GET':
             if get_categorias:
                 db.session.delete(get_categorias)
                 db.session.commit()
                 return redirect(url_for('views.categorias'))
-                # return render_template("categorias_listar.html", 
-                #     user=current_user,
-                #     data=data, 
-                #     categorias=categorias,
-                #     tamanhos=tamanhos)
         
     return render_template("categorias_listar.html", 
         user=current_user,

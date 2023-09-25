@@ -1,112 +1,100 @@
-    {% extends "base.html" %}
-    {% block title %} Lista de categorias {% endblock %}
-    {% block content %}
+{% extends "base.html" %}
+{% block title %} Lista de categorias {% endblock %}
+{% block content %}
 
-    <!-- *********************************************************** -->
 
-    <div class="container-fluid" style="min-height:100dvh;padding-top:100px">
-      <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 80px">
 
-        <table class="table table-dropdown table-borderless table-sm myTheme-900 ">
-          <thead>
-            <tr>
-              <h2 class="p-3 ">Lista de categorias {{ texto }}</h2>
-            </tr>
-            <tr>
-              <th>
-                <div class="d-flex">
-                  <a href="" class="btn btn-primary btn-floating d-flex justify-content-center align-items-center"
-                  data-mdb-toggle="modal"
-                  data-mdb-target="#modal-categoria">
-                  <i class="fa-solid fa-plus"></i></a>
-                  <span class=" ms-2"><h2>Categorias</h2></span>                            
-                </div>
-              </th>
-            </tr>
-          </thead>
+<div class="container-fluid" style="min-height:100dvh;padding-top:100px">
+  <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 80px">
 
-          <tbody id="tb-categorias">
-            {% for cat in categorias %}
-            <tr>
-              <td class="text-nowrap" scope="row"> 
-                <details
-                data-detailsId="{{ cat.id }}"
-                class=""
-                >
-                <summary class="ps-4">&nbsp;&nbsp;&nbsp;&nbsp;{{ cat.nome }}</summary>
-                <div class="card card-border p-3 m-3 myTheme-900">
-                  <table  class="table-sm w-100 table-responsive myTheme-900">
-                    <tbody class="">
+    <table class="table table-dropdown table-borderless table-sm myTheme-900 ">
+      <thead>
+        <tr>
+          <h2 class="p-3 ">Lista de categorias {{ texto }}</h2>
+        </tr>
+        <tr>
+          <th>
+            <div class="d-flex">
+              <a href="" class="btn btn-primary btn-floating d-flex justify-content-center align-items-center"
+                data-mdb-toggle="modal" data-mdb-target="#modal-categoria">
+                <i class="fa-solid fa-plus"></i></a>
+              <span class=" ms-2">
+                <h2>Categorias</h2>
+              </span>
+            </div>
+          </th>
+        </tr>
+      </thead>
 
-                      <tr>
-                        <div class="input-group mt-1 mb-1">
-                          <form action="#" method="POST">      
-                            <a class="form-control-sm my-btn d-flex justify-content-center align-items-center" type="button"
-                            href="/tamanhos_deletar/{{ tam.id }}"
+      <tbody id="tb-categorias">
+        {% for cat in categorias %}
+        <tr>
+          <td class="text-nowrap" scope="row">
+            <details data-detailsId="{{ cat.id }}" class="">
+              <summary class="ps-4">
+                &nbsp;&nbsp;&nbsp;&nbsp;{{ cat.nome }}
+              </summary>
+              <div class="card card-border p-3 m-3 myTheme-900">
+                <table class="table-sm w-100 table-responsive myTheme-900">
+                  <tbody class="">
+
+                    {% for tam in cat.categoria %}
+                    {% if tam.cat_id == cat.id %}
+                    <tr>
+                      <div class="input-group mt-1 mb-1">
+                        <form action="#" method="POST">
+                          <a class="form-control-sm my-btn d-flex justify-content-center align-items-center"
+                            type="button" href="/tamanhos_deletar/{{ tam.id }}"
                             onclick="revomeTamanho( {{ tam.id }} , {{ cat.id }})">
                             <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
-                            </a>                                                 
-                            <input
-                            style="text-transform:uppercase;"
-                            type="text"
-                            class="form-control-sm myInputs"
-                            style="min-width: 150px; text-transform: uppercase;"
-                            value="{{ tam.nome }}"
-                            data-inputTamanho="{{ tam.id }}"
-                            name="inputNome_{{ tam.id }}"
-                            />
-                            <button class="form-control-sm my-btn d-flex justify-content-center align-items-center"
-                            type="button"
-                            onclick="updateTamanho( {{ tam.id }} )">
+                          </a>
+                          <input style="text-transform:uppercase;" type="text" class="form-control-sm myInputs"
+                            style="min-width: 150px; text-transform: uppercase;" value="{{ tam.nome }}"
+                            data-inputTamanho="{{ tam.id }}" name="inputNome_{{ tam.id }}" />
+                          <button class="form-control-sm my-btn d-flex justify-content-center align-items-center"
+                            type="button" onclick="updateTamanho( {{ tam.id }} )">
                             <i class="fa-regular fa-pen-to-square fa-lg"></i>
                           </button>
-                          </form>
+                        </form>
+                      </div>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    
+                    <tr>
+                      <div class="input-group mt-4 p-1">
+                        <form>
+                          <input type="text" class="form-control-sm myInputs"
+                            style="text-transform:uppercase;min-width: 150px;" data-inputTamanhoNew="{{ cat.id }}"
+                            placeholder="Novo tamanho ..." name="inputTamanhoNovo{{ cat.id }}"
+                            id="inputTamanhoNovo{{ cat.id }}" />
+                          <a class="form-control-sm btn-table-cadastrar d-flex justify-content-center align-items-center"
+                            type="button" onclick="addTamanho( {{ cat.id }} )">
+                            <i class="fa-regular fa-plus fa-xl"></i>
+                          </a>
+                        </form>
+                      </div>
+                      <div style="min-height:40px">
+                        <div data-msgErroTamanho="{{ cat.id }}" class="msgerror ms-1 text-danger hide ">
+                          Este campo é obrigatório!
                         </div>
+                      </div>
+                    </tr>
+                     
+                  </tbody>
+                </table>
 
-                  </tr>
-          {% endfor %}    
-                                     
-                  <tr> 
-
-                    <div class="input-group mt-4 p-1">
-                      <form >
-                        <input
-                        type="text"
-                        class="form-control-sm myInputs"
-                        style="text-transform:uppercase;min-width: 150px;"
-                        data-inputTamanhoNew="{{ cat.id }}"
-                        placeholder="Novo tamanho ..."
-                        name="inputTamanhoNovo{{ cat.id }}"                               
-                        id="inputTamanhoNovo{{ cat.id }}"             
-                        />                                                                                
-                        <a
-                        class="form-control-sm btn-table-cadastrar d-flex justify-content-center align-items-center" 
-                        type="button"
-                        onclick="addTamanho( {{ cat.id }} )">
-                        <i class="fa-regular fa-plus fa-xl"></i>
-                      </a>
-                      </form>
-                  </div>
-                  <div style="min-height:40px">
-                    <div data-msgErroTamanho="{{ cat.id }}" class="msgerror ms-1 text-danger hide ">
-                      Este campo é obrigatório!
-                    </div>
-                  </div>
-
-                </tr>                                                    
-              </tbody>                                                     
-            </table>
-
-          </div>
-        </details>
-      </td>
-    </tr>
-   
-  </tbody>
-</table>
+              </div>
+            </details>
+          </td>
+        </tr>
+        
+        {% endfor %}
+      </tbody>
+    </table>
 
 
-</div>
+  </div>
 </div>
 
 
@@ -115,168 +103,152 @@
 <!-- *********************************************************** -->
 <!-- MODAL -->
 <!-- *********************************************************** -->
-<div class="modal top pb-5" id="modal-categoria" aria-hidden="true"
-data-mdb-backdrop="true" data-mdb-keyboard="true">
-<div class="modal-dialog modal-dialog-centered">
-  <div class="modal-content modal-cat">
-    <div class="modal-header border-0">
-      <h2 class="modal-title" id="exampleModalLabel">Categorias</h2>
-    </div>
-    <div class="modal-body mb-0">  
-
-      <form >
-        {% for cat in categorias %}
-        <tr>
-          <div class="input-group mt-3 mb-3">
-            <a class="form-control-sm my-btn d-flex justify-content-center align-items-center" type="button" 
-            href="/categorias_deletar/{{ cat.id }}"                                       
-            onclick="revomeCategoria( {{ cat.id }} )"
-            >
-            <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
-          </a>
-
-          <input
-          style="text-transform: uppercase;"
-          id="inputCat"
-          type="text"
-          class="form-control-sm myInputs"
-          style="min-width: 150px;"
-          value="{{ cat.nome }}"
-          data-inputCategoria="{{ cat.id }}"
-          />
-          <a class="form-control-sm my-btn d-flex justify-content-center align-items-center" type="button"
-          onclick="updateCategoria( {{ cat.id }} )" >
-          <i class="fa-regular fa-pen-to-square fa-lg"></i>
-        </a>
+<div class="modal top pb-5" id="modal-categoria" aria-hidden="true" data-mdb-backdrop="true" data-mdb-keyboard="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-cat">
+      <div class="modal-header border-0">
+        <h2 class="modal-title" id="exampleModalLabel">Categorias</h2>
       </div>
-    </tr>
-    {% endfor %}                      
-    <tr>   
-      <div class="input-group mb-1">
-        <input
-        style="text-transform: uppercase;"
-        id="inputCategoria_new"
-        type="text"
-        class="form-control-sm myInputs"
-        placeholder="Nova categoria ..."
-        style="min-width: 150px;text-transform: uppercase;"
-        />
-        <button class="form-control-sm btn-table-cadastrar" type="button"
-        onclick="addCategoria()"
-        >
-        <i class="fa-regular fa-plus fa-xl"></i>
-      </button>
-    </div>
-  </tr>                                                    
+      <div class="modal-body mb-0">
 
-  <div style="min-height:80px">
-    <div id="msgErrorCat" class="msgerror text-danger hide ">
-      Este campo é obrigatório!
+        <form>
+          {% for cat in categorias %}
+          <tr>
+            <div class="input-group mt-3 mb-3">
+              <a class="form-control-sm my-btn d-flex justify-content-center align-items-center" type="button"
+                href="/categorias_deletar/{{ cat.id }}" onclick="revomeCategoria( {{ cat.id }} )">
+                <i class="fa-regular fa-trash-can fa-lg isdanger"></i>
+              </a>
+
+              <input style="text-transform: uppercase;" id="inputCat" type="text" class="form-control-sm myInputs"
+                style="min-width: 150px;" value="{{ cat.nome }}" data-inputCategoria="{{ cat.id }}" />
+              <a class="form-control-sm my-btn d-flex justify-content-center align-items-center" type="button"
+                onclick="updateCategoria( {{ cat.id }} )">
+                <i class="fa-regular fa-pen-to-square fa-lg"></i>
+              </a>
+            </div>
+          </tr>
+          {% endfor %}
+          <tr>
+            <div class="input-group mb-1">
+              <input style="text-transform: uppercase;" id="inputCategoria_new" type="text"
+                class="form-control-sm myInputs" placeholder="Nova categoria ..."
+                style="min-width: 150px;text-transform: uppercase;" />
+              <button class="form-control-sm btn-table-cadastrar" type="button" onclick="addCategoria()">
+                <i class="fa-regular fa-plus fa-xl"></i>
+              </button>
+            </div>
+          </tr>
+
+          <div style="min-height:80px">
+            <div id="msgErrorCat" class="msgerror text-danger hide ">
+              Este campo é obrigatório!
+            </div>
+          </div>
+          </table>
+          <a style="width:125px" type="button" class="float-end btn btn-primary m-1"
+            data-mdb-dismiss="modal">CANCELAR</a>
+
+      </div>
     </div>
   </div>
-</table>
-<a style="width:125px" 
-type="button"
-class="float-end btn btn-primary m-1"
-data-mdb-dismiss="modal">CANCELAR</a>
-
-</div>
-</div>
-</div>
 </div>
 <!-- *********************************************************** -->
 <!-- MODAL -->
 <!-- *********************************************************** -->
 <script type="text/javascript">
-
-
-    // **************************************************************************** 
+  // **************************************************************************** 
   function addCategoria() {
-    let msgError =  document.querySelector('#msgErrorCat');
+    let msgError = document.querySelector('#msgErrorCat');
     let inputCategoriaNewValue = document.querySelector('#inputCategoria_new').value;
     let inputCategoriaNew = document.querySelector('#inputCategoria_new');
 
     if (inputCategoriaNewValue == "") {
-     msgError.classList.toggle('hide')
-     inputCategoriaNew.focus()
-     setTimeout(()=> { msgError.classList.toggle('hide') }, 3000)
-   } else {
-    fetch("/categorias_cadastrar/" + inputCategoriaNewValue)
-    .then( (response) => { 
-      location.reload();
-    });        
-  }
-}
-function revomeCategoria(id) {
-  fetch("/categorias_deletar/" + id)
-  .then( (response) => {
-    location.reload();
-  });
-};
-function updateCategoria(id) {    
-  let valor = document.querySelector('[data-inputCategoria="' + id + '"]').value;
-  fetch("/categorias_atualizar/" + id + "/" + valor)
-  .then( (response) => {
-    location.reload();
-  });
-};
-    // ****************************************************************************
-
-function addTamanho(catId) {
-  let msgError = document.querySelector('[data-msgErroTamanho="' + catId + '"]')
-  let inputTamanhoNewValue = document.querySelector('[data-inputTamanhoNew="' + catId + '"]').value;
-  let inputTamanho = document.querySelector('[data-inputTamanhoNew="' + catId + '"]')
-
-  if (inputTamanhoNewValue == "") {
-    msgError.classList.toggle('hide')
-    inputTamanho.focus()
-    setTimeout(()=> { msgError.classList.toggle('hide') }, 3000)
-  } else {
-    fetch("/tamanos_cadastrar/" + catId + "/" + inputTamanhoNewValue)
-    .then( (response) => { 
-      location.reload();  
-    })
-  }
-
-  inputTamanho.focus()
-}
-
-function updateTamanho(id) {    
-  let valor = document.querySelector('[data-inputTamanho="' + id + '"]').value;
-  fetch("/tamanhos_atualizar/" + id + "/" + valor)
-  .then( (response) => {
-    location.reload();
-  });
-};
-
-    // ****************************************************************************
-let allDetails = document.querySelectorAll('details');
-
-function rememberIfDetailsWasDisclosed(id) {
-  let localStorageKey = "detailsWasDisclosed_" + id;
-
-  let details = document.querySelector('[data-detailsId="' + id + '"]');
-
-  details.addEventListener("toggle", event => {
-    if (details.open) {
-      localStorage.setItem(localStorageKey, true);
+      msgError.classList.toggle('hide')
+      inputCategoriaNew.focus()
+      setTimeout(() => {
+        msgError.classList.toggle('hide')
+      }, 3000)
     } else {
-      localStorage.removeItem(localStorageKey);
+      fetch("/categorias_cadastrar/" + inputCategoriaNewValue)
+        .then((response) => {
+          location.reload();
+        });
     }
-  });
-
-  if (localStorage.getItem(localStorageKey)) {
-    details.open = true;
   }
-}
 
-allDetails.forEach( (detail) => {
-  detailId = detail.getAttribute('data-detailsId')
-  rememberIfDetailsWasDisclosed(detailId);
-})  
+  function revomeCategoria(id) {
+    fetch("/categorias_deletar/" + id)
+      .then((response) => {
+        location.reload();
+      });
+  };
 
-    // ****************************************************************************
+  function updateCategoria(id) {
+    let valor = document.querySelector('[data-inputCategoria="' + id + '"]').value;
+    fetch("/categorias_atualizar/" + id + "/" + valor)
+      .then((response) => {
+        location.reload();
+      });
+  };
+  // ****************************************************************************
 
+  function addTamanho(catId) {
+    let msgError = document.querySelector('[data-msgErroTamanho="' + catId + '"]')
+    let inputTamanhoNewValue = document.querySelector('[data-inputTamanhoNew="' + catId + '"]').value;
+    let inputTamanho = document.querySelector('[data-inputTamanhoNew="' + catId + '"]')
+
+    if (inputTamanhoNewValue == "") {
+      msgError.classList.toggle('hide')
+      inputTamanho.focus()
+      setTimeout(() => {
+        msgError.classList.toggle('hide')
+      }, 3000)
+    } else {
+      fetch("/tamanos_cadastrar/" + catId + "/" + inputTamanhoNewValue)
+        .then((response) => {
+          location.reload();
+        })
+    }
+
+    inputTamanho.focus()
+  }
+
+  function updateTamanho(id) {
+    let valor = document.querySelector('[data-inputTamanho="' + id + '"]').value;
+    fetch("/tamanhos_atualizar/" + id + "/" + valor)
+      .then((response) => {
+        location.reload();
+      });
+  };
+
+  // ****************************************************************************
+  let allDetails = document.querySelectorAll('details');
+
+  function rememberIfDetailsWasDisclosed(id) {
+    let localStorageKey = "detailsWasDisclosed_" + id;
+
+    let details = document.querySelector('[data-detailsId="' + id + '"]');
+
+    details.addEventListener("toggle", event => {
+      if (details.open) {
+        localStorage.setItem(localStorageKey, true);
+      } else {
+        localStorage.removeItem(localStorageKey);
+      }
+    });
+
+    if (localStorage.getItem(localStorageKey)) {
+      details.open = true;
+    }
+  }
+
+  allDetails.forEach((detail) => {
+    detailId = detail.getAttribute('data-detailsId')
+    rememberIfDetailsWasDisclosed(detailId);
+  })
+
+  // ****************************************************************************
 </script>
 
 {% endblock %}
