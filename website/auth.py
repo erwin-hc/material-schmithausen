@@ -3,7 +3,7 @@ from .models import *
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
-from .forms import FormLogin
+from .forms.forms_login import *
 # ***********************************************************************************************
 auth = Blueprint('auth', __name__)
 # ***********************************************************************************************
