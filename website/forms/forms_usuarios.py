@@ -2,11 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, EmailField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 from wtforms.widgets import PasswordInput
-# from wtforms_sqlalchemy.fields import QuerySelectField
 
-# ***********************************************************************************************
-# CADASTRO USUARIOS
-# ***********************************************************************************************
 class CadastroUsuario(FlaskForm):
 	nome = StringField(
 		'Nome',

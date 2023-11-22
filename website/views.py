@@ -5,6 +5,10 @@ from flask_login import login_user, login_required, logout_user, current_user
 from . import db
 from .models import *
 from .forms.forms_usuarios import *
+from .forms.forms_clientes import *
+from .forms.forms_login import *
+from .forms.forms_produtos import *
+
 import datetime
 import json
 # ***********************************************************************************************
