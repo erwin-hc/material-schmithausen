@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask import get_flashed_messages
 from flask_login import login_required, current_user
 from .. import db
-from ..models import *
+from ..models.models import *
 # from ..forms.forms_usuarios import *
 # from ..forms.forms_clientes import *
 # from ..forms.forms_login import *

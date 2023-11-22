@@ -32,8 +32,8 @@ def create_app():
     app.register_blueprint(view_tamanhos, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    from .models import User, Cliente, Produto
-    
+    from .models.models import Cliente, Produto, Categoria, Comanda, User
+
     with app.app_context():
         db.create_all()
 
