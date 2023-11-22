@@ -14,8 +14,9 @@ def create_app():
     app.config["TEMPLATES_AUTO_RELOAD"] = True
     db.init_app(app)
 
-    from .views import views
-    from .auth import auth
+    from .routes.views import views
+    from .routes.view_login import auth
+    # from .auth import auth
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
