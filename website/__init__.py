@@ -14,11 +14,22 @@ def create_app():
     app.config["TEMPLATES_AUTO_RELOAD"] = True
     db.init_app(app)
 
-    from .routes.views import views
+    from .routes.view_helpers import view_helpers
     from .routes.view_login import auth
-    # from .auth import auth
-
-    app.register_blueprint(views, url_prefix='/')
+    from .routes.view_comandas import view_comandas
+    from .routes.view_usuarios import view_usuarios
+    from .routes.view_clientes import view_clientes
+    from .routes.view_produtos import view_produtos
+    from .routes.view_categorias import view_categorias
+    from .routes.view_tamanhos import view_tamanhos
+    
+    app.register_blueprint(view_helpers, url_prefix='/')
+    app.register_blueprint(view_comandas, url_prefix='/')
+    app.register_blueprint(view_usuarios, url_prefix='/')
+    app.register_blueprint(view_clientes, url_prefix='/')
+    app.register_blueprint(view_produtos, url_prefix='/')
+    app.register_blueprint(view_categorias, url_prefix='/')
+    app.register_blueprint(view_tamanhos, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
     from .models import User, Cliente, Produto

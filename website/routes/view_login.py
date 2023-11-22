@@ -47,7 +47,7 @@ def login():
             if user:
                 if check_password_hash(user.password, password):
                     login_user(user, remember=True)
-                    return redirect(url_for('views.comandas'))
+                    return redirect(url_for('view_comandas.comandas'))
                 else:
                     flash('SENHA INCORRETA !!!', category='error')
             else:
