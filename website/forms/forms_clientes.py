@@ -1,8 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField, SubmitField, PasswordField, SelectField, FloatField
-from wtforms.validators import ValidationError, DataRequired, Length, Email, EqualTo
-from wtforms.widgets import PasswordInput, Select
-from wtforms_sqlalchemy.fields import QuerySelectField
+from wtforms import StringField
+from wtforms.validators import  DataRequired, Length
 
 class CadastroCliente(FlaskForm):
 	nome = StringField(
