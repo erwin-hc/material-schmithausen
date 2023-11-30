@@ -5,7 +5,7 @@
 
 <section class="painel w-100 card myTheme-900 larg-max m-auto ">
 <div class="painel-one">
-    <a  href="#" class="btn btn-primary m-1 w-50">INICIAR</a>
+    <a  href="/comandas/iniciar" class="btn btn-primary m-1 w-50">INICIAR</a>
     <h2 class="h5"><i class="fa-regular fa-calendar fa-sm"></i>&nbsp;&nbsp;14/09/23</h2>
     <h3 class="h6"><i class="fa-regular fa-clock fa-sm"></i></i>&nbsp;&nbsp;20:25</h3>
     <h3 class="h6"><i class="fa-regular fa-user fa-sm"></i></i>&nbsp;&nbsp;{{ user.first_name.split()[0] | upper }}</h3>
@@ -15,6 +15,12 @@
 </div>
 </section>
 
+{% if isOpen == False %}
+<div class="table-responsive w-100 card myTheme-900 larg-max m-auto d-flex justify-content-center align-items-center p-4">
+    <img src="../static/img/unplugged.svg" width="200px">
+    <h5 class="mt-4">Clique em iniciar para começar!</h5>
+</div>
+{% else %}
 <div class="table-responsive w-100 card myTheme-900 larg-max m-auto" style="padding-bottom: 40px">
     <table class="table table-borderless table-sm">
         <tr>
@@ -26,17 +32,19 @@
         </tr>
         {% for produto in dfProdutos %}
         <tr>
-           <td>{{produto.id}}</td>
-           <td>{{produto.categoria.nome}}</td>
-           <td>{{produto.descricao}}</td>
-           <td>{{produto.tamanho.nome}}</td>
-           <td>{{produto.usuario.first_name}}</td>   
+            <td>{{produto.id}}</td>
+            <td>{{produto.categoria.nome}}</td>
+            <td>{{produto.descricao}}</td>
+            <td>{{produto.tamanho.nome}}</td>
+            <td>{{produto.usuario.first_name}}</td>   
         </tr>
         {% endfor %}
     </table>
 </div>
+{% endif %}
 
 </div>
+
 {% endblock %}
 
 {% block titlefooter %}
